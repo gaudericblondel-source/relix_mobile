@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<title>CMMS Mobile · spec initiale</title>
+<title>Relix Mobile · initial spec</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -33,38 +33,38 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
 <!-- ================= HEADER (wine) ================= -->
 <sc-if value="{{ hd.on }}" hint-placeholder-val="{{ false }}">
   <div style="position:absolute;left:0;right:0;top:0;z-index:20;height:104px;padding:50px 8px 0;background:#5E0B1E;color:#fff;display:flex;align-items:center;gap:4px">
-    <button onClick="{{ back }}" aria-label="Retour" style="flex:none;width:44px;height:44px;border:0;border-radius:50%;background:none;color:#fff;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer">{{ hd.backIcon }}</button>
+    <button onClick="{{ back }}" aria-label="Back" style="flex:none;width:44px;height:44px;border:0;border-radius:50%;background:none;color:#fff;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer">{{ hd.backIcon }}</button>
     <span style="flex:1;text-align:center;font-size:17px;font-weight:600">{{ hd.title }}</span>
     <button onClick="{{ hd.rightGo }}" aria-label="{{ hd.rightAria }}" style="flex:none;width:44px;height:44px;border:0;border-radius:50%;background:none;color:#fff;display:grid;place-items:center;font:24px/1 'Material Symbols Rounded';cursor:pointer">{{ hd.right }}</button>
   </div>
 </sc-if>
 
-<!-- ================= À FAIRE (home) ================= -->
+<!-- ================= TO DO (home) ================= -->
 <sc-if value="{{ is.home }}" hint-placeholder-val="{{ true }}">
-  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:0 0 120px;display:flex;flex-direction:column;gap:18px">
-    <div style="display:flex;align-items:center;gap:10px;padding:56px 18px 12px;background:#fff;border-bottom:1px solid #EEE9E7">
-      <span style="flex:1;font-size:19px;font-weight:700;letter-spacing:.01em;color:#5E0B1E">CMMS MOBILE</span>
-      <button onClick="{{ go.sync }}" aria-label="Synchronisation" style="width:42px;height:42px;border:0;border-radius:50%;background:none;color:#1F8A4C;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer">{{ home.cloud }}</button>
-      <span style="width:40px;height:40px;border-radius:50%;background:#E8EEF9;color:#2456B8;display:grid;place-items:center;font-size:14px;font-weight:600">PL</span>
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:0 0 120px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;align-items:center;gap:8px;padding:50px 16px 6px;background:#fff;border-bottom:1px solid #EEE9E7">
+      <svg width="26" height="23" viewBox="12 10.5 30 27" fill="none" aria-hidden="true" style="display:block;flex:none"><path d="M41.5834 21.3333C41.5834 15.4421 36.6836 10.6666 30.639 10.6666H21.7467C20.6129 10.6666 19.6947 11.5616 19.6947 12.6666V18.9802L19.6148 18.897C19.4988 18.7754 19.3357 18.7061 19.165 18.7061H13.0329C12.7877 18.7061 12.5655 18.848 12.4681 19.0666C12.3707 19.2853 12.4156 19.5402 12.582 19.7152L18.5619 25.968L12.582 32.2218C12.4145 32.3968 12.3696 32.6517 12.4681 32.8704C12.5666 33.089 12.7877 33.2309 13.0329 33.2309H19.165C19.3357 33.2309 19.4988 33.1616 19.6159 33.04L19.6958 32.9568V35.3333C19.6958 36.4384 20.6611 37.3333 21.8518 37.3333H40.7199C40.9541 37.3333 41.1532 37.2533 41.301 37.1264C41.301 37.1264 41.602 36.8085 41.3513 35.9882C41.2123 35.5317 39.2194 33.3088 36.4494 30.3712C39.5324 28.4842 41.5834 25.1434 41.5834 21.3333ZM37.0568 17.6938L29.144 25.9669L37.0568 34.2421C37.2242 34.417 37.2691 34.672 37.1706 34.8906C37.0732 35.1093 36.851 35.2512 36.6059 35.2512H28.6132C28.4425 35.2512 28.2794 35.1818 28.1623 35.0602L22.9222 29.5797L25.9855 26.3765C26.2055 26.1461 26.2055 25.7888 25.9855 25.5584L22.9222 22.3552L28.1623 16.8757C28.2783 16.7541 28.4414 16.6848 28.6121 16.6848H36.6048C36.8499 16.6848 37.0721 16.8266 37.1695 17.0453C37.2669 17.264 37.222 17.5189 37.0557 17.6938H37.0568Z" fill="#5E0B1E"></path></svg><span style="flex:1;font-size:19px;font-weight:700;letter-spacing:-.01em;color:#5E0B1E">Relix</span>
+      <button onClick="{{ go.sync }}" aria-label="Sync" style="width:36px;height:36px;border:0;border-radius:50%;background:none;color:#1F8A4C;display:grid;place-items:center;font:24px/1 'Material Symbols Rounded';cursor:pointer">{{ home.cloud }}</button>
+      <span style="width:34px;height:34px;border-radius:50%;background:#E8EEF9;color:#2456B8;display:grid;place-items:center;font-size:13px;font-weight:600">PL</span>
     </div>
-    <div style="display:flex;flex-direction:column;gap:2px;padding:0 18px"><span style="font-size:22px;font-weight:700">Bonjour Pierre</span><span style="font-size:14px;color:#6B625D">Jeudi 3 septembre</span></div>
+    <div style="display:flex;flex-direction:column;gap:2px;padding:0 18px"><span style="font-size:22px;font-weight:700">Hello Pierre</span><span style="font-size:14px;color:#6B625D">Thursday, September 3</span></div>
     <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0 18px">
       <sc-for list="{{ home.kpis }}" as="k" hint-placeholder-count="3"><button onClick="{{ k.go }}" style="height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:1px solid #EEE9E7;border-radius:14px;background:#fff;cursor:pointer"><span style="font-size:28px;line-height:32px;font-weight:700;color:{{ k.color }}">{{ k.value }}</span><span style="font-size:13px;color:{{ k.color }}">{{ k.label }}</span></button></sc-for>
     </div>
     <sc-if value="{{ home.hasCur }}">
     <div style="display:flex;flex-direction:column;gap:8px;padding:0 18px">
-      <div style="display:flex;align-items:center"><span style="flex:1;font-size:16px;font-weight:600">En cours</span><button onClick="{{ go.list }}" style="border:0;background:none;padding:0;font-size:14px;font-weight:600;color:#5E0B1E;cursor:pointer">Voir tout</button></div>
+      <div style="display:flex;align-items:center"><span style="flex:1;font-size:16px;font-weight:600">In progress</span><button onClick="{{ go.list }}" style="border:0;background:none;padding:0;font-size:14px;font-weight:600;color:#5E0B1E;cursor:pointer">See all</button></div>
       <div style="display:flex;align-items:center;gap:12px;padding:10px;background:#fff;border:1px solid #EEE9E7;border-radius:14px">
         <button onClick="{{ home.curOpen }}" style="flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:#1A1412">
           <span style="flex:none;width:58px;height:58px;border-radius:10px;background:linear-gradient(135deg,#8A7E74,#4E4640);display:grid;place-items:center;color:rgba(255,255,255,.85);font:30px/1 'Material Symbols Rounded'">local_fire_department</span>
-          <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">{{ home.curAsset }}</span><span style="font-size:14px;color:#6B625D">{{ home.curTask }}</span><span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6B625D"><span style="padding:2px 8px;border-radius:10px;background:#E7F6EC;color:#1F8A4C;font-weight:600">En cours</span>depuis 10:32</span></span>
+          <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">{{ home.curAsset }}</span><span style="font-size:14px;color:#6B625D">{{ home.curTask }}</span><span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6B625D"><span style="padding:2px 8px;border-radius:10px;background:#E7F6EC;color:#1F8A4C;font-weight:600">In progress</span>since 10:32</span></span>
         </button>
-        <button onClick="{{ home.curOpen }}" aria-label="Reprendre" style="flex:none;width:40px;height:40px;border:0;border-radius:50%;background:#F6F4F3;color:#1A1412;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer">play_arrow</button>
+        <button onClick="{{ home.curOpen }}" aria-label="Resume" style="flex:none;width:40px;height:40px;border:0;border-radius:50%;background:#F6F4F3;color:#1A1412;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer">play_arrow</button>
       </div>
     </div>
     </sc-if>
     <div style="display:flex;flex-direction:column;gap:8px;padding:0 18px">
-      <span style="font-size:16px;font-weight:600">À faire aujourd'hui</span>
+      <span style="font-size:16px;font-weight:600">To do today</span>
       <div style="background:#fff;border:1px solid #EEE9E7;border-radius:14px;overflow:hidden">
         <sc-for list="{{ home.today }}" as="r" hint-placeholder-count="3">
           <button onClick="{{ r.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:62px;padding:10px 14px;border:0;border-top:{{ r.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412">
@@ -73,11 +73,11 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
             <span style="flex:none;padding:3px 9px;border-radius:10px;background:{{ r.bg }};color:{{ r.fg }};font-size:12px;font-weight:600">{{ r.badge }}</span>
           </button>
         </sc-for>
-        <sc-if value="{{ home.noToday }}"><div style="padding:16px 14px;font-size:14px;color:#6B625D">Rien d'autre aujourd'hui.</div></sc-if>
+        <sc-if value="{{ home.noToday }}"><div style="padding:16px 14px;font-size:14px;color:#6B625D">Nothing else today.</div></sc-if>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;padding:0 18px">
-      <span style="font-size:16px;font-weight:600">À venir</span>
+      <span style="font-size:16px;font-weight:600">Coming up</span>
       <div style="background:#fff;border:1px solid #EEE9E7;border-radius:14px;overflow:hidden">
         <sc-for list="{{ home.next }}" as="r" hint-placeholder-count="1">
           <button onClick="{{ r.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:62px;padding:10px 14px;border:0;border-top:{{ r.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412">
@@ -90,11 +90,11 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
   </div>
 </sc-if>
 
-<!-- ================= RECHERCHE ================= -->
+<!-- ================= SEARCH ================= -->
 <sc-if value="{{ is.search }}">
   <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:56px 18px 120px;display:flex;flex-direction:column;gap:14px">
     <span style="font-size:22px;font-weight:700">{{ search.title }}</span>
-    <label style="height:50px;display:flex;align-items:center;gap:10px;padding:0 14px;background:#fff;border:1px solid #E2DCD9;border-radius:12px"><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">search</span><input value="{{ search.q }}" onInput="{{ search.setQ }}" placeholder="Équipement, OT, ligne…" aria-label="Rechercher" style="flex:1;min-width:0;border:0;outline:none;background:transparent;font-size:16px;color:#1A1412" /></label>
+    <label style="height:50px;display:flex;align-items:center;gap:10px;padding:0 14px;background:#fff;border:1px solid #E2DCD9;border-radius:12px"><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">search</span><input value="{{ search.q }}" onInput="{{ search.setQ }}" placeholder="Asset, work order, line…" aria-label="Search" style="flex:1;min-width:0;border:0;outline:none;background:transparent;font-size:16px;color:#1A1412" /></label>
     <div style="display:grid;grid-template-columns:1fr 1fr;padding:3px;background:#EEE9E7;border-radius:10px">
       <sc-for list="{{ search.segs }}" as="g" hint-placeholder-count="2"><button onClick="{{ g.pick }}" style="height:38px;border:0;border-radius:8px;background:{{ g.bg }};color:{{ g.color }};font-size:14px;font-weight:600;cursor:pointer">{{ g.label }}</button></sc-for>
     </div>
@@ -106,7 +106,7 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
           <sc-if value="{{ r.hasBadge }}"><span style="flex:none;padding:3px 9px;border-radius:10px;background:{{ r.bg }};color:{{ r.fg }};font-size:12px;font-weight:600">{{ r.badge }}</span></sc-if>
         </button>
       </sc-for>
-      <sc-if value="{{ search.empty }}"><div style="padding:18px 14px;font-size:14px;color:#6B625D">Aucun résultat.</div></sc-if>
+      <sc-if value="{{ search.empty }}"><div style="padding:18px 14px;font-size:14px;color:#6B625D">No results.</div></sc-if>
     </div>
   </div>
 </sc-if>
@@ -115,11 +115,11 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
 <sc-if value="{{ is.scan }}">
   <div style="position:absolute;inset:0;background:#141210">
     <div style="position:absolute;left:0;right:0;top:0;height:104px;z-index:5;padding:50px 8px 0;background:#1E1B19;color:#fff;display:flex;align-items:center">
-      <button onClick="{{ back }}" aria-label="Fermer" style="width:44px;height:44px;border:0;background:none;color:#fff;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer">close</button>
-      <span style="flex:1;text-align:center;font-size:17px;font-weight:600">Scanner</span>
-      <button onClick="{{ scan.torch }}" aria-label="Lampe" style="width:44px;height:44px;border:0;background:none;color:{{ scan.torchColor }};display:grid;place-items:center;font:24px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer">bolt</button>
+      <button onClick="{{ back }}" aria-label="Close" style="width:44px;height:44px;border:0;background:none;color:#fff;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer">close</button>
+      <span style="flex:1;text-align:center;font-size:17px;font-weight:600">Scan</span>
+      <button onClick="{{ scan.torch }}" aria-label="Torch" style="width:44px;height:44px;border:0;background:none;color:{{ scan.torchColor }};display:grid;place-items:center;font:24px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer">bolt</button>
     </div>
-    <button onClick="{{ scan.detect }}" aria-label="Simuler la lecture du QR code" style="position:absolute;left:0;right:0;top:104px;bottom:0;border:0;padding:0;cursor:pointer;background:linear-gradient(180deg,#5C5650 0%,#3B3631 55%,#26221F 100%);overflow:hidden">
+    <button onClick="{{ scan.detect }}" aria-label="Simulate reading the QR code" style="position:absolute;left:0;right:0;top:104px;bottom:0;border:0;padding:0;cursor:pointer;background:linear-gradient(180deg,#5C5650 0%,#3B3631 55%,#26221F 100%);overflow:hidden">
       <span style="position:absolute;left:58px;top:70px;width:274px;height:470px;border-radius:6px;background:linear-gradient(90deg,#9A9690,#C4C0BA 45%,#A8A49E);box-shadow:0 20px 60px rgba(0,0,0,.5)"></span>
       <span style="position:absolute;left:70px;top:84px;width:250px;height:440px;border:2px solid #8E8A84;border-radius:4px"></span>
       <span style="position:absolute;left:300px;top:280px;width:8px;height:60px;border-radius:4px;background:#5D5954"></span>
@@ -133,12 +133,12 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
         <span style="position:absolute;right:0;bottom:0;width:40px;height:40px;border-right:4px solid #fff;border-bottom:4px solid #fff"></span>
         <span style="position:absolute;left:14px;right:14px;top:30px;height:2px;background:#fff;box-shadow:0 0 14px 3px rgba(255,255,255,.6);animation:spscan 2.4s ease-in-out infinite"></span>
       </span>
-      <span style="position:absolute;left:0;right:0;top:600px;text-align:center;color:#fff;font-size:15px;line-height:22px">Positionnez le QR code<br />dans le cadre</span>
+      <span style="position:absolute;left:0;right:0;top:600px;text-align:center;color:#fff;font-size:15px;line-height:22px">Place the QR code<br />inside the frame</span>
     </button>
   </div>
 </sc-if>
 
-<!-- ================= ÉQUIPEMENT ================= -->
+<!-- ================= ASSET ================= -->
 <sc-if value="{{ is.asset }}">
   <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:16px">
     <div style="display:flex;gap:14px">
@@ -146,21 +146,21 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
       <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><span style="font-size:19px;font-weight:700">{{ asset.name }}</span><span style="font:500 13px 'IBM Plex Mono',monospace;color:#6B625D">{{ asset.code }}</span><span style="align-self:flex-start;padding:2px 8px;border-radius:10px;background:{{ asset.stBg }};color:{{ asset.stFg }};font-size:12px;font-weight:600">{{ asset.status }}</span><span style="font-size:13px;color:#6B625D">{{ asset.loc }}</span></span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
-      <button onClick="{{ go.fiche }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px solid #5E0B1E;border-radius:12px;background:#fff;color:#1A1412;font-size:13px;font-weight:600;line-height:16px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded';color:#5E0B1E;font-variation-settings:'FILL' 1">visibility</span>Voir la fiche</button>
-      <button onClick="{{ go.incident }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px solid #D9730D;border-radius:12px;background:#FFF8F0;color:#1A1412;font-size:13px;font-weight:600;line-height:16px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded';color:#D9730D;font-variation-settings:'FILL' 1">warning</span>Déclarer<br />un incident</button>
-      <button onClick="{{ go.create }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px solid #5E0B1E;border-radius:12px;background:#fff;color:#1A1412;font-size:13px;font-weight:600;line-height:16px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded';color:#5E0B1E">add</span>Créer une<br />intervention</button>
+      <button onClick="{{ go.fiche }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px solid #5E0B1E;border-radius:12px;background:#fff;color:#1A1412;font-size:13px;font-weight:600;line-height:16px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded';color:#5E0B1E;font-variation-settings:'FILL' 1">visibility</span>View sheet</button>
+      <button onClick="{{ go.incident }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px solid #D9730D;border-radius:12px;background:#FFF8F0;color:#1A1412;font-size:13px;font-weight:600;line-height:16px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded';color:#D9730D;font-variation-settings:'FILL' 1">warning</span>Report<br />an incident</button>
+      <button onClick="{{ go.create }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px solid #5E0B1E;border-radius:12px;background:#fff;color:#1A1412;font-size:13px;font-weight:600;line-height:16px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded';color:#5E0B1E">add</span>Create an<br />intervention</button>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px">
-      <div style="display:flex;align-items:center"><span style="flex:1;font-size:15px;font-weight:600">{{ asset.openLabel }}</span><button onClick="{{ go.list }}" style="border:0;background:none;padding:0;font-size:14px;font-weight:600;color:#5E0B1E;cursor:pointer">Voir tout</button></div>
+      <div style="display:flex;align-items:center"><span style="flex:1;font-size:15px;font-weight:600">{{ asset.openLabel }}</span><button onClick="{{ go.list }}" style="border:0;background:none;padding:0;font-size:14px;font-weight:600;color:#5E0B1E;cursor:pointer">See all</button></div>
       <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
         <sc-for list="{{ asset.jobs }}" as="r" hint-placeholder-count="2">
           <button onClick="{{ r.open }}" style="width:100%;display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 14px;border:0;border-top:{{ r.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font:600 13px 'IBM Plex Mono',monospace">{{ r.id }}</span><span style="font-size:14px;color:#3B3431">{{ r.task }}</span></span><span style="flex:none;padding:3px 9px;border-radius:10px;background:{{ r.bg }};color:{{ r.fg }};font-size:12px;font-weight:600">{{ r.state }}</span></button>
         </sc-for>
-        <sc-if value="{{ asset.noJobs }}"><div style="padding:14px;font-size:14px;color:#6B625D">Aucune intervention ouverte.</div></sc-if>
+        <sc-if value="{{ asset.noJobs }}"><div style="padding:14px;font-size:14px;color:#6B625D">No open intervention.</div></sc-if>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px">
-      <div style="display:flex;align-items:center"><span style="flex:1;font-size:15px;font-weight:600">Documents (3)</span><button onClick="{{ go.fiche }}" style="border:0;background:none;padding:0;font-size:14px;font-weight:600;color:#5E0B1E;cursor:pointer">Voir tout</button></div>
+      <div style="display:flex;align-items:center"><span style="flex:1;font-size:15px;font-weight:600">Documents (3)</span><button onClick="{{ go.fiche }}" style="border:0;background:none;padding:0;font-size:14px;font-weight:600;color:#5E0B1E;cursor:pointer">See all</button></div>
       <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
         <sc-for list="{{ asset.docs }}" as="d" hint-placeholder-count="3"><button onClick="{{ d.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 14px;border:0;border-top:{{ d.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="font:24px/1 'Material Symbols Rounded';color:#5E0B1E">description</span><span style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ d.name }}</span><span style="font-size:12px;color:#6B625D">{{ d.size }}</span></span></button></sc-for>
       </div>
@@ -168,7 +168,7 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
   </div>
 </sc-if>
 
-<!-- ================= FICHE ÉQUIPEMENT ================= -->
+<!-- ================= ASSET SHEET ================= -->
 <sc-if value="{{ is.fiche }}">
   <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:16px">
     <span style="height:170px;border-radius:12px;background:linear-gradient(135deg,#8A7E74,#4E4640);display:grid;place-items:center;color:rgba(255,255,255,.85);font:70px/1 'Material Symbols Rounded'">{{ asset.icon }}</span>
@@ -183,37 +183,37 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
   </div>
 </sc-if>
 
-<!-- ================= DÉCLARER UN INCIDENT ================= -->
+<!-- ================= REPORT AN INCIDENT ================= -->
 <sc-if value="{{ is.incident }}">
   <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:18px">
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Équipement</span><div style="height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#F2EFEE;color:#6B625D;font-size:14px"><span style="flex:1">{{ asset.name }} ({{ asset.code }})</span><span style="font:20px/1 'Material Symbols Rounded'">lock</span></div></div>
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Que se passe-t-il ? *</span><textarea value="{{ inc.text }}" onInput="{{ inc.setText }}" placeholder="Décrire le problème constaté…" aria-label="Que se passe-t-il ?" style="height:96px;resize:none;padding:10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea></div>
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Criticité *</span>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Asset</span><div style="height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#F2EFEE;color:#6B625D;font-size:14px"><span style="flex:1">{{ asset.name }} ({{ asset.code }})</span><span style="font:20px/1 'Material Symbols Rounded'">lock</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">What's happening? *</span><textarea value="{{ inc.text }}" onInput="{{ inc.setText }}" placeholder="Describe the problem you see…" aria-label="What's happening?" style="height:96px;resize:none;padding:10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Criticality *</span>
       <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #E2DCD9;border-radius:10px;overflow:hidden;background:#fff"><sc-for list="{{ inc.crits }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" style="height:44px;border:0;border-left:{{ c.sep }};background:{{ c.bg }};color:{{ c.color }};font-size:14px;font-weight:600;cursor:pointer">{{ c.label }}</button></sc-for></div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Ajouter une photo <span style="font-weight:400;color:#6B625D">(optionnel)</span></span>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Add a photo <span style="font-weight:400;color:#6B625D">(optional)</span></span>
       <button onClick="{{ inc.photo }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1px dashed #CFC7C3;border-radius:10px;background:#fff;color:#3B3431;font-size:13px;cursor:pointer"><span style="font:28px/1 'Material Symbols Rounded'">{{ inc.photoIcon }}</span>{{ inc.photoLabel }}</button>
     </div>
-    <button onClick="{{ inc.send }}" style="height:52px;border:0;border-radius:10px;background:{{ inc.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer">Déclarer l'incident</button>
+    <button onClick="{{ inc.send }}" style="height:52px;border:0;border-radius:10px;background:{{ inc.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer">Report the incident</button>
   </div>
 </sc-if>
 
-<!-- ================= CRÉER UNE INTERVENTION ================= -->
+<!-- ================= CREATE AN INTERVENTION ================= -->
 <sc-if value="{{ is.create }}">
   <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:16px">
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Équipement</span><div style="height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#F2EFEE;color:#6B625D;font-size:14px"><span style="flex:1">{{ asset.name }} ({{ asset.code }})</span><span style="font:20px/1 'Material Symbols Rounded'">lock</span></div></div>
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Titre *</span><input value="{{ cr.title }}" onInput="{{ cr.setTitle }}" placeholder="Ex : Remplacement roulement" aria-label="Titre" style="height:46px;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;color:#1A1412;outline:none" /></div>
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Type d'intervention *</span>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Asset</span><div style="height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#F2EFEE;color:#6B625D;font-size:14px"><span style="flex:1">{{ asset.name }} ({{ asset.code }})</span><span style="font:20px/1 'Material Symbols Rounded'">lock</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Title *</span><input value="{{ cr.title }}" onInput="{{ cr.setTitle }}" placeholder="E.g. Bearing replacement" aria-label="Title" style="height:46px;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;color:#1A1412;outline:none" /></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Intervention type *</span>
       <div style="display:flex;gap:8px"><sc-for list="{{ cr.types }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.pick }}" style="flex:1;height:40px;display:flex;align-items:center;justify-content:center;gap:4px;border:1px solid {{ t.border }};border-radius:8px;background:{{ t.bg }};color:{{ t.color }};font-size:13px;font-weight:600;cursor:pointer"><span style="font:17px/1 'Material Symbols Rounded'">{{ t.icon }}</span>{{ t.label }}</button></sc-for></div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Priorité *</span>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Priority *</span>
       <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #E2DCD9;border-radius:10px;overflow:hidden;background:#fff"><sc-for list="{{ cr.prios }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" style="height:44px;border:0;border-left:{{ c.sep }};background:{{ c.bg }};color:{{ c.color }};font-size:14px;font-weight:600;cursor:pointer">{{ c.label }}</button></sc-for></div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Checklist <span style="font-weight:400;color:#6B625D">(optionnel)</span></span>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Checklist <span style="font-weight:400;color:#6B625D">(optional)</span></span>
       <button onClick="{{ cr.nextChecklist }}" style="height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;color:{{ cr.clColor }};font-size:14px;text-align:left;cursor:pointer"><span style="flex:1">{{ cr.checklist }}</span><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">expand_more</span></button>
     </div>
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Description <span style="font-weight:400;color:#6B625D">(optionnel)</span></span><textarea value="{{ cr.desc }}" onInput="{{ cr.setDesc }}" placeholder="Décrire l'intervention…" aria-label="Description" style="height:84px;resize:none;padding:10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea></div>
-    <button onClick="{{ cr.save }}" style="height:52px;border:0;border-radius:10px;background:{{ cr.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer">Créer l'intervention</button>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Description <span style="font-weight:400;color:#6B625D">(optional)</span></span><textarea value="{{ cr.desc }}" onInput="{{ cr.setDesc }}" placeholder="Describe the intervention…" aria-label="Description" style="height:84px;resize:none;padding:10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea></div>
+    <button onClick="{{ cr.save }}" style="height:52px;border:0;border-radius:10px;background:{{ cr.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer">Create the intervention</button>
   </div>
 </sc-if>
 
@@ -244,12 +244,12 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
     <sc-if value="{{ job.isPhotos }}">
       <span style="font-size:16px;font-weight:600">Photos</span>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
-        <button onClick="{{ job.addPhoto }}" style="aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1px dashed #CFC7C3;border-radius:10px;background:#fff;color:#3B3431;font-size:12px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded'">add_a_photo</span>Ajouter<br />une photo</button>
+        <button onClick="{{ job.addPhoto }}" style="aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1px dashed #CFC7C3;border-radius:10px;background:#fff;color:#3B3431;font-size:12px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded'">add_a_photo</span>Add<br />a photo</button>
         <sc-for list="{{ job.photos }}" as="p" hint-placeholder-count="5"><span style="aspect-ratio:1;border-radius:10px;background:{{ p.bg }};display:grid;place-items:center;color:rgba(255,255,255,.8);font:34px/1 'Material Symbols Rounded'">{{ p.icon }}</span></sc-for>
       </div>
     </sc-if>
     <sc-if value="{{ job.isComments }}">
-      <div style="display:flex;gap:8px"><input value="{{ job.draft }}" onInput="{{ job.setDraft }}" placeholder="Ajouter un commentaire…" aria-label="Ajouter un commentaire" style="flex:1;min-width:0;height:44px;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;color:#1A1412;outline:none" /><button onClick="{{ job.send }}" aria-label="Envoyer" style="flex:none;width:44px;height:44px;border:0;border-radius:10px;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';cursor:pointer">send</button></div>
+      <div style="display:flex;gap:8px"><input value="{{ job.draft }}" onInput="{{ job.setDraft }}" placeholder="Add a comment…" aria-label="Add a comment" style="flex:1;min-width:0;height:44px;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;color:#1A1412;outline:none" /><button onClick="{{ job.send }}" aria-label="Send" style="flex:none;width:44px;height:44px;border:0;border-radius:10px;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';cursor:pointer">send</button></div>
       <sc-for list="{{ job.comments }}" as="c" hint-placeholder-count="2">
         <div style="display:flex;gap:10px;padding:12px;background:#fff;border:1px solid #EEE9E7;border-radius:12px"><span style="flex:none;width:36px;height:36px;border-radius:50%;background:{{ c.bg }};color:{{ c.fg }};display:grid;place-items:center;font-size:12px;font-weight:600">{{ c.ini }}</span><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600">{{ c.name }}</span><span style="font-size:12px;color:#6B625D">{{ c.when }}</span><span style="font-size:14px;line-height:20px;color:#3B3431">{{ c.text }}</span></span></div>
       </sc-for>
@@ -262,18 +262,18 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
   </sc-if>
 </sc-if>
 
-<!-- ================= TERMINER ================= -->
+<!-- ================= FINISH ================= -->
 <sc-if value="{{ is.finish }}">
   <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:16px">
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Compte rendu *</span><textarea value="{{ fin.text }}" onInput="{{ fin.setText }}" aria-label="Compte rendu" style="height:120px;resize:none;padding:10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea></div>
-    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Photos finales <span style="font-weight:400;color:#6B625D">(optionnel)</span></span>
-      <div style="display:flex;gap:10px"><sc-for list="{{ fin.photos }}" as="p" hint-placeholder-count="2"><span style="width:84px;height:84px;border-radius:10px;background:{{ p.bg }};display:grid;place-items:center;color:rgba(255,255,255,.8);font:32px/1 'Material Symbols Rounded'">{{ p.icon }}</span></sc-for><button onClick="{{ fin.addPhoto }}" aria-label="Ajouter une photo" style="width:84px;height:84px;border:1px dashed #CFC7C3;border-radius:10px;background:#fff;color:#3B3431;display:grid;place-items:center;font:28px/1 'Material Symbols Rounded';cursor:pointer">add</button></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Report *</span><textarea value="{{ fin.text }}" onInput="{{ fin.setText }}" aria-label="Report" style="height:120px;resize:none;padding:10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Final photos <span style="font-weight:400;color:#6B625D">(optional)</span></span>
+      <div style="display:flex;gap:10px"><sc-for list="{{ fin.photos }}" as="p" hint-placeholder-count="2"><span style="width:84px;height:84px;border-radius:10px;background:{{ p.bg }};display:grid;place-items:center;color:rgba(255,255,255,.8);font:32px/1 'Material Symbols Rounded'">{{ p.icon }}</span></sc-for><button onClick="{{ fin.addPhoto }}" aria-label="Add a photo" style="width:84px;height:84px;border:1px dashed #CFC7C3;border-radius:10px;background:#fff;color:#3B3431;display:grid;place-items:center;font:28px/1 'Material Symbols Rounded';cursor:pointer">add</button></div>
     </div>
-    <button onClick="{{ fin.done }}" style="height:52px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;background:{{ fin.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer"><span style="font:22px/1 'Material Symbols Rounded'">check</span>Terminer l'intervention</button>
+    <button onClick="{{ fin.done }}" style="height:52px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;background:{{ fin.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer"><span style="font:22px/1 'Material Symbols Rounded'">check</span>Finish the intervention</button>
   </div>
 </sc-if>
 
-<!-- ================= SYNCHRONISATION ================= -->
+<!-- ================= SYNC ================= -->
 <sc-if value="{{ is.sync }}">
   <div style="position:absolute;inset:0;padding:150px 32px 40px;display:flex;flex-direction:column;align-items:center;gap:18px;background:#fff">
     <span style="position:relative;width:110px;height:110px;border-radius:50%;border:3px solid #5E0B1E;display:grid;place-items:center;color:#5E0B1E;font:52px/1 'Material Symbols Rounded'">{{ sync.icon }}<sc-if value="{{ sync.busy }}"><span style="position:absolute;inset:-3px;border-radius:50%;border:3px solid transparent;border-top-color:#D9A3AE;animation:spspin 1s linear infinite"></span></sc-if></span>
@@ -281,16 +281,16 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
     <div style="align-self:stretch;display:flex;flex-direction:column;gap:12px;padding:8px 24px">
       <sc-for list="{{ sync.items }}" as="i" hint-placeholder-count="4"><span style="display:flex;align-items:center;gap:12px;font-size:15px;color:{{ i.color }}"><span style="font:22px/1 'Material Symbols Rounded';color:{{ i.ic }}">{{ i.icon }}</span>{{ i.label }}</span></sc-for>
     </div>
-    <button onClick="{{ sync.close }}" style="margin-top:auto;align-self:stretch;height:52px;border:0;border-radius:10px;background:#5E0B1E;color:#fff;font-size:16px;font-weight:600;cursor:pointer">Retour à l'accueil</button>
+    <button onClick="{{ sync.close }}" style="margin-top:auto;align-self:stretch;height:52px;border:0;border-radius:10px;background:#5E0B1E;color:#fff;font-size:16px;font-weight:600;cursor:pointer">Back to home</button>
   </div>
 </sc-if>
 
 <!-- ================= TAB BAR ================= -->
 <sc-if value="{{ tabs.show }}" hint-placeholder-val="{{ true }}">
   <nav aria-label="Navigation" style="position:absolute;left:0;right:0;bottom:0;z-index:30;height:88px;padding:6px 10px 28px;background:#5E0B1E;border-radius:22px 22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start">
-    <button onClick="{{ tabs.todo }}" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:0;background:none;color:{{ tabs.todoC }};font-size:12px;font-weight:600;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded'">assignment</span>À faire</button>
-    <button onClick="{{ go.scan }}" aria-label="Scanner" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;border:0;background:none;color:#fff;font-size:12px;font-weight:600;cursor:pointer"><span style="width:60px;height:60px;margin-top:-30px;border-radius:50%;background:#7A1A2E;border:4px solid #F6F4F3;display:grid;place-items:center;font:30px/1 'Material Symbols Rounded';box-shadow:0 6px 16px rgba(94,11,30,.35)">qr_code_scanner</span>Scanner</button>
-    <button onClick="{{ tabs.search }}" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:0;background:none;color:{{ tabs.searchC }};font-size:12px;font-weight:600;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded'">search</span>Recherche</button>
+    <button onClick="{{ tabs.todo }}" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:0;background:none;color:{{ tabs.todoC }};font-size:12px;font-weight:600;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded'">assignment</span>To do</button>
+    <button onClick="{{ go.scan }}" aria-label="Scan" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;border:0;background:none;color:#fff;font-size:12px;font-weight:600;cursor:pointer"><span style="width:60px;height:60px;margin-top:-30px;border-radius:50%;background:#7A1A2E;border:4px solid #F6F4F3;display:grid;place-items:center;font:30px/1 'Material Symbols Rounded';box-shadow:0 6px 16px rgba(94,11,30,.35)">qr_code_scanner</span>Scan</button>
+    <button onClick="{{ tabs.search }}" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:0;background:none;color:{{ tabs.searchC }};font-size:12px;font-weight:600;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded'">search</span>Search</button>
   </nav>
 </sc-if>
 
@@ -312,28 +312,28 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":462,"height":916},"screen":{"editor":"enum","options":["home","scan","asset","fiche","incident","create","job","jobDocs","jobPhotos","jobComments","finish","sync","search"],"default":"home","tsType":"string"}}'>
 const W = '#5E0B1E', LINE = '1px solid #EEE9E7';
 const sep = i => i ? LINE : '0';
-const BADGE = { Haute: ['#FDECEE', '#C8102E'], Critique: ['#C8102E', '#fff'], Moyenne: ['#FFF1E0', '#C2610C'], Basse: ['#E7F6EC', '#1F8A4C'], Préventive: ['#E8F0FE', '#2457C5'] };
-const STATE = { cours: ['En cours', '#E7F6EC', '#1F8A4C'], retard: ['En retard', '#FDECEE', '#C8102E'], todo: ['À faire', '#E8F0FE', '#2457C5'], done: ['Terminée', '#EEE9E7', '#6B625D'] };
+const BADGE = { High: ['#FDECEE', '#C8102E'], Critical: ['#C8102E', '#fff'], Medium: ['#FFF1E0', '#C2610C'], Low: ['#E7F6EC', '#1F8A4C'], Preventive: ['#E8F0FE', '#2457C5'] };
+const STATE = { cours: ['In progress', '#E7F6EC', '#1F8A4C'], retard: ['Late', '#FDECEE', '#C8102E'], todo: ['To do', '#E8F0FE', '#2457C5'], done: ['Done', '#EEE9E7', '#6B625D'] };
 const ASSETS = {
-  FT2: { name: 'Four Trempe 2', code: 'FT2-FR-001', loc: 'Ligne Trempe > Zone Four', icon: 'local_fire_department', facts: [['Fabricant', 'Glaston FC500'], ['N° de série', 'GL-7730'], ['Mise en service', 'Avril 2016'], ['Criticité', 'A · critique'], ['Dernière intervention', '28/08/2026']] },
-  CV3: { name: 'Convoyeur Ligne 3', code: 'CV3-FL-003', loc: 'Ligne Float > Bout froid', icon: 'conveyor_belt', facts: [['Fabricant', 'Interroll RM 8310'], ['N° de série', 'IR-55102'], ['Mise en service', 'Juin 2020'], ['Criticité', 'B'], ['Dernière intervention', '12/08/2026']] },
-  PH: { name: 'Presse hydraulique', code: 'PH-030-AT-001', loc: 'Atelier > Zone presses', icon: 'compress', facts: [['Fabricant', 'Schuler HPX 250'], ['N° de série', 'SCH-1187'], ['Mise en service', 'Janvier 2017'], ['Criticité', 'A · critique'], ['Dernière intervention', '20/08/2026']] },
-  C01: { name: 'Compresseur C-01', code: 'C01-UT-001', loc: 'Utilités > Air comprimé', icon: 'air', facts: [['Fabricant', 'Atlas Copco GA 75'], ['N° de série', 'AC-77031'], ['Mise en service', 'Novembre 2018'], ['Criticité', 'B'], ['Dernière intervention', '01/09/2026']] },
-  V12: { name: 'Ventilateur V-12', code: 'V12-FL-012', loc: 'Ligne Float > Bain d\'étain', icon: 'mode_fan', facts: [['Fabricant', 'ebm-papst W3G 910'], ['N° de série', 'EP-30418'], ['Mise en service', 'Septembre 2021'], ['Criticité', 'B'], ['Dernière intervention', '15/07/2026']] },
+  FT2: { name: 'Tempering Furnace 2', code: 'FT2-FR-001', loc: 'Tempering Line > Furnace Area', icon: 'local_fire_department', facts: [['Manufacturer', 'Glaston FC500'], ['Serial number', 'GL-7730'], ['In service since', 'April 2016'], ['Criticality', 'A · critical'], ['Last intervention', '28/08/2026']] },
+  CV3: { name: 'Conveyor Line 3', code: 'CV3-FL-003', loc: 'Float Line > Cold End', icon: 'conveyor_belt', facts: [['Manufacturer', 'Interroll RM 8310'], ['Serial number', 'IR-55102'], ['In service since', 'June 2020'], ['Criticality', 'B'], ['Last intervention', '12/08/2026']] },
+  PH: { name: 'Hydraulic Press', code: 'PH-030-AT-001', loc: 'Workshop > Press Area', icon: 'compress', facts: [['Manufacturer', 'Schuler HPX 250'], ['Serial number', 'SCH-1187'], ['In service since', 'January 2017'], ['Criticality', 'A · critical'], ['Last intervention', '20/08/2026']] },
+  C01: { name: 'Compressor C-01', code: 'C01-UT-001', loc: 'Utilities > Compressed Air', icon: 'air', facts: [['Manufacturer', 'Atlas Copco GA 75'], ['Serial number', 'AC-77031'], ['In service since', 'November 2018'], ['Criticality', 'B'], ['Last intervention', '01/09/2026']] },
+  V12: { name: 'Fan V-12', code: 'V12-FL-012', loc: 'Float Line > Tin Bath', icon: 'mode_fan', facts: [['Manufacturer', 'ebm-papst W3G 910'], ['Serial number', 'EP-30418'], ['In service since', 'September 2021'], ['Criticality', 'B'], ['Last intervention', '15/07/2026']] },
 };
-const DOCS_ASSET = [['Manuel constructeur', 'PDF · 2.4 Mo'], ['Plan électrique', 'PDF · 1.1 Mo'], ['Procédure maintenance', 'PDF · 890 Ko']];
+const DOCS_ASSET = [['Manufacturer manual', 'PDF · 2.4 MB'], ['Electrical drawing', 'PDF · 1.1 MB'], ['Maintenance procedure', 'PDF · 890 KB']];
 const JOBS = {
-  1359: { asset: 'FT2', task: 'Remplacement roulement', type: 'Corrective', prio: 'Haute', state: 'cours', when: 'depuis 10:32', desc: 'Roulement côté moteur présentant un bruit anormal.', items: ['Consigner la machine', 'Démonter le carter de protection', 'Remplacer le roulement côté moteur', 'Contrôler les vibrations au redémarrage'], docs: [['Procédure remplacement roulement', 'PDF · 1.2 Mo'], ['Vue éclatée', 'PDF · 800 Ko'], ['Plan mécanique', 'PDF · 1.5 Mo']] },
-  1355: { asset: 'FT2', task: 'Fuite importante sur pompe', type: 'Corrective', prio: 'Critique', state: 'retard', when: 'prévue hier', desc: 'Fuite d\'eau importante sous la pompe de refroidissement du four.', items: ['Consigner la pompe', 'Localiser la fuite', 'Remplacer le joint', 'Contrôler l\'étanchéité'], docs: [['Procédure pompe', 'PDF · 640 Ko']] },
-  1361: { asset: 'CV3', task: 'Vérification capteur', type: 'Inspection', prio: 'Haute', state: 'todo', time: '08:00', when: 'aujourd\'hui 08:00', desc: 'Arrêts aléatoires signalés, vérifier le capteur de vitesse.', items: ['Consigner le convoyeur', 'Contrôler le câblage', 'Tester le capteur'], docs: [['Schéma capteurs', 'PDF · 420 Ko']] },
-  1362: { asset: 'PH', task: 'Graissage', type: 'Préventive', prio: 'Basse', state: 'todo', time: '11:00', when: 'aujourd\'hui 11:00', desc: 'Graissage mensuel des glissières et des articulations.', items: ['Nettoyer les points de graissage', 'Graisser les 8 points', 'Essai à vide'], docs: [['Plan de graissage', 'PDF · 300 Ko']] },
-  1363: { asset: 'C01', task: 'Contrôle pression', type: 'Inspection', prio: 'Moyenne', state: 'todo', time: '14:00', when: 'aujourd\'hui 14:00', desc: 'Relever la pression de sortie et contrôler les purges.', items: ['Relever la pression', 'Vérifier les purges', 'Noter les valeurs'], docs: [] },
-  1364: { asset: 'V12', task: 'Remplacement filtre', type: 'Préventive', prio: 'Préventive', state: 'todo', time: 'Demain · 09:00', when: 'demain 09:00', next: true, desc: 'Remplacement trimestriel du filtre d\'aspiration.', items: ['Consigner le ventilateur', 'Remplacer le filtre', 'Redémarrer et contrôler'], docs: [] },
+  1359: { asset: 'FT2', task: 'Bearing replacement', type: 'Corrective', prio: 'High', state: 'cours', when: 'since 10:32', desc: 'Motor-side bearing making an abnormal noise.', items: ['Lock out the machine', 'Remove the protective guard', 'Replace the motor-side bearing', 'Check vibrations on restart'], docs: [['Bearing replacement procedure', 'PDF · 1.2 MB'], ['Exploded view', 'PDF · 800 KB'], ['Mechanical drawing', 'PDF · 1.5 MB']] },
+  1355: { asset: 'FT2', task: 'Major leak on pump', type: 'Corrective', prio: 'Critical', state: 'retard', when: 'due yesterday', desc: 'Major water leak under the furnace cooling pump.', items: ['Lock out the pump', 'Locate the leak', 'Replace the seal', 'Check for leaks'], docs: [['Pump procedure', 'PDF · 640 KB']] },
+  1361: { asset: 'CV3', task: 'Sensor check', type: 'Inspection', prio: 'High', state: 'todo', time: '08:00', when: 'today 08:00', desc: 'Random stops reported, check the speed sensor.', items: ['Lock out the conveyor', 'Check the wiring', 'Test the sensor'], docs: [['Sensor diagram', 'PDF · 420 KB']] },
+  1362: { asset: 'PH', task: 'Greasing', type: 'Preventive', prio: 'Low', state: 'todo', time: '11:00', when: 'today 11:00', desc: 'Monthly greasing of the slides and joints.', items: ['Clean the grease points', 'Grease the 8 points', 'No-load test'], docs: [['Greasing plan', 'PDF · 300 KB']] },
+  1363: { asset: 'C01', task: 'Pressure check', type: 'Inspection', prio: 'Medium', state: 'todo', time: '14:00', when: 'today 14:00', desc: 'Read the outlet pressure and check the drains.', items: ['Read the pressure', 'Check the drains', 'Record the values'], docs: [] },
+  1364: { asset: 'V12', task: 'Filter replacement', type: 'Preventive', prio: 'Preventive', state: 'todo', time: 'Tomorrow · 09:00', when: 'tomorrow 09:00', next: true, desc: 'Quarterly replacement of the intake filter.', items: ['Lock out the fan', 'Replace the filter', 'Restart and check'], docs: [] },
 };
-const COMMENTS = { 1359: [['PL', 'Pierre Leroy', '03/09/2026 10:45', 'Roulement démonté, remplacement en cours.'], ['MD', 'Marc Dupont', '03/09/2026 11:02', 'Nouveau roulement monté, test en cours.']] };
+const COMMENTS = { 1359: [['PL', 'Pierre Leroy', '03/09/2026 10:45', 'Bearing removed, replacement in progress.'], ['MD', 'Marc Dupont', '03/09/2026 11:02', 'New bearing fitted, test in progress.']] };
 const PEOPLE = { PL: ['#E8EEF9', '#2456B8'], MD: ['#E6F4EE', '#0B6B4A'] };
 const PHOTO = [['linear-gradient(135deg,#7D8790,#3F474F)', 'settings'], ['linear-gradient(135deg,#5E7FA3,#2E4560)', 'precision_manufacturing'], ['linear-gradient(135deg,#8A8F96,#4B5057)', 'settings'], ['linear-gradient(135deg,#4F6E92,#263A52)', 'mode_fan'], ['linear-gradient(135deg,#878C93,#45494F)', 'build']];
-const TITLES = { asset: 'Équipement', fiche: 'Fiche équipement', incident: 'Déclarer un incident', create: 'Créer une intervention', job: 'Intervention', finish: 'Terminer l\'intervention', sync: 'Synchronisation' };
+const TITLES = { asset: 'Asset', fiche: 'Asset sheet', incident: 'Report an incident', create: 'Create an intervention', job: 'Intervention', finish: 'Finish the intervention', sync: 'Sync' };
 
 class Component extends DCLogic {
   constructor(p) {
@@ -343,8 +343,8 @@ class Component extends DCLogic {
     const scr = tabMap[s0] ? 'job' : s0;
     this.state = { scr, stack: scr === 'home' || scr === 'search' ? [] : ['home'], assetId: 'FT2', jobId: 1359, tab: tabMap[s0] || 'summary',
       checks: { 1359: [true, true, false, false] }, states: {}, photos: { 1359: 5 }, comments: { ...COMMENTS }, draft: '',
-      inc: { text: s0 === 'incident' ? '' : '', crit: 'Haute', photo: false }, cr: { title: '', type: 'Corrective', prio: 'Haute', checklist: 0, desc: '' },
-      fin: { text: 'Remplacement du roulement côté moteur effectué. Test OK, aucune vibration constatée.', photos: 2 },
+      inc: { text: s0 === 'incident' ? '' : '', crit: 'High', photo: false }, cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '' },
+      fin: { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2 },
       q: '', seg: 'jobs', torch: false, syncDone: s0 === 'sync', newJobs: {}, toast: null };
     this._auto = !p.screen;
   }
@@ -362,10 +362,10 @@ class Component extends DCLogic {
     const openJob = id => () => this.go('job', { jobId: id, tab: 'summary', assetId: allJobs[id].asset });
     const openAsset = id => () => this.go('asset', { assetId: id });
     const go = { scan: () => this.go('scan'), sync: () => this.go('sync', { syncDone: false }), list: () => this.go('search', { seg: 'jobs', q: '' }), fiche: () => this.go('fiche'),
-      incident: () => this.go('incident', { inc: { text: '', crit: 'Haute', photo: false } }), create: () => this.go('create', { cr: { title: '', type: 'Corrective', prio: 'Haute', checklist: 0, desc: '' } }) };
+      incident: () => this.go('incident', { inc: { text: '', crit: 'High', photo: false } }), create: () => this.go('create', { cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '' } }) };
 
     // header
-    const hd = { on: !!TITLES[scr], title: TITLES[scr] || '', backIcon: scr === 'sync' ? 'close' : 'chevron_left', right: scr === 'asset' || scr === 'job' ? 'more_horiz' : '', rightAria: 'Plus d\'options', rightGo: () => this.flash('Options : partager, imprimer l\'étiquette QR, historique') };
+    const hd = { on: !!TITLES[scr], title: TITLES[scr] || '', backIcon: scr === 'sync' ? 'close' : 'chevron_left', right: scr === 'asset' || scr === 'job' ? 'more_horiz' : '', rightAria: 'More options', rightGo: () => this.flash('Options: share, print the QR label, history') };
 
     // home
     const open = Object.keys(allJobs).filter(id => stOf(id) !== 'done');
@@ -373,18 +373,18 @@ class Component extends DCLogic {
     const badge = j => BADGE[j.prio] || BADGE.Moyenne;
     const todayIds = open.filter(id => stOf(id) === 'todo' && !allJobs[id].next);
     const home = { cloud: 'cloud_done',
-      kpis: [[String(open.filter(id => stOf(id) === 'todo').length), 'À faire', '#1A1412'], [String(open.filter(id => stOf(id) === 'cours').length), 'En cours', '#D9730D'], [String(open.filter(id => stOf(id) === 'retard').length), 'En retard', '#C8102E']].map(([value, label, color]) => ({ value, label, color, go: go.list })),
+      kpis: [[String(open.filter(id => stOf(id) === 'todo').length), 'To do', '#1A1412'], [String(open.filter(id => stOf(id) === 'cours').length), 'In progress', '#D9730D'], [String(open.filter(id => stOf(id) === 'retard').length), 'Late', '#C8102E']].map(([value, label, color]) => ({ value, label, color, go: go.list })),
       hasCur: !!cur, curAsset: cur ? ASSETS[allJobs[cur].asset].name : '', curTask: cur ? allJobs[cur].task : '', curOpen: cur ? openJob(cur) : () => {},
       today: todayIds.map((id, i) => { const j = allJobs[id], [bg, fg] = badge(j); return { time: j.time, asset: ASSETS[j.asset].name, task: j.task, badge: j.prio, bg, fg, sep: sep(i), open: openJob(id) }; }), noToday: !todayIds.length,
       next: open.filter(id => allJobs[id].next).map((id, i) => { const j = allJobs[id], [bg, fg] = badge(j); return { time: j.time, asset: ASSETS[j.asset].name, task: j.task, badge: j.prio, bg, fg, sep: sep(i), open: openJob(id) }; }) };
 
     // search
     const q = s.q.trim().toLowerCase();
-    const rowsJobs = Object.keys(allJobs).filter(id => { const j = allJobs[id]; return !q || `ot #${id} ${j.task} ${ASSETS[j.asset].name}`.toLowerCase().includes(q); }).map((id, i) => { const j = allJobs[id], st = STATE[stOf(id)]; return { icon: 'build', title: `OT #${id} · ${j.task}`, sub: ASSETS[j.asset].name, hasBadge: true, badge: st[0], bg: st[1], fg: st[2], sep: sep(i), open: openJob(id) }; });
+    const rowsJobs = Object.keys(allJobs).filter(id => { const j = allJobs[id]; return !q || `wo #${id} ${j.task} ${ASSETS[j.asset].name}`.toLowerCase().includes(q); }).map((id, i) => { const j = allJobs[id], st = STATE[stOf(id)]; return { icon: 'build', title: `WO #${id} · ${j.task}`, sub: ASSETS[j.asset].name, hasBadge: true, badge: st[0], bg: st[1], fg: st[2], sep: sep(i), open: openJob(id) }; });
     const rowsAssets = Object.keys(ASSETS).filter(k => { const a = ASSETS[k]; return !q || `${a.name} ${a.code} ${a.loc}`.toLowerCase().includes(q); }).map((k, i) => ({ icon: ASSETS[k].icon, title: ASSETS[k].name, sub: `${ASSETS[k].code} · ${ASSETS[k].loc}`, hasBadge: false, badge: '', bg: '', fg: '', sep: sep(i), open: openAsset(k) }));
     const rows = s.seg === 'jobs' ? rowsJobs : rowsAssets;
-    const search = { title: 'Recherche', q: s.q, setQ: e => this.setState({ q: e.target.value }), rows, empty: !rows.length,
-      segs: [['jobs', 'Interventions'], ['assets', 'Équipements']].map(([v, label]) => { const on = s.seg === v; return { label, bg: on ? '#fff' : 'transparent', color: on ? '#1A1412' : '#6B625D', pick: () => this.setState({ seg: v }) }; }) };
+    const search = { title: 'Search', q: s.q, setQ: e => this.setState({ q: e.target.value }), rows, empty: !rows.length,
+      segs: [['jobs', 'Interventions'], ['assets', 'Assets']].map(([v, label]) => { const on = s.seg === v; return { label, bg: on ? '#fff' : 'transparent', color: on ? '#1A1412' : '#6B625D', pick: () => this.setState({ seg: v }) }; }) };
 
     // scan
     const scan = { detect: () => this.setState({ scr: 'asset', assetId: 'FT2' }), torch: () => this.setState({ torch: !s.torch }), torchColor: s.torch ? '#FFD84D' : '#fff' };
@@ -392,59 +392,59 @@ class Component extends DCLogic {
     // asset
     const A = ASSETS[s.assetId] || ASSETS.FT2;
     const aj = open.filter(id => allJobs[id].asset === s.assetId);
-    const asset = { ...A, status: s.assetId === 'FT2' ? 'En service' : 'En service', stBg: '#E7F6EC', stFg: '#1F8A4C',
-      openLabel: `${aj.length} intervention${aj.length > 1 ? 's' : ''} ouverte${aj.length > 1 ? 's' : ''}`, noJobs: !aj.length,
-      jobs: aj.map((id, i) => { const st = STATE[stOf(id)]; return { id: `OT #${id}`, task: allJobs[id].task, state: st[0], bg: st[1], fg: st[2], sep: sep(i), open: openJob(id) }; }),
-      docs: DOCS_ASSET.map(([name, size], i) => ({ name, size, sep: sep(i), open: () => this.flash(`${name} — ouvert hors ligne`) })),
+    const asset = { ...A, status: 'In service', stBg: '#E7F6EC', stFg: '#1F8A4C',
+      openLabel: `${aj.length} open intervention${aj.length > 1 ? 's' : ''}`, noJobs: !aj.length,
+      jobs: aj.map((id, i) => { const st = STATE[stOf(id)]; return { id: `WO #${id}`, task: allJobs[id].task, state: st[0], bg: st[1], fg: st[2], sep: sep(i), open: openJob(id) }; }),
+      docs: DOCS_ASSET.map(([name, size], i) => ({ name, size, sep: sep(i), open: () => this.flash(`${name} — opened offline`) })),
       facts: A.facts.map(([k, v], i) => ({ k, v, sep: sep(i) })) };
 
     // incident
     const ic = s.inc, icOk = ic.text.trim().length > 2;
     const segBtns = (opts, cur, set, colors) => opts.map((label, i) => { const on = cur === label; return { label, sep: i ? '1px solid #E2DCD9' : '0', bg: on ? W : '#fff', color: on ? '#fff' : colors[i], pick: () => set(label) }; });
     const inc = { text: ic.text, setText: e => this.setState({ inc: { ...ic, text: e.target.value } }),
-      crits: segBtns(['Faible', 'Moyenne', 'Haute', 'Critique'], ic.crit, v => this.setState({ inc: { ...ic, crit: v } }), ['#1F8A4C', '#C2610C', '#C8102E', '#C8102E']),
-      photo: () => this.setState({ inc: { ...ic, photo: !ic.photo } }), photoIcon: ic.photo ? 'check_circle' : 'photo_camera', photoLabel: ic.photo ? 'Photo ajoutée · toucher pour retirer' : 'Ajouter une photo',
-      btnBg: icOk ? W : '#BFA9AE', send: () => { if (!icOk) return this.flash('Décrivez le problème constaté'); this.back(); this.flash(`Incident déclaré · ${A.name} · criticité ${ic.crit.toLowerCase()}`); } };
+      crits: segBtns(['Low', 'Medium', 'High', 'Critical'], ic.crit, v => this.setState({ inc: { ...ic, crit: v } }), ['#1F8A4C', '#C2610C', '#C8102E', '#C8102E']),
+      photo: () => this.setState({ inc: { ...ic, photo: !ic.photo } }), photoIcon: ic.photo ? 'check_circle' : 'photo_camera', photoLabel: ic.photo ? 'Photo added · tap to remove' : 'Add a photo',
+      btnBg: icOk ? W : '#BFA9AE', send: () => { if (!icOk) return this.flash('Describe the problem you see'); this.back(); this.flash(`Incident reported · ${A.name} · ${ic.crit.toLowerCase()} criticality`); } };
 
     // create
-    const c = s.cr, crOk = c.title.trim().length > 2, CL = ['Sélectionner une checklist', 'Remplacement roulement (4 étapes)', 'Contrôle sécurité (6 étapes)', 'Graissage (3 étapes)'];
+    const c = s.cr, crOk = c.title.trim().length > 2, CL = ['Select a checklist', 'Bearing replacement (4 steps)', 'Safety check (6 steps)', 'Greasing (3 steps)'];
     const cr = { title: c.title, setTitle: e => this.setState({ cr: { ...c, title: e.target.value } }), desc: c.desc, setDesc: e => this.setState({ cr: { ...c, desc: e.target.value } }),
-      types: [['Corrective', 'build'], ['Préventive', 'event_repeat'], ['Inspection', 'visibility']].map(([label, icon]) => { const on = c.type === label; return { label, icon, bg: on ? W : '#fff', color: on ? '#fff' : '#1A1412', border: on ? W : '#E2DCD9', pick: () => this.setState({ cr: { ...c, type: label } }) }; }),
-      prios: segBtns(['Basse', 'Moyenne', 'Haute', 'Critique'], c.prio, v => this.setState({ cr: { ...c, prio: v } }), ['#1F8A4C', '#C2610C', '#C8102E', '#C8102E']),
+      types: [['Corrective', 'build'], ['Preventive', 'event_repeat'], ['Inspection', 'visibility']].map(([label, icon]) => { const on = c.type === label; return { label, icon, bg: on ? W : '#fff', color: on ? '#fff' : '#1A1412', border: on ? W : '#E2DCD9', pick: () => this.setState({ cr: { ...c, type: label } }) }; }),
+      prios: segBtns(['Low', 'Medium', 'High', 'Critical'], c.prio, v => this.setState({ cr: { ...c, prio: v } }), ['#1F8A4C', '#C2610C', '#C8102E', '#C8102E']),
       checklist: CL[c.checklist], clColor: c.checklist ? '#1A1412' : '#9B928C', nextChecklist: () => this.setState({ cr: { ...c, checklist: (c.checklist + 1) % CL.length } }),
       btnBg: crOk ? W : '#BFA9AE',
-      save: () => { if (!crOk) return this.flash('Donnez un titre à l\'intervention'); const id = 1370 + Object.keys(s.newJobs).length;
-        const items = c.checklist === 1 ? JOBS[1359].items : c.checklist === 2 ? ['Consigner', 'Contrôler les carters', 'Tester les arrêts d\'urgence', 'Contrôler les barrières', 'Vérifier la signalisation', 'Déconsigner'] : c.checklist === 3 ? JOBS[1362].items : ['Réaliser l\'intervention'];
+      save: () => { if (!crOk) return this.flash('Give the intervention a title'); const id = 1370 + Object.keys(s.newJobs).length;
+        const items = c.checklist === 1 ? JOBS[1359].items : c.checklist === 2 ? ['Lock out', 'Check the guards', 'Test the emergency stops', 'Check the light curtains', 'Check the signage', 'Remove lockout'] : c.checklist === 3 ? JOBS[1362].items : ['Carry out the intervention'];
         const stack = s.stack.slice(); stack.pop();
-        this.setState({ newJobs: { ...s.newJobs, [id]: { asset: s.assetId, task: c.title.trim(), type: c.type, prio: c.prio, state: 'todo', time: '—', when: 'à planifier', desc: c.desc || 'Créée depuis le mobile.', items, docs: [] } }, scr: 'job', jobId: id, tab: 'summary', stack: [...stack, 'asset'] });
-        this.flash(`Intervention OT #${id} créée`); } };
+        this.setState({ newJobs: { ...s.newJobs, [id]: { asset: s.assetId, task: c.title.trim(), type: c.type, prio: c.prio, state: 'todo', time: '—', when: 'to schedule', desc: c.desc || 'Created from the mobile app.', items, docs: [] } }, scr: 'job', jobId: id, tab: 'summary', stack: [...stack, 'asset'] });
+        this.flash(`Intervention WO #${id} created`); } };
 
     // job
     const J = allJobs[s.jobId] || JOBS[1359], jst = stOf(s.jobId), chk = s.checks[s.jobId] || J.items.map(() => false), nd = chk.filter(Boolean).length;
     const [pbg, pfg] = badge(J), stt = STATE[jst];
-    const job = { id: `OT #${s.jobId}`, task: J.task, state: stt[0], stBg: stt[1], stFg: stt[2], asset: ASSETS[J.asset].name, code: ASSETS[J.asset].code, type: J.type, prio: J.prio, prBg: pbg, prFg: pfg, desc: J.desc,
+    const job = { id: `WO #${s.jobId}`, task: J.task, state: stt[0], stBg: stt[1], stFg: stt[2], asset: ASSETS[J.asset].name, code: ASSETS[J.asset].code, type: J.type, prio: J.prio, prBg: pbg, prFg: pfg, desc: J.desc,
       openAsset: openAsset(J.asset), done: nd, total: J.items.length, pct: Math.round(nd / J.items.length * 100) + '%',
       items: J.items.map((label, i) => { const on = !!chk[i]; return { label, mark: on ? 'check' : '', ring: on ? W : '#CFC7C3', fill: on ? W : '#fff', strike: 'none', color: on ? '#6B625D' : '#1A1412', sep: sep(i),
-        toggle: () => { if (jst !== 'cours') return this.flash('Démarrez l\'intervention pour cocher la checklist'); const a = chk.slice(); a[i] = !a[i]; this.setState({ checks: { ...s.checks, [s.jobId]: a } }); } }; }),
-      tabs: [['summary', 'Résumé'], ['docs', 'Documents'], ['photos', 'Photos'], ['comments', 'Commentaires']].map(([v, label]) => { const on = s.tab === v; return { label, color: on ? W : '#6B625D', line: on ? W : 'transparent', pick: () => this.setState({ tab: v }) }; }),
+        toggle: () => { if (jst !== 'cours') return this.flash('Start the intervention to tick the checklist'); const a = chk.slice(); a[i] = !a[i]; this.setState({ checks: { ...s.checks, [s.jobId]: a } }); } }; }),
+      tabs: [['summary', 'Summary'], ['docs', 'Documents'], ['photos', 'Photos'], ['comments', 'Comments']].map(([v, label]) => { const on = s.tab === v; return { label, color: on ? W : '#6B625D', line: on ? W : 'transparent', pick: () => this.setState({ tab: v }) }; }),
       isSummary: s.tab === 'summary', isDocs: s.tab === 'docs', isPhotos: s.tab === 'photos', isComments: s.tab === 'comments',
-      docs: (J.docs.length ? J.docs : [['Aucun document lié', '—']]).map(([name, size], i) => ({ name, size, sep: sep(i), open: () => this.flash(`${name} — téléchargé`) })),
+      docs: (J.docs.length ? J.docs : [['No linked document', '—']]).map(([name, size], i) => ({ name, size, sep: sep(i), open: () => this.flash(`${name} — downloaded`) })),
       photos: Array.from({ length: s.photos[s.jobId] || 0 }, (_, i) => ({ bg: PHOTO[i % PHOTO.length][0], icon: PHOTO[i % PHOTO.length][1] })), addPhoto: () => this.setState({ photos: { ...s.photos, [s.jobId]: (s.photos[s.jobId] || 0) + 1 } }),
       comments: (s.comments[s.jobId] || []).map(([ini, name, when, text]) => ({ ini, name, when, text, bg: (PEOPLE[ini] || PEOPLE.PL)[0], fg: (PEOPLE[ini] || PEOPLE.PL)[1] })),
       draft: s.draft, setDraft: e => this.setState({ draft: e.target.value }),
-      send: () => { if (!s.draft.trim()) return; this.setState({ draft: '', comments: { ...s.comments, [s.jobId]: [...(s.comments[s.jobId] || []), ['PL', 'Pierre Leroy', 'À l\'instant', s.draft.trim()]] } }); },
-      hasBtn: jst !== 'done', btn: jst === 'cours' ? 'Terminer l\'intervention' : 'Démarrer l\'intervention', btnIcon: jst === 'cours' ? 'check_circle' : 'play_arrow',
-      go: () => { if (jst === 'cours') return this.go('finish'); this.setState({ states: { ...s.states, [s.jobId]: 'cours' }, tab: 'summary' }); this.flash(`Intervention démarrée · OT #${s.jobId}`); } };
+      send: () => { if (!s.draft.trim()) return; this.setState({ draft: '', comments: { ...s.comments, [s.jobId]: [...(s.comments[s.jobId] || []), ['PL', 'Pierre Leroy', 'Just now', s.draft.trim()]] } }); },
+      hasBtn: jst !== 'done', btn: jst === 'cours' ? 'Finish the intervention' : 'Start the intervention', btnIcon: jst === 'cours' ? 'check_circle' : 'play_arrow',
+      go: () => { if (jst === 'cours') return this.go('finish'); this.setState({ states: { ...s.states, [s.jobId]: 'cours' }, tab: 'summary' }); this.flash(`Intervention started · WO #${s.jobId}`); } };
 
     // finish
     const f = s.fin, fOk = f.text.trim().length > 2;
     const fin = { text: f.text, setText: e => this.setState({ fin: { ...f, text: e.target.value } }), photos: Array.from({ length: f.photos }, (_, i) => ({ bg: PHOTO[i % PHOTO.length][0], icon: PHOTO[i % PHOTO.length][1] })), addPhoto: () => this.setState({ fin: { ...f, photos: f.photos + 1 } }),
-      btnBg: fOk ? W : '#BFA9AE', done: () => { if (!fOk) return this.flash('Le compte rendu est obligatoire'); this.setState({ states: { ...s.states, [s.jobId]: 'done' }, scr: 'sync', stack: ['home'], syncDone: false }); } };
+      btnBg: fOk ? W : '#BFA9AE', done: () => { if (!fOk) return this.flash('The report is required'); this.setState({ states: { ...s.states, [s.jobId]: 'done' }, scr: 'sync', stack: ['home'], syncDone: false }); } };
 
     // sync
     const sd = s.syncDone;
-    const sync = { busy: !sd, icon: sd ? 'cloud_done' : 'cloud_sync', title: sd ? 'Synchronisation terminée' : 'Synchronisation en cours…', sub: sd ? 'Vos données sont à jour.' : 'Envoi des données au serveur',
-      items: ['Interventions', 'Photos', 'Commentaires', 'Documents'].map((label, i) => ({ label, icon: sd ? 'check' : i === 0 ? 'sync' : 'schedule', ic: sd ? '#1F8A4C' : '#9B928C', color: sd ? '#1A1412' : '#6B625D' })),
+    const sync = { busy: !sd, icon: sd ? 'cloud_done' : 'cloud_sync', title: sd ? 'Sync complete' : 'Syncing…', sub: sd ? 'Your data is up to date.' : 'Sending data to the server',
+      items: ['Interventions', 'Photos', 'Comments', 'Documents'].map((label, i) => ({ label, icon: sd ? 'check' : i === 0 ? 'sync' : 'schedule', ic: sd ? '#1F8A4C' : '#9B928C', color: sd ? '#1A1412' : '#6B625D' })),
       close: () => this.setState({ scr: 'home', stack: [] }) };
 
     const tabs = { show: scr === 'home' || scr === 'search', todo: () => this.tab('home'), search: () => this.tab('search'), todoC: scr === 'home' ? '#fff' : 'rgba(255,255,255,.6)', searchC: scr === 'search' ? '#fff' : 'rgba(255,255,255,.6)' };
