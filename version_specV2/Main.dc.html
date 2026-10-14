@@ -321,6 +321,50 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
   </div>
 </sc-if>
 
+<!-- ================= STEP BY STEP ================= -->
+<sc-if value="{{ is.wiz }}">
+  <div style="position:absolute;left:0;right:0;top:104px;bottom:0;display:flex;flex-direction:column;background:#fff">
+    <div style="flex:none;display:flex;flex-direction:column;gap:8px;padding:14px 18px 6px;border-bottom:1px solid #EEE9E7">
+      <div style="display:flex;align-items:center;gap:8px"><span style="flex:1;min-width:0;font-size:13px;color:#6B625D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><b style="font-family:'IBM Plex Mono',monospace;color:#1A1412">{{ wiz.id }}</b> · {{ wiz.task }}</span><span style="font:500 13px 'IBM Plex Mono',monospace;color:#6B625D">{{ wiz.timer }}</span></div>
+      <div style="display:flex;gap:4px"><sc-for list="{{ wiz.segs }}" as="g" hint-placeholder-count="4"><button onClick="{{ g.go }}" aria-label="{{ g.aria }}" style="flex:1;height:6px;padding:0;border:0;border-radius:3px;background:{{ g.bg }};cursor:pointer"></button></sc-for></div>
+      <div style="display:flex;align-items:center;font-size:13px"><span style="font-weight:700;color:#1A1412">Step {{ wiz.n }} of {{ wiz.total }}</span><span style="margin-left:auto;color:#6B625D">{{ wiz.doneText }}</span></div>
+    </div>
+    <div class="sp-s" style="flex:1;min-height:0;overflow-y:auto;padding:18px 18px 20px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:8px"><h1 style="margin:0;font-size:24px;line-height:30px;font-weight:700;letter-spacing:-.01em">{{ wiz.title }}</h1><p style="margin:0;font-size:15px;line-height:22px;color:#3B3431">{{ wiz.detail }}</p></div>
+      <sc-if value="{{ wiz.hasSafety }}"><div style="display:flex;gap:10px;padding:12px 14px;border-radius:12px;background:#FFF1E0;color:#7A3A06;font-size:14px;line-height:20px"><span style="flex:none;font:20px/1 'Material Symbols Rounded';color:#C2610C;font-variation-settings:'FILL' 1">warning</span>{{ wiz.safety }}</div></sc-if>
+      <sc-if value="{{ wiz.isConfirm }}">
+        <button onClick="{{ wiz.toggle }}" style="min-height:64px;display:flex;align-items:center;gap:14px;padding:12px 16px;border:2px solid {{ wiz.cBorder }};border-radius:14px;background:{{ wiz.cBg }};color:#1A1412;font-size:16px;font-weight:600;text-align:left;cursor:pointer"><span style="flex:none;width:32px;height:32px;border-radius:50%;border:2px solid {{ wiz.cRing }};background:{{ wiz.cFill }};color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded'">{{ wiz.cMark }}</span>{{ wiz.cLabel }}</button>
+      </sc-if>
+      <sc-if value="{{ wiz.isMeasure }}">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px;border-radius:16px;background:#F6F4F3">
+          <div style="display:flex;align-items:center;gap:16px">
+            <button onClick="{{ wiz.minus }}" aria-label="Decrease" style="width:52px;height:52px;border:0;border-radius:50%;background:#fff;color:#1A1412;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.08)">remove</button>
+            <span style="min-width:120px;text-align:center"><span style="font:600 40px/1 'IBM Plex Mono',monospace">{{ wiz.value }}</span> <span style="font-size:16px;color:#6B625D">{{ wiz.unit }}</span></span>
+            <button onClick="{{ wiz.plus }}" aria-label="Increase" style="width:52px;height:52px;border:0;border-radius:50%;background:#fff;color:#1A1412;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.08)">add</button>
+          </div>
+          <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:{{ wiz.rangeColor }}"><span style="font:18px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1">{{ wiz.rangeIcon }}</span>{{ wiz.rangeText }}</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{ wiz.isPhoto }}">
+        <button onClick="{{ wiz.photo }}" style="height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed {{ wiz.phBorder }};border-radius:14px;background:{{ wiz.phBg }};color:#3B3431;font-size:14px;font-weight:600;cursor:pointer"><span style="font:32px/1 'Material Symbols Rounded';color:{{ wiz.phIc }}">{{ wiz.phIcon }}</span>{{ wiz.phLabel }}</button>
+      </sc-if>
+      <sc-if value="{{ wiz.hasParts }}">
+        <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:600">Parts for this step</span>
+          <sc-for list="{{ wiz.parts }}" as="p"><div style="display:flex;align-items:center;gap:12px;padding:8px 10px 8px 8px;border:1px solid #EEE9E7;border-radius:12px"><span style="flex:none;width:56px;height:56px;border-radius:10px;background:#F1ECE7;display:grid;place-items:center"><sc-if value="{{ p.isSeal }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><circle cx="48" cy="48" r="38" fill="#AEB5BC"></circle><circle cx="48" cy="48" r="27" fill="#2A2E32"></circle><circle cx="48" cy="48" r="20" fill="#C7CDD2"></circle><circle cx="48" cy="48" r="12" fill="#F1ECE7"></circle></svg></sc-if><sc-if value="{{ p.isGasket }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><circle cx="48" cy="48" r="40" fill="#D3B48A"></circle><circle cx="48" cy="48" r="19" fill="#F1ECE7"></circle><circle cx="79" cy="48" r="4.5" fill="#F1ECE7"></circle><circle cx="63.5" cy="74.8" r="4.5" fill="#F1ECE7"></circle><circle cx="32.5" cy="74.8" r="4.5" fill="#F1ECE7"></circle><circle cx="17" cy="48" r="4.5" fill="#F1ECE7"></circle><circle cx="32.5" cy="21.2" r="4.5" fill="#F1ECE7"></circle><circle cx="63.5" cy="21.2" r="4.5" fill="#F1ECE7"></circle></svg></sc-if><sc-if value="{{ p.isOring }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><circle cx="38" cy="40" r="22" fill="none" stroke="#1F2326" stroke-width="7"></circle><circle cx="63" cy="58" r="15" fill="none" stroke="#2D3237" stroke-width="6"></circle><circle cx="30" cy="72" r="9" fill="none" stroke="#3A4046" stroke-width="5"></circle></svg></sc-if><sc-if value="{{ p.isKit }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><rect x="14" y="34" width="68" height="46" rx="6" fill="#C9A66B"></rect><rect x="14" y="34" width="68" height="13" rx="4" fill="#B38E52"></rect><rect x="41" y="34" width="14" height="46" fill="#E3CFA6"></rect><circle cx="32" cy="22" r="10" fill="none" stroke="#2A2E32" stroke-width="5"></circle><circle cx="63" cy="21" r="7" fill="none" stroke="#2A2E32" stroke-width="4"></circle></svg></sc-if><sc-if value="{{ p.isOil }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><rect x="26" y="24" width="44" height="60" rx="7" fill="#2F6B4F"></rect><rect x="31" y="13" width="14" height="13" rx="2" fill="#1F4A36"></rect><rect x="51" y="15" width="15" height="10" rx="3" fill="#1F4A36"></rect><rect x="31" y="44" width="34" height="22" rx="3" fill="#E9E4DF"></rect><rect x="35" y="50" width="26" height="4" fill="#2F6B4F"></rect></svg></sc-if><sc-if value="{{ p.isBearing }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><circle cx="48" cy="48" r="38" fill="#AEB5BC"></circle><circle cx="48" cy="48" r="31" fill="#4E565E"></circle><circle cx="72.0" cy="48.0" r="5.5" fill="#D9DEE2"></circle><circle cx="65.0" cy="65.0" r="5.5" fill="#D9DEE2"></circle><circle cx="48.0" cy="72.0" r="5.5" fill="#D9DEE2"></circle><circle cx="31.0" cy="65.0" r="5.5" fill="#D9DEE2"></circle><circle cx="24.0" cy="48.0" r="5.5" fill="#D9DEE2"></circle><circle cx="31.0" cy="31.0" r="5.5" fill="#D9DEE2"></circle><circle cx="48.0" cy="24.0" r="5.5" fill="#D9DEE2"></circle><circle cx="65.0" cy="31.0" r="5.5" fill="#D9DEE2"></circle><circle cx="48" cy="48" r="18" fill="#C7CDD2"></circle><circle cx="48" cy="48" r="11" fill="#F1ECE7"></circle></svg></sc-if><sc-if value="{{ p.noImg }}"><span style="font:26px/1 'Material Symbols Rounded';color:#9B928C">inventory_2</span></sc-if></span><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ p.name }}</span><span style="font-size:13px;color:#6B625D">×{{ p.qty }} · Shelf {{ p.bin }}</span></span><button onClick="{{ p.toggle }}" aria-label="{{ p.aria }}" style="flex:none;width:36px;height:36px;border-radius:50%;border:2px solid {{ p.ring }};background:{{ p.fill }};color:#fff;display:grid;place-items:center;font:20px/1 'Material Symbols Rounded';cursor:pointer">{{ p.mark }}</button></div></sc-for>
+        </div>
+      </sc-if>
+      <sc-for list="{{ wiz.notes }}" as="n"><div style="display:flex;gap:10px;padding:12px 14px;border-radius:12px;background:#F6F4F3"><span style="flex:none;font:20px/1 'Material Symbols Rounded';color:#5E0B1E;font-variation-settings:'FILL' 1">mic</span><span style="font-size:14px;line-height:20px;color:#3B3431">{{ n.text }}</span></div></sc-for>
+      <sc-if value="{{ wiz.hasPhotos }}"><span style="display:flex;align-items:center;gap:6px;font-size:13px;color:#6B625D"><span style="font:18px/1 'Material Symbols Rounded'">photo_camera</span>{{ wiz.photosText }}</span></sc-if>
+    </div>
+    <div style="flex:none;display:flex;align-items:center;gap:10px;padding:12px 18px 34px;border-top:1px solid #EEE9E7">
+      <button onClick="{{ wiz.prev }}" aria-label="Previous step" style="flex:none;width:50px;height:50px;border:0;border-radius:50%;background:#F2EFEE;color:{{ wiz.prevColor }};display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer">chevron_left</button>
+      <button onClick="{{ wiz.addPhoto }}" aria-label="Take a photo" style="flex:none;width:50px;height:50px;border:0;border-radius:50%;background:#F2EFEE;color:#1A1412;display:grid;place-items:center;font:23px/1 'Material Symbols Rounded';cursor:pointer">photo_camera</button>
+      <button onClick="{{ wiz.speak }}" aria-label="Dictate a note" style="flex:none;width:64px;height:64px;margin-top:-10px;border:0;border-radius:50%;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:30px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer;box-shadow:0 6px 16px rgba(94,11,30,.3)">mic</button>
+      <button onClick="{{ wiz.next }}" style="flex:1;height:52px;display:flex;align-items:center;justify-content:center;gap:4px;border:0;border-radius:26px;background:{{ wiz.nextBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer">{{ wiz.nextLabel }}<span style="font:22px/1 'Material Symbols Rounded'">chevron_right</span></button>
+    </div>
+  </div>
+</sc-if>
+
 <!-- ================= PICK AN ASSET ================= -->
 <sc-if value="{{ is.pick }}">
   <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:14px">
@@ -405,9 +449,10 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
 </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":462,"height":916},"screen":{"editor":"enum","options":["home","scan","asset","fiche","incident","create","job","jobDocs","jobPhotos","jobComments","finish","sync","search","pick","quick","profile","voice"],"default":"home","tsType":"string"}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":462,"height":916},"screen":{"editor":"enum","options":["home","scan","asset","fiche","incident","create","job","jobDocs","jobPhotos","jobComments","finish","sync","search","pick","quick","profile","voice","wizard","wizardMeasure"],"default":"home","tsType":"string"}}'>
 const W = '#5E0B1E', LINE = '1px solid #EEE9E7';
 const sep = i => i ? LINE : '0';
+const pad = n => String(n).padStart(2, '0');
 const BADGE = { High: ['#FDECEE', '#C8102E'], Critical: ['#C8102E', '#fff'], Medium: ['#FFF1E0', '#C2610C'], Low: ['#E7F6EC', '#1F8A4C'], Preventive: ['#E8F0FE', '#2457C5'] };
 const STATE = { cours: ['In progress', '#E7F6EC', '#1F8A4C'], retard: ['Late', '#FDECEE', '#C8102E'], todo: ['To do', '#E8F0FE', '#2457C5'], done: ['Done', '#EEE9E7', '#6B625D'] };
 const ASSETS = {
@@ -435,25 +480,38 @@ const PHOTO = [['linear-gradient(135deg,#7D8790,#3F474F)', 'settings'], ['linear
 const PARTS = { BRG: ['Bearing 6310-2RS', 'B-04', 4, 'bearing'], GRS: ['Grease cartridge EP2', 'C-01', 14, 'oil'], KIT: ['Fastener kit M12', 'D-02', 20, 'kit'], SEAL: ['Mechanical seal 45 mm', 'A-07', 3, 'seal'], GSK: ['Pump casing gasket', 'A-07', 4, 'gasket'], ORG: ['O-ring kit NBR', 'A-09', 12, 'oring'], SNS: ['Inductive sensor M18', 'E-11', 6, ''], FLT: ['Intake filter G4', 'F-03', 8, ''] };
 const JOB_PARTS = { 1359: [['BRG', 1], ['GRS', 1], ['KIT', 1]], 1355: [['SEAL', 1], ['GSK', 1], ['ORG', 1]], 1361: [['SNS', 1]], 1362: [['GRS', 2]], 1363: [], 1364: [['FLT', 1]] };
 const TOOLS = { 1359: [['build', 'Bearing puller'], ['handyman', 'Torque wrench 20–100 N·m'], ['vibration', 'Vibration meter']], 1355: [['build', 'Seal puller'], ['water_drop', 'Retention tray'], ['lock', 'Lockout kit']], 1361: [['electric_meter', 'Multimeter'], ['lock', 'Lockout kit']], 1362: [['format_color_fill', 'Grease gun']], 1363: [['speed', 'Pressure gauge']], 1364: [['lock', 'Lockout kit']] };
-const VOICE = { inc: 'Strong vibration on the motor side and a burning smell, the machine is still running.', cr: 'Replace the drive belt, it slips when the line speeds up.', fin: 'Bearing replaced on the motor side, vibration back to normal, machine handed back to production.', job: 'Bearing in place, starting the vibration test now.', quick: 'It started a few minutes ago, I check it right away.' };
+const VOICE = { wiz: 'Old bearing came out easily, seat looks clean, no scoring.', inc: 'Strong vibration on the motor side and a burning smell, the machine is still running.', cr: 'Replace the drive belt, it slips when the line speeds up.', fin: 'Bearing replaced on the motor side, vibration back to normal, machine handed back to production.', job: 'Bearing in place, starting the vibration test now.', quick: 'It started a few minutes ago, I check it right away.' };
+const STEP = {
+  'Lock out the machine': ['Switch off the furnace drive, padlock the isolator and hang your tag. Check zero energy at the motor before touching anything.', 'confirm', 'Lockout is mandatory. Never work on a machine that is not locked out.'],
+  'Remove the protective guard': ['Undo the 4 M12 bolts and lift the guard off. Keep the bolts in the tray, you will reuse them.', 'confirm'],
+  'Replace the motor-side bearing': ['Pull the old bearing with the puller, clean the seat, then fit the new bearing and grease it with one cartridge.', 'confirm', '', ['BRG', 'GRS']],
+  'Check vibrations on restart': ['Refit the guard, remove the lockout and restart. Measure vibration on the motor bearing after 5 minutes.', 'measure', '', [], ['mm/s', 0, 2.8, 1.6]],
+  'Lock out the pump': ['Stop the pump, close the suction and discharge valves, padlock and tag the isolator.', 'confirm', 'Hot water may be under pressure: let the pump cool down first.'],
+  'Locate the leak': ['Dry the area and watch the seal, the casing joint and the fittings. Take a photo of where it leaks.', 'photo'],
+  'Replace the seal': ['Remove the coupling, fit the new mechanical seal, casing gasket and O-rings.', 'confirm', '', ['SEAL', 'GSK', 'ORG']],
+  'Check for leaks': ['Restart the pump and watch the seal area for 10 minutes. Take a photo of the dry seal area.', 'photo'],
+  'Read the pressure': ['Read the outlet pressure on the main gauge with the compressor loaded.', 'measure', '', [], ['bar', 6.5, 7.5, 7.0]],
+  'Grease the 8 points': ['Two strokes of grease on each of the 8 points marked in yellow.', 'confirm', '', ['GRS']],
+};
 const QTYPES = [['leak', 'Leak', 'water_drop'], ['noise', 'Strange noise', 'graphic_eq'], ['vib', 'Vibration', 'vibration'], ['hot', 'Overheating', 'device_thermostat'], ['start', "Won't start", 'power_settings_new'], ['other', 'Other', 'more_horiz']];
-const TITLES = { asset: 'Asset', fiche: 'Asset sheet', incident: 'Report an incident', create: 'Create an intervention', job: 'Intervention', finish: 'Finish the intervention', sync: 'Sync', pick: 'Choose the asset', quick: 'Quick intervention' };
+const TITLES = { asset: 'Asset', fiche: 'Asset sheet', incident: 'Report an incident', create: 'Create an intervention', job: 'Intervention', finish: 'Finish the intervention', sync: 'Sync', wiz: 'Checklist', pick: 'Choose the asset', quick: 'Quick intervention' };
 
 class Component extends DCLogic {
   constructor(p) {
     super(p);
     const s0 = p.screen || 'home';
     const tabMap = { jobDocs: 'docs', jobPhotos: 'photos', jobComments: 'comments' };
-    const scr = tabMap[s0] ? 'job' : s0 === 'profile' ? 'home' : s0 === 'voice' ? 'incident' : s0;
+    const scr = tabMap[s0] ? 'job' : s0 === 'profile' ? 'home' : s0 === 'voice' ? 'incident' : (s0 === 'wizard' || s0 === 'wizardMeasure') ? 'wiz' : s0;
     this.state = { scr, stack: scr === 'home' || scr === 'search' ? [] : ['home'], assetId: 'FT2', jobId: 1359, tab: tabMap[s0] || 'summary',
       checks: { 1359: [true, true, false, false] }, states: {}, photos: { 1359: 5 }, comments: { ...COMMENTS }, draft: '',
       inc: { text: s0 === 'incident' ? '' : '', crit: 'High', photo: false }, cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '', when: 'none', day: 1, hour: 0, who: 'PL' },
       fin: { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2, jobId: 1359 },
-      q: '', seg: 'jobs', torch: false, pickFor: s0 === 'pick' ? 'report' : null, pq: '', quick: { asset: 'FT2', type: s0 === 'quick' ? 'vib' : '', note: '' }, picked: { 1359: { BRG: true } }, sheet: s0 === 'profile' ? 'profile' : null, site: 'Thourotte Plant', lang: 'English', rec: s0 === 'voice' ? { field: 'inc', text: VOICE.inc, words: 9 } : null, syncDone: s0 === 'sync', newJobs: {}, toast: null };
+      q: '', seg: 'jobs', torch: false, wStep: s0 === 'wizardMeasure' ? 3 : 2, meas: {}, wNotes: {}, wPhotos: {}, wSec: 37 * 60 + 12, pickFor: s0 === 'pick' ? 'report' : null, pq: '', quick: { asset: 'FT2', type: s0 === 'quick' ? 'vib' : '', note: '' }, picked: { 1359: { BRG: true } }, sheet: s0 === 'profile' ? 'profile' : null, site: 'Thourotte Plant', lang: 'English', rec: s0 === 'voice' ? { field: 'inc', text: VOICE.inc, words: 9 } : null, syncDone: s0 === 'sync', newJobs: {}, toast: null };
     this._auto = !p.screen;
   }
+  componentDidMount() { this._clk = setInterval(() => { if (this.state.scr === 'wiz' && this._auto) this.setState(st => ({ wSec: st.wSec + 1 })); }, 1000); }
   componentDidUpdate() { const was = this._last; this._last = this.state.scr; if (this.state.scr === 'sync' && was !== 'sync' && !this.state.syncDone) { clearTimeout(this._t2); this._t2 = setTimeout(() => this.setState({ syncDone: true }), 1600); } }
-  componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._t2); clearInterval(this._ri); }
+  componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._t2); clearInterval(this._ri); clearInterval(this._clk); }
   speak(field) { clearInterval(this._ri); const text = VOICE[field]; this.setState({ rec: { field, text, words: 0 } });
     this._ri = setInterval(() => { const r = this.state.rec; if (!r) return clearInterval(this._ri); if (r.words >= text.split(' ').length) return clearInterval(this._ri); this.setState({ rec: { ...r, words: r.words + 1 } }); }, 230); }
   stopRec() { clearInterval(this._ri); const r = this.state.rec; if (!r) return; const t = r.text, s = this.state, add = (old) => (old && old.trim() ? old.trim() + ' ' : '') + t;
@@ -462,6 +520,7 @@ class Component extends DCLogic {
     if (r.field === 'cr') upd.cr = { ...s.cr, desc: add(s.cr.desc), title: s.cr.title || 'Replace the drive belt' };
     if (r.field === 'fin') upd.fin = { ...s.fin, text: t };
     if (r.field === 'job') upd.draft = t;
+    if (r.field === 'wiz') { const k = s.jobId + ':' + s.wStep; upd.wNotes = { ...s.wNotes, [k]: [...(s.wNotes[k] || []), t] }; }
     if (r.field === 'quick') upd.quick = { ...s.quick, note: t };
     this.setState(upd); }
   picked(id) { const pf = this.state.pickFor;
@@ -478,7 +537,7 @@ class Component extends DCLogic {
     const s = this.state, scr = s.scr;
     const allJobs = { ...JOBS, ...s.newJobs };
     const stOf = id => s.states[id] || allJobs[id].state;
-    const is = { pick: scr === 'pick', quick: scr === 'quick', home: scr === 'home', scan: scr === 'scan', asset: scr === 'asset', fiche: scr === 'fiche', incident: scr === 'incident', create: scr === 'create', job: scr === 'job', finish: scr === 'finish', sync: scr === 'sync', search: scr === 'search' };
+    const is = { wiz: scr === 'wiz', pick: scr === 'pick', quick: scr === 'quick', home: scr === 'home', scan: scr === 'scan', asset: scr === 'asset', fiche: scr === 'fiche', incident: scr === 'incident', create: scr === 'create', job: scr === 'job', finish: scr === 'finish', sync: scr === 'sync', search: scr === 'search' };
     const openJob = id => () => this.go('job', { jobId: id, tab: 'summary', assetId: allJobs[id].asset });
     const openAsset = id => () => this.go('asset', { assetId: id });
     const go = { scan: () => this.go('scan'), sync: () => this.go('sync', { syncDone: false }), list: () => this.go('search', { seg: 'jobs', q: '' }), fiche: () => this.go('fiche'),
@@ -570,8 +629,31 @@ class Component extends DCLogic {
       comments: (s.comments[s.jobId] || []).map(([ini, name, when, text]) => ({ ini, name, when, text, bg: (PEOPLE[ini] || PEOPLE.PL)[0], fg: (PEOPLE[ini] || PEOPLE.PL)[1] })),
       draft: s.draft, setDraft: e => this.setState({ draft: e.target.value }),
       send: () => { if (!s.draft.trim()) return; this.setState({ draft: '', comments: { ...s.comments, [s.jobId]: [...(s.comments[s.jobId] || []), ['PL', 'Pierre Leroy', 'Just now', s.draft.trim()]] } }); },
-      hasBtn: jst !== 'done', btn: jst === 'cours' ? 'Finish the intervention' : 'Start the intervention', btnIcon: jst === 'cours' ? 'check_circle' : 'play_arrow',
-      go: () => { if (jst === 'cours') return this.go('finish', { fin: s.jobId === 1359 ? { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2, jobId: 1359 } : { text: '', photos: 0, jobId: s.jobId } }); this.setState({ states: { ...s.states, [s.jobId]: 'cours' }, tab: 'summary' }); this.flash(`Intervention started · WO #${s.jobId}`); } };
+      hasBtn: jst !== 'done', btn: jst === 'cours' ? (J.items.length && nd < J.items.length ? `Resume · step ${(chk.findIndex(x => !x) + 1) || 1} of ${J.items.length}` : 'Finish the intervention') : 'Start the intervention', btnIcon: jst === 'cours' && !(J.items.length && nd < J.items.length) ? 'check_circle' : 'play_arrow',
+      go: () => { const firstTodo = chk.findIndex(x => !x); if (J.items.length && (jst !== 'cours' || firstTodo !== -1)) { const st0 = firstTodo === -1 ? 0 : firstTodo; if (jst !== 'cours') this.flash(`Intervention started · WO #${s.jobId}`); return this.go('wiz', { states: { ...s.states, [s.jobId]: 'cours' }, wStep: st0 }); }
+        if (jst === 'cours') return this.go('finish', { fin: s.jobId === 1359 ? { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2, jobId: 1359 } : { text: '', photos: 0, jobId: s.jobId } }); this.setState({ states: { ...s.states, [s.jobId]: 'cours' }, tab: 'summary' }); this.flash(`Intervention started · WO #${s.jobId}`); } };
+
+    // wizard
+    const wi = Math.min(s.wStep, Math.max(0, J.items.length - 1)), wl = J.items[wi] || '', info = STEP[wl] || ['Do this step, then mark it as done.', 'confirm'], wkey = s.jobId + ':' + wi, wdone = !!chk[wi];
+    const setChk = (k, v) => { const a = (s.checks[s.jobId] || J.items.map(() => false)).slice(); a[k] = v; return { ...s.checks, [s.jobId]: a }; };
+    const mi = info[4] || ['', 0, 0, 0], mv = s.meas[wkey] != null ? s.meas[wkey] : mi[3], inR = mv >= mi[1] && mv <= mi[2];
+    const wph = s.wPhotos[wkey] || 0, wmin = Math.floor(s.wSec / 60), last = wi === J.items.length - 1;
+    const stepOk = info[1] === 'photo' ? wph > 0 || wdone : true;
+    const wiz = { id: `WO #${s.jobId}`, task: `${J.task} · ${ASSETS[J.asset].name}`, timer: `${pad(Math.floor(wmin / 60))}:${pad(wmin % 60)}:${pad(s.wSec % 60)}`, n: wi + 1, total: J.items.length, doneText: `${nd} done`,
+      segs: J.items.map((_, k) => ({ bg: chk[k] ? W : k === wi ? '#C99AA6' : '#EEE9E7', aria: `Go to step ${k + 1}`, go: () => this.setState({ wStep: k }) })),
+      title: wl, detail: info[0], hasSafety: !!info[2], safety: info[2] || '',
+      isConfirm: info[1] === 'confirm', isMeasure: info[1] === 'measure', isPhoto: info[1] === 'photo',
+      toggle: () => this.setState({ checks: setChk(wi, !wdone) }), cLabel: wdone ? 'Done' : 'Mark this step as done', cMark: wdone ? 'check' : '', cRing: wdone ? '#1F8A4C' : '#CFC7C3', cFill: wdone ? '#1F8A4C' : '#fff', cBorder: wdone ? '#BFE3D1' : '#EEE9E7', cBg: wdone ? '#F1FAF5' : '#fff',
+      value: info[1] === 'measure' ? mv.toFixed(1) : '', unit: mi[0], minus: () => this.setState({ meas: { ...s.meas, [wkey]: Math.round((mv - 0.1) * 10) / 10 } }), plus: () => this.setState({ meas: { ...s.meas, [wkey]: Math.round((mv + 0.1) * 10) / 10 } }),
+      rangeColor: inR ? '#1F8A4C' : '#C8102E', rangeIcon: inR ? 'check_circle' : 'error', rangeText: inR ? `Normal · ${mi[1]} – ${mi[2]} ${mi[0]}` : `Out of range · normal ${mi[1]} – ${mi[2]} ${mi[0]}`,
+      photo: () => this.setState({ wPhotos: { ...s.wPhotos, [wkey]: wph + 1 } }), phLabel: wph ? `${wph} photo${wph > 1 ? 's' : ''} taken · add another` : 'Take the photo for this step', phIcon: wph ? 'check_circle' : 'add_a_photo', phIc: wph ? '#1F8A4C' : '#5E0B1E', phBorder: wph ? '#BFE3D1' : '#CFC7C3', phBg: wph ? '#F1FAF5' : '#fff',
+      hasParts: !!(info[3] && info[3].length), parts: (info[3] || []).map(k => { const [name, bin, , kind] = PARTS[k], on = !!pk[k], q = ((JOB_PARTS[s.jobId] || []).find(x => x[0] === k) || [k, 1])[1]; return { name, bin, qty: q, isSeal: kind === 'seal', isGasket: kind === 'gasket', isOring: kind === 'oring', isKit: kind === 'kit', isOil: kind === 'oil', isBearing: kind === 'bearing', noImg: !kind, mark: on ? 'check' : '', ring: on ? '#1F8A4C' : '#CFC7C3', fill: on ? '#1F8A4C' : '#fff', aria: on ? 'Picked' : 'Mark as picked', toggle: () => this.setState({ picked: { ...s.picked, [s.jobId]: { ...pk, [k]: !on } } }) }; }),
+      notes: (s.wNotes[wkey] || []).map(text => ({ text: `“${text}”` })), hasPhotos: wph > 0 && info[1] !== 'photo', photosText: `${wph} photo${wph > 1 ? 's' : ''} on this step`,
+      prev: () => wi > 0 && this.setState({ wStep: wi - 1 }), prevColor: wi > 0 ? '#1A1412' : '#C9C1BA', addPhoto: () => { this.setState({ wPhotos: { ...s.wPhotos, [wkey]: wph + 1 } }); if (info[1] !== 'photo') this.flash('Photo added to this step'); }, speak: () => this.speak('wiz'),
+      nextLabel: last ? 'Finish' : 'Next', nextBg: stepOk ? W : '#BFA9AE',
+      next: () => { if (!stepOk) return this.flash('Take the photo first'); const checks = setChk(wi, true);
+        if (last) return this.setState({ checks, scr: 'finish', stack: [...s.stack.filter(x => x !== 'wiz'), 'job'], fin: s.jobId === 1359 ? { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2, jobId: 1359 } : { text: '', photos: 0, jobId: s.jobId } });
+        this.setState({ checks, wStep: wi + 1 }); } };
 
     // finish
     const f = s.fin, fOk = f.text.trim().length > 2;
@@ -622,9 +704,9 @@ class Component extends DCLogic {
     const openSheet = { profile: toSheet('profile') };
     const tabs = { show: scr === 'home' || scr === 'search', todo: () => this.tab('home'), search: () => this.tab('search'), todoC: scr === 'home' ? '#fff' : 'rgba(255,255,255,.6)', searchC: scr === 'search' ? '#fff' : 'rgba(255,255,255,.6)' };
     const light = !(scr === 'home' || scr === 'search');
-    return { is, go, open: openSheet, back: () => this.back(), hd, home, search, scan, asset, inc, cr, job, fin, sync, tabs, pick, quick, sheet, rec,
+    return { is, go, open: openSheet, back: () => this.back(), hd, home, search, scan, asset, inc, cr, job, fin, sync, tabs, pick, quick, sheet, rec, wiz,
       sb: { color: light ? '#fff' : '#1A1412', bar: scr === 'scan' ? '#fff' : '#1A1412' },
-      toast: { on: !!s.toast, text: s.toast || '', bottom: tabs.show ? '100px' : (scr === 'job' ? '104px' : '40px') } };
+      toast: { on: !!s.toast, text: s.toast || '', bottom: tabs.show ? '100px' : (scr === 'job' || scr === 'wiz' || scr === 'quick' ? '108px' : '40px') } };
   }
 }
 </script>
