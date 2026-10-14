@@ -287,11 +287,12 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
 <!-- ================= FINISH ================= -->
 <sc-if value="{{ is.finish }}">
   <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:#fff;border:1px solid #EEE9E7;border-radius:12px"><span style="flex:none;font:22px/1 'Material Symbols Rounded';color:#5E0B1E">{{ fin.icon }}</span><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font:600 12px 'IBM Plex Mono',monospace;color:#6B625D">{{ fin.id }}</span><span style="font-size:14px;font-weight:600">{{ fin.task }}</span><span style="font-size:13px;color:#6B625D">{{ fin.asset }}</span></span></div>
     <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Report *</span><div style="position:relative;display:flex"><textarea value="{{ fin.text }}" onInput="{{ fin.setText }}" aria-label="Report" style="flex:1;height:120px;resize:none;padding:10px 54px 10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea><button onClick="{{ fin.speak }}" aria-label="Dictate" style="position:absolute;right:8px;bottom:8px;width:40px;height:40px;border:0;border-radius:50%;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer;box-shadow:0 4px 10px rgba(94,11,30,.25)">mic</button></div></div>
     <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Final photos <span style="font-weight:400;color:#6B625D">(optional)</span></span>
       <div style="display:flex;gap:10px"><sc-for list="{{ fin.photos }}" as="p" hint-placeholder-count="2"><span style="width:84px;height:84px;border-radius:10px;background:{{ p.bg }};display:grid;place-items:center;color:rgba(255,255,255,.8);font:32px/1 'Material Symbols Rounded'">{{ p.icon }}</span></sc-for><button onClick="{{ fin.addPhoto }}" aria-label="Add a photo" style="width:84px;height:84px;border:1px dashed #CFC7C3;border-radius:10px;background:#fff;color:#3B3431;display:grid;place-items:center;font:28px/1 'Material Symbols Rounded';cursor:pointer">add</button></div>
     </div>
-    <button onClick="{{ fin.done }}" style="height:52px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;background:{{ fin.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer"><span style="font:22px/1 'Material Symbols Rounded'">check</span>Finish the intervention</button>
+    <button onClick="{{ fin.done }}" style="height:52px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;background:{{ fin.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer"><span style="font:22px/1 'Material Symbols Rounded'">task_alt</span>Confirm and close</button>
   </div>
 </sc-if>
 
@@ -431,7 +432,7 @@ class Component extends DCLogic {
     this.state = { scr, stack: scr === 'home' || scr === 'search' ? [] : ['home'], assetId: 'FT2', jobId: 1359, tab: tabMap[s0] || 'summary',
       checks: { 1359: [true, true, false, false] }, states: {}, photos: { 1359: 5 }, comments: { ...COMMENTS }, draft: '',
       inc: { text: s0 === 'incident' ? '' : '', crit: 'High', photo: false }, cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '' },
-      fin: { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2 },
+      fin: { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2, jobId: 1359 },
       q: '', seg: 'jobs', torch: false, pickFor: s0 === 'pick' ? 'report' : null, pq: '', quick: { asset: 'FT2', type: s0 === 'quick' ? 'vib' : '', note: '' }, picked: { 1359: { BRG: true } }, sheet: s0 === 'profile' ? 'profile' : null, site: 'Thourotte Plant', lang: 'English', rec: s0 === 'voice' ? { field: 'inc', text: VOICE.inc, words: 9 } : null, syncDone: s0 === 'sync', newJobs: {}, toast: null };
     this._auto = !p.screen;
   }
@@ -544,11 +545,12 @@ class Component extends DCLogic {
       draft: s.draft, setDraft: e => this.setState({ draft: e.target.value }),
       send: () => { if (!s.draft.trim()) return; this.setState({ draft: '', comments: { ...s.comments, [s.jobId]: [...(s.comments[s.jobId] || []), ['PL', 'Pierre Leroy', 'Just now', s.draft.trim()]] } }); },
       hasBtn: jst !== 'done', btn: jst === 'cours' ? 'Finish the intervention' : 'Start the intervention', btnIcon: jst === 'cours' ? 'check_circle' : 'play_arrow',
-      go: () => { if (jst === 'cours') return this.go('finish'); this.setState({ states: { ...s.states, [s.jobId]: 'cours' }, tab: 'summary' }); this.flash(`Intervention started · WO #${s.jobId}`); } };
+      go: () => { if (jst === 'cours') return this.go('finish', { fin: s.jobId === 1359 ? { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2, jobId: 1359 } : { text: '', photos: 0, jobId: s.jobId } }); this.setState({ states: { ...s.states, [s.jobId]: 'cours' }, tab: 'summary' }); this.flash(`Intervention started · WO #${s.jobId}`); } };
 
     // finish
     const f = s.fin, fOk = f.text.trim().length > 2;
-    const fin = { speak: () => this.speak('fin'), text: f.text, setText: e => this.setState({ fin: { ...f, text: e.target.value } }), photos: Array.from({ length: f.photos }, (_, i) => ({ bg: PHOTO[i % PHOTO.length][0], icon: PHOTO[i % PHOTO.length][1] })), addPhoto: () => this.setState({ fin: { ...f, photos: f.photos + 1 } }),
+    const FJ = allJobs[f.jobId] || allJobs[s.jobId] || JOBS[1359];
+    const fin = { id: `WO #${f.jobId || s.jobId}`, task: FJ.task, asset: ASSETS[FJ.asset].name, icon: ASSETS[FJ.asset].icon, speak: () => this.speak('fin'), text: f.text, setText: e => this.setState({ fin: { ...f, text: e.target.value } }), photos: Array.from({ length: f.photos }, (_, i) => ({ bg: PHOTO[i % PHOTO.length][0], icon: PHOTO[i % PHOTO.length][1] })), addPhoto: () => this.setState({ fin: { ...f, photos: f.photos + 1 } }),
       btnBg: fOk ? W : '#BFA9AE', done: () => { if (!fOk) return this.flash('The report is required'); this.setState({ states: { ...s.states, [s.jobId]: 'done' }, scr: 'sync', stack: ['home'], syncDone: false }); } };
 
     // sync
