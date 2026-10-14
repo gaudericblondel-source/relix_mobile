@@ -8,6 +8,7 @@ Added compared with version_spec
 - **Quick intervention:** asset + what's happening (one tap) + optional note → *Start now* creates the work order in progress and opens it; details can be completed at the end.
 - **Intervention summary:** **spare parts** with picture (when available), quantity, shelf, stock and a *picked* tick, then **tools and equipment**, above the checklist.
 - **Voice input:** mic button in *Report an incident*, *Create an intervention* (description), *Finish the intervention* (report), *Comments* and the quick-intervention note; the dictated text goes into the field.
+- **New intervention:** types Corrective / Preventive / Inspection / **Improvement**; **When?** not scheduled (planner backlog) or a date and time; **Assign to** a person (optional, default: the creator); real checklist picker with preview.
 - **Avatar menu (PL):** my profile, availability and time off, skills, site, language, notifications, sync now, log out.
 
 Notes

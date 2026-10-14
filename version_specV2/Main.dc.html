@@ -205,7 +205,7 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
     <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Asset</span><div style="height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#F2EFEE;color:#6B625D;font-size:14px"><span style="flex:1">{{ asset.name }} ({{ asset.code }})</span><span style="font:20px/1 'Material Symbols Rounded'">lock</span></div></div>
     <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Title *</span><input value="{{ cr.title }}" onInput="{{ cr.setTitle }}" placeholder="E.g. Bearing replacement" aria-label="Title" style="height:46px;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;color:#1A1412;outline:none" /></div>
     <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Intervention type *</span>
-      <div style="display:flex;gap:8px"><sc-for list="{{ cr.types }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.pick }}" style="flex:1;height:40px;display:flex;align-items:center;justify-content:center;gap:4px;border:1px solid {{ t.border }};border-radius:8px;background:{{ t.bg }};color:{{ t.color }};font-size:13px;font-weight:600;cursor:pointer"><span style="font:17px/1 'Material Symbols Rounded'">{{ t.icon }}</span>{{ t.label }}</button></sc-for></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><sc-for list="{{ cr.types }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.pick }}" style="height:40px;display:flex;align-items:center;justify-content:center;gap:4px;border:1px solid {{ t.border }};border-radius:8px;background:{{ t.bg }};color:{{ t.color }};font-size:13px;font-weight:600;cursor:pointer"><span style="font:17px/1 'Material Symbols Rounded'">{{ t.icon }}</span>{{ t.label }}</button></sc-for></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Priority *</span>
       <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #E2DCD9;border-radius:10px;overflow:hidden;background:#fff"><sc-for list="{{ cr.prios }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" style="height:44px;border:0;border-left:{{ c.sep }};background:{{ c.bg }};color:{{ c.color }};font-size:14px;font-weight:600;cursor:pointer">{{ c.label }}</button></sc-for></div>
@@ -213,6 +213,17 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
     <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Checklist <span style="font-weight:400;color:#6B625D">(optional)</span></span>
       <button onClick="{{ cr.openChecklist }}" style="min-height:46px;display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid {{ cr.clBorder }};border-radius:10px;background:#fff;color:{{ cr.clColor }};font-size:14px;text-align:left;cursor:pointer"><span style="font:20px/1 'Material Symbols Rounded';color:{{ cr.clIc }}">checklist</span><span style="flex:1;display:flex;flex-direction:column"><span style="font-weight:{{ cr.clWeight }}">{{ cr.checklist }}</span><sc-if value="{{ cr.hasCl }}"><span style="font-size:12px;color:#6B625D">{{ cr.clSub }}</span></sc-if></span><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">expand_more</span></button>
       <sc-if value="{{ cr.hasCl }}"><div style="display:flex;flex-direction:column;gap:4px;padding:10px 12px;border-radius:10px;background:#F2EFEE"><sc-for list="{{ cr.clSteps }}" as="st"><span style="display:flex;gap:8px;font-size:13px;line-height:18px;color:#3B3431"><span style="flex:none;width:18px;font-weight:600;color:#6B625D">{{ st.n }}.</span>{{ st.label }}</span></sc-for></div></sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:600">When?</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;padding:3px;background:#EEE9E7;border-radius:10px"><sc-for list="{{ cr.whens }}" as="g" hint-placeholder-count="2"><button onClick="{{ g.pick }}" style="height:38px;border:0;border-radius:8px;background:{{ g.bg }};color:{{ g.color }};font-size:14px;font-weight:600;cursor:pointer">{{ g.label }}</button></sc-for></div>
+      <sc-if value="{{ cr.isDated }}">
+        <div style="display:flex;gap:8px;overflow-x:auto;margin:0 -18px;padding:0 18px 2px"><sc-for list="{{ cr.days }}" as="d" hint-placeholder-count="5"><button onClick="{{ d.pick }}" style="flex:none;width:64px;height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border:1.5px solid {{ d.border }};border-radius:10px;background:{{ d.bg }};color:{{ d.color }};cursor:pointer"><span style="font-size:12px;font-weight:600">{{ d.dow }}</span><span style="font-size:18px;font-weight:700">{{ d.num }}</span></button></sc-for></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ cr.times }}" as="t" hint-placeholder-count="5"><button onClick="{{ t.pick }}" style="height:36px;padding:0 14px;border:1.5px solid {{ t.border }};border-radius:18px;background:{{ t.bg }};color:{{ t.color }};font:500 13px 'IBM Plex Mono',monospace;cursor:pointer">{{ t.label }}</button></sc-for></div>
+      </sc-if>
+      <sc-if value="{{ cr.isNone }}"><span style="font-size:13px;line-height:18px;color:#6B625D">It goes to the planner's backlog. It can still be started at any time.</span></sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Assign to <span style="font-weight:400;color:#6B625D">(optional)</span></span>
+      <button onClick="{{ cr.openAssign }}" style="height:54px;display:flex;align-items:center;gap:10px;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;color:#1A1412;text-align:left;cursor:pointer"><span style="flex:none;width:34px;height:34px;border-radius:50%;background:{{ cr.whoBg }};color:{{ cr.whoFg }};display:grid;place-items:center;font-size:12px;font-weight:600">{{ cr.whoIni }}</span><span style="flex:1;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ cr.whoName }}</span><span style="font-size:12px;color:#6B625D">{{ cr.whoSub }}</span></span><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">expand_more</span></button>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Description <span style="font-weight:400;color:#6B625D">(optional)</span></span><div style="position:relative;display:flex"><textarea value="{{ cr.desc }}" onInput="{{ cr.setDesc }}" placeholder="Describe it, or tap the mic and say it…" aria-label="Description" style="flex:1;height:84px;resize:none;padding:10px 54px 10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea><button onClick="{{ cr.speak }}" aria-label="Dictate" style="position:absolute;right:8px;bottom:8px;width:40px;height:40px;border:0;border-radius:50%;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer;box-shadow:0 4px 10px rgba(94,11,30,.25)">mic</button></div></div>
     <button onClick="{{ cr.save }}" style="height:52px;border:0;border-radius:10px;background:{{ cr.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer">Create the intervention</button>
@@ -227,7 +238,8 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
   <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:164px 18px 120px;display:flex;flex-direction:column;gap:14px">
     <sc-if value="{{ job.isSummary }}">
       <div style="display:flex;align-items:flex-start;gap:10px"><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font:600 14px 'IBM Plex Mono',monospace;color:#6B625D">{{ job.id }}</span><span style="font-size:20px;line-height:26px;font-weight:700">{{ job.task }}</span></span><span style="flex:none;padding:3px 10px;border-radius:10px;background:{{ job.stBg }};color:{{ job.stFg }};font-size:12px;font-weight:600">{{ job.state }}</span></div>
-      <button onClick="{{ job.openAsset }}" style="display:flex;align-items:center;gap:12px;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="flex:none;width:44px;height:44px;border-radius:50%;background:#E8EEF9;color:#2456B8;display:grid;place-items:center;font-size:14px;font-weight:600">PL</span><span style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">{{ job.asset }}</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#6B625D">{{ job.code }}</span></span></button>
+      <button onClick="{{ job.openAsset }}" style="display:flex;align-items:center;gap:12px;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="flex:none;width:44px;height:44px;border-radius:10px;background:#F6EDEF;color:#5E0B1E;display:grid;place-items:center;font:24px/1 'Material Symbols Rounded'">{{ job.assetIcon }}</span><span style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">{{ job.asset }}</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#6B625D">{{ job.code }}</span></span></button>
+      <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#3B3431"><span style="flex:none;width:30px;height:30px;border-radius:50%;background:{{ job.whoBg }};color:{{ job.whoFg }};display:grid;place-items:center;font-size:11px;font-weight:600">{{ job.whoIni }}</span><span>Assigned to <b>{{ job.whoName }}</b> · {{ job.whenText }}</span></div>
       <div style="display:flex;gap:8px"><span style="display:flex;align-items:center;gap:4px;padding:3px 10px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:12px;font-weight:600"><span style="font:15px/1 'Material Symbols Rounded'">build</span>{{ job.type }}</span><span style="padding:3px 10px;border-radius:10px;background:{{ job.prBg }};color:{{ job.prFg }};font-size:12px;font-weight:600">{{ job.prio }}</span></div>
       <p style="margin:0;font-size:14px;line-height:21px;color:#3B3431">{{ job.desc }}</p>
       <sc-if value="{{ job.hasParts }}">
@@ -415,7 +427,10 @@ const JOBS = {
   1364: { asset: 'V12', task: 'Filter replacement', type: 'Preventive', prio: 'Preventive', state: 'todo', time: 'Tomorrow · 09:00', when: 'tomorrow 09:00', next: true, desc: 'Quarterly replacement of the intake filter.', items: ['Lock out the fan', 'Replace the filter', 'Restart and check'], docs: [] },
 };
 const COMMENTS = { 1359: [['PL', 'Pierre Leroy', '03/09/2026 10:45', 'Bearing removed, replacement in progress.'], ['MD', 'Marc Dupont', '03/09/2026 11:02', 'New bearing fitted, test in progress.']] };
-const PEOPLE = { PL: ['#E8EEF9', '#2456B8'], MD: ['#E6F4EE', '#0B6B4A'] };
+const PEOPLE = { PL: ['#E8EEF9', '#2456B8'], MD: ['#E6F4EE', '#0B6B4A'], AM: ['#FEF3E2', '#B54708'], SM: ['#F3EEFC', '#6941C6'], JM: ['#FDF0F7', '#C11574'] };
+const TEAM = [['PL', 'Pierre Leroy', 'Mechanic · you'], ['MD', 'Marc Dupont', 'Mechanic · free today after 14:00'], ['AM', 'Alex Martin', 'Technician · on an intervention until 10:30'], ['SM', 'Sophie Martin', 'Electrician · free today'], ['JM', 'Julie Martin', 'Technician · at Saultain Plant today']];
+const DAYS = [['Today', '14', 'Wed 14 Oct'], ['Thu', '15', 'Thu 15 Oct'], ['Fri', '16', 'Fri 16 Oct'], ['Mon', '19', 'Mon 19 Oct'], ['Tue', '20', 'Tue 20 Oct'], ['Wed', '21', 'Wed 21 Oct']];
+const HOURS = ['08:00', '10:00', '13:30', '15:00', '17:00'];
 const PHOTO = [['linear-gradient(135deg,#7D8790,#3F474F)', 'settings'], ['linear-gradient(135deg,#5E7FA3,#2E4560)', 'precision_manufacturing'], ['linear-gradient(135deg,#8A8F96,#4B5057)', 'settings'], ['linear-gradient(135deg,#4F6E92,#263A52)', 'mode_fan'], ['linear-gradient(135deg,#878C93,#45494F)', 'build']];
 const PARTS = { BRG: ['Bearing 6310-2RS', 'B-04', 4, 'bearing'], GRS: ['Grease cartridge EP2', 'C-01', 14, 'oil'], KIT: ['Fastener kit M12', 'D-02', 20, 'kit'], SEAL: ['Mechanical seal 45 mm', 'A-07', 3, 'seal'], GSK: ['Pump casing gasket', 'A-07', 4, 'gasket'], ORG: ['O-ring kit NBR', 'A-09', 12, 'oring'], SNS: ['Inductive sensor M18', 'E-11', 6, ''], FLT: ['Intake filter G4', 'F-03', 8, ''] };
 const JOB_PARTS = { 1359: [['BRG', 1], ['GRS', 1], ['KIT', 1]], 1355: [['SEAL', 1], ['GSK', 1], ['ORG', 1]], 1361: [['SNS', 1]], 1362: [['GRS', 2]], 1363: [], 1364: [['FLT', 1]] };
@@ -432,7 +447,7 @@ class Component extends DCLogic {
     const scr = tabMap[s0] ? 'job' : s0 === 'profile' ? 'home' : s0 === 'voice' ? 'incident' : s0;
     this.state = { scr, stack: scr === 'home' || scr === 'search' ? [] : ['home'], assetId: 'FT2', jobId: 1359, tab: tabMap[s0] || 'summary',
       checks: { 1359: [true, true, false, false] }, states: {}, photos: { 1359: 5 }, comments: { ...COMMENTS }, draft: '',
-      inc: { text: s0 === 'incident' ? '' : '', crit: 'High', photo: false }, cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '' },
+      inc: { text: s0 === 'incident' ? '' : '', crit: 'High', photo: false }, cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '', when: 'none', day: 1, hour: 0, who: 'PL' },
       fin: { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2, jobId: 1359 },
       q: '', seg: 'jobs', torch: false, pickFor: s0 === 'pick' ? 'report' : null, pq: '', quick: { asset: 'FT2', type: s0 === 'quick' ? 'vib' : '', note: '' }, picked: { 1359: { BRG: true } }, sheet: s0 === 'profile' ? 'profile' : null, site: 'Thourotte Plant', lang: 'English', rec: s0 === 'voice' ? { field: 'inc', text: VOICE.inc, words: 9 } : null, syncDone: s0 === 'sync', newJobs: {}, toast: null };
     this._auto = !p.screen;
@@ -452,7 +467,7 @@ class Component extends DCLogic {
   picked(id) { const pf = this.state.pickFor;
     this.setState(s => { const st = s.stack.filter(x => x !== 'pick' && x !== 'scan'); const base = { assetId: id, pickFor: null };
       if (pf === 'report') return { ...base, stack: st, scr: 'incident', inc: { text: '', crit: 'High', photo: false } };
-      if (pf === 'create') return { ...base, stack: st, scr: 'create', cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '' } };
+      if (pf === 'create') return { ...base, stack: st, scr: 'create', cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '', when: 'none', day: 1, hour: 0, who: 'PL' } };
       if (pf === 'quickChange') { const p = st.pop() || 'quick'; return { ...base, stack: st, scr: p, quick: { ...s.quick, asset: id } }; }
       return { ...base, stack: st, scr: 'quick', quick: { asset: id, type: '', note: '' } }; }); }
   go(scr, extra = {}) { this.setState(s => ({ stack: [...s.stack, s.scr], scr, ...extra })); }
@@ -467,7 +482,7 @@ class Component extends DCLogic {
     const openJob = id => () => this.go('job', { jobId: id, tab: 'summary', assetId: allJobs[id].asset });
     const openAsset = id => () => this.go('asset', { assetId: id });
     const go = { scan: () => this.go('scan'), sync: () => this.go('sync', { syncDone: false }), list: () => this.go('search', { seg: 'jobs', q: '' }), fiche: () => this.go('fiche'),
-      incident: () => this.go('incident', { inc: { text: '', crit: 'High', photo: false } }), create: () => this.go('create', { cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '' } }) };
+      incident: () => this.go('incident', { inc: { text: '', crit: 'High', photo: false } }), create: () => this.go('create', { cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '', when: 'none', day: 1, hour: 0, who: 'PL' } }) };
 
     // header
     const hd = { on: !!TITLES[scr], title: TITLES[scr] || '', backIcon: scr === 'sync' ? 'close' : 'chevron_left', right: scr === 'asset' || scr === 'job' ? 'more_horiz' : '', rightAria: 'More options', rightGo: () => this.flash('Options: share, print the QR label, history') };
@@ -476,14 +491,15 @@ class Component extends DCLogic {
     const open = Object.keys(allJobs).filter(id => stOf(id) !== 'done');
     const cur = open.find(id => stOf(id) === 'cours');
     const badge = j => BADGE[j.prio] || BADGE.Moyenne;
-    const todayIds = open.filter(id => stOf(id) === 'todo' && !allJobs[id].next);
+    const mine = id => !allJobs[id].who || allJobs[id].who === 'PL';
+    const todayIds = open.filter(id => stOf(id) === 'todo' && !allJobs[id].next && !allJobs[id].backlog && mine(id));
     const toPick = pf => () => this.go('pick', { pickFor: pf, pq: '' });
     const home = { cloud: 'cloud_done',
       actions: [['Report a problem', 'warning', '#D9730D', '#FFF8F0', '#D9730D', 1, toPick('report')], ['Quick intervention', 'bolt', '#5E0B1E', '#fff', '#5E0B1E', 1, toPick('quick')], ['New intervention', 'add_circle', '#5E0B1E', '#fff', '#5E0B1E', 0, toPick('create')]].map(([label, icon, ic, bg, border, fill, g]) => ({ label, icon, ic, bg, border, fill, go: g })),
       kpis: [[String(open.filter(id => stOf(id) === 'todo').length), 'To do', '#1A1412'], [String(open.filter(id => stOf(id) === 'cours').length), 'In progress', '#D9730D'], [String(open.filter(id => stOf(id) === 'retard').length), 'Late', '#C8102E']].map(([value, label, color]) => ({ value, label, color, go: go.list })),
       hasCur: !!cur, curAsset: cur ? ASSETS[allJobs[cur].asset].name : '', curTask: cur ? allJobs[cur].task : '', curOpen: cur ? openJob(cur) : () => {},
       today: todayIds.map((id, i) => { const j = allJobs[id], [bg, fg] = badge(j); return { time: j.time, asset: ASSETS[j.asset].name, task: j.task, badge: j.prio, bg, fg, sep: sep(i), open: openJob(id) }; }), noToday: !todayIds.length,
-      next: open.filter(id => allJobs[id].next).map((id, i) => { const j = allJobs[id], [bg, fg] = badge(j); return { time: j.time, asset: ASSETS[j.asset].name, task: j.task, badge: j.prio, bg, fg, sep: sep(i), open: openJob(id) }; }) };
+      next: open.filter(id => allJobs[id].next && mine(id)).map((id, i) => { const j = allJobs[id], [bg, fg] = badge(j); return { time: j.time, asset: ASSETS[j.asset].name, task: j.task, badge: j.prio, bg, fg, sep: sep(i), open: openJob(id) }; }) };
 
     // search
     const q = s.q.trim().toLowerCase();
@@ -518,21 +534,28 @@ class Component extends DCLogic {
     const CLS = [null, ['Bearing replacement', 'Corrective', JOBS[1359].items], ['Pump seal replacement', 'Corrective', JOBS[1355].items], ['Monthly safety check', 'Inspection', ['Lock out', 'Check the guards', 'Test the emergency stops', 'Check the light curtains', 'Check the signage', 'Remove lockout']], ['Greasing', 'Preventive', JOBS[1362].items], ['Sensor check', 'Inspection', JOBS[1361].items]];
     const curCl = CLS[c.checklist];
     const cr = { speak: () => this.speak('cr'), title: c.title, setTitle: e => this.setState({ cr: { ...c, title: e.target.value } }), desc: c.desc, setDesc: e => this.setState({ cr: { ...c, desc: e.target.value } }),
-      types: [['Corrective', 'build'], ['Preventive', 'event_repeat'], ['Inspection', 'visibility']].map(([label, icon]) => { const on = c.type === label; return { label, icon, bg: on ? W : '#fff', color: on ? '#fff' : '#1A1412', border: on ? W : '#E2DCD9', pick: () => this.setState({ cr: { ...c, type: label } }) }; }),
+      types: [['Corrective', 'build'], ['Preventive', 'event_repeat'], ['Inspection', 'visibility'], ['Improvement', 'trending_up']].map(([label, icon]) => { const on = c.type === label; return { label, icon, bg: on ? W : '#fff', color: on ? '#fff' : '#1A1412', border: on ? W : '#E2DCD9', pick: () => this.setState({ cr: { ...c, type: label } }) }; }),
       prios: segBtns(['Low', 'Medium', 'High', 'Critical'], c.prio, v => this.setState({ cr: { ...c, prio: v } }), ['#1F8A4C', '#C2610C', '#C8102E', '#C8102E']),
       checklist: curCl ? curCl[0] : 'Select a checklist', hasCl: !!curCl, clSub: curCl ? `${curCl[2].length} steps · ${curCl[1]}` : '', clSteps: curCl ? curCl[2].map((label, i) => ({ n: i + 1, label })) : [], clColor: curCl ? '#1A1412' : '#9B928C', clWeight: curCl ? 600 : 400, clIc: curCl ? W : '#9B928C', clBorder: curCl ? W : '#E2DCD9', openChecklist: () => this.setState({ sheet: 'checklist' }),
+      whens: [['none', 'Not scheduled'], ['date', 'Pick a date']].map(([v, label]) => { const on = (c.when || 'none') === v; return { label, bg: on ? '#fff' : 'transparent', color: on ? '#1A1412' : '#6B625D', pick: () => this.setState({ cr: { ...c, when: v } }) }; }),
+      isDated: c.when === 'date', isNone: (c.when || 'none') === 'none',
+      days: DAYS.map(([dow, num], i) => { const on = c.day === i; return { dow, num, bg: on ? W : '#fff', color: on ? '#fff' : '#1A1412', border: on ? W : '#E2DCD9', pick: () => this.setState({ cr: { ...c, day: i } }) }; }),
+      times: HOURS.map((label, i) => { const on = c.hour === i; return { label, bg: on ? W : '#fff', color: on ? '#fff' : '#1A1412', border: on ? W : '#E2DCD9', pick: () => this.setState({ cr: { ...c, hour: i } }) }; }),
+      whoIni: c.who || 'PL', whoBg: PEOPLE[c.who || 'PL'][0], whoFg: PEOPLE[c.who || 'PL'][1], whoName: (TEAM.find(t => t[0] === (c.who || 'PL')) || TEAM[0])[1] + ((c.who || 'PL') === 'PL' ? ' (me)' : ''), whoSub: (c.who || 'PL') === 'PL' ? 'Default: the person who creates it' : (TEAM.find(t => t[0] === c.who) || TEAM[0])[2], openAssign: () => this.setState({ sheet: 'assign' }),
       btnBg: crOk ? W : '#BFA9AE',
       save: () => { if (!crOk) return this.flash('Give the intervention a title'); const id = 1370 + Object.keys(s.newJobs).length;
         const items = curCl ? curCl[2] : [];
         const stack = s.stack.slice(); stack.pop();
-        this.setState({ newJobs: { ...s.newJobs, [id]: { asset: s.assetId, task: c.title.trim(), type: c.type, prio: c.prio, state: 'todo', time: '—', when: 'to schedule', desc: c.desc || 'Created from the mobile app.', items, docs: [] } }, scr: 'job', jobId: id, tab: 'summary', stack: [...stack, 'asset'] });
-        this.flash(`Intervention WO #${id} created`); } };
+        const dated = c.when === 'date', dI = c.day || 0, hh = HOURS[c.hour || 0];
+        this.setState({ newJobs: { ...s.newJobs, [id]: { asset: s.assetId, task: c.title.trim(), type: c.type, prio: c.prio, state: 'todo', who: c.who || 'PL', time: dated ? (dI === 0 ? hh : dI === 1 ? `Tomorrow · ${hh}` : `${DAYS[dI][2]} · ${hh}`) : '—', next: dated && dI > 0, backlog: !dated, when: dated ? `${DAYS[dI][2]} · ${hh}` : 'not scheduled', desc: c.desc || 'Created from the mobile app.', items, docs: [] } }, scr: 'job', jobId: id, tab: 'summary', stack: [...stack, 'asset'] });
+        this.flash(`WO #${id} created${c.when === 'date' ? ` · ${DAYS[c.day || 0][2]} ${HOURS[c.hour || 0]}` : ' · not scheduled'}${(c.who || 'PL') !== 'PL' ? ` · ${(TEAM.find(t => t[0] === c.who) || TEAM[0])[1]} is notified` : ''}`); } };
 
     // job
     const J = allJobs[s.jobId] || JOBS[1359], jst = stOf(s.jobId), chk = s.checks[s.jobId] || J.items.map(() => false), nd = chk.filter(Boolean).length;
     const [pbg, pfg] = badge(J), stt = STATE[jst];
     const jp = (JOB_PARTS[s.jobId] || []), pk = s.picked[s.jobId] || {}, npk = jp.filter(([k]) => pk[k]).length;
-    const job = { speak: () => this.speak('job'), id: `WO #${s.jobId}`,
+    const jw = J.who || 'PL', jwt = TEAM.find(t => t[0] === jw) || TEAM[0];
+    const job = { assetIcon: ASSETS[J.asset].icon, whoIni: jw, whoBg: PEOPLE[jw][0], whoFg: PEOPLE[jw][1], whoName: jwt[1] + (jw === 'PL' ? ' (me)' : ''), whenText: J.when, speak: () => this.speak('job'), id: `WO #${s.jobId}`,
       hasParts: jp.length > 0, pickedText: `${npk} of ${jp.length} picked`,
       parts: jp.map(([k, qty], i) => { const [name, bin, stock, kind] = PARTS[k], on = !!pk[k]; return { name, bin, stock, qty, sep: sep(i), isSeal: kind === 'seal', isGasket: kind === 'gasket', isOring: kind === 'oring', isKit: kind === 'kit', isOil: kind === 'oil', isBearing: kind === 'bearing', noImg: !kind,
         mark: on ? 'check' : '', ring: on ? '#1F8A4C' : '#CFC7C3', fill: on ? '#1F8A4C' : '#fff', aria: on ? 'Picked' : 'Mark as picked', toggle: () => this.setState({ picked: { ...s.picked, [s.jobId]: { ...pk, [k]: !on } } }) }; }),
@@ -591,6 +614,7 @@ class Component extends DCLogic {
     if (s.sheet === 'skills') sheet = { ...sheet, title: 'Skills', rows: [['Mechanical', 'Expert'], ['Hydraulics', 'Expert'], ['Pneumatics', 'Qualified'], ['Electrical clearance B1V', 'Basic']].map(([v, l], i) => shRow({ label: v, sub: l, end: ' ', go: () => {} }, i)) };
     if (s.sheet === 'avail') sheet = { ...sheet, title: 'Availability and time off', rows: [shRow({ icon: 'schedule', label: 'Usual week', sub: 'Mon–Thu 07:00–18:00 · Fri 07:00–12:00', go: () => {} }, 0), shRow({ icon: 'beach_access', label: 'Holiday', sub: 'Mon 20 – Fri 24 Oct', end: ' ', go: () => {}, bg: '#FFF1E0', fg: '#C2610C' }, 1), shRow({ icon: 'add', label: 'Add time off', go: () => this.flash('Time off added · your manager and the planner are told') }, 2)] };
     if (s.sheet === 'notif') sheet = { ...sheet, title: 'Notifications', rows: [['Interventions assigned to me', 'Pop-up'], ['Incidents reported on my assets', 'Pop-up'], ['Comments and mentions', 'Notification'], ['Planning changes', 'Notification'], ['Spare parts back in stock', 'Off']].map(([v, l], i) => shRow({ label: v, sub: l, go: () => this.flash('Change: Pop-up · Notification · Off') }, i)) };
+    if (s.sheet === 'assign') sheet = { ...sheet, title: 'Assign to', rows: TEAM.map(([k, name, sub], i) => shRow({ label: name + (k === 'PL' ? ' (me)' : ''), sub, icon: 'person', bg: PEOPLE[k][0], fg: PEOPLE[k][1], end: (c.who || 'PL') === k ? 'check' : ' ', go: () => this.setState({ cr: { ...c, who: k }, sheet: null }) }, i)) };
     if (s.sheet === 'checklist') sheet = { ...sheet, title: 'Choose a checklist', rows: CLS.map((cl, i) => shRow({ icon: cl ? 'checklist' : 'block', label: cl ? cl[0] : 'No checklist', sub: cl ? `${cl[2].length} steps · ${cl[1]}${cl[1] === c.type ? ' · matches the type' : ''}` : 'The technician works without steps', end: c.checklist === i ? 'check' : ' ', bg: cl ? '#F6EDEF' : '#F2EFEE', fg: cl ? W : '#6B625D', go: () => this.setState({ cr: { ...c, checklist: i }, sheet: null }) }, i)) };
     const rc = s.rec, wds = rc ? rc.text.split(' ') : [];
     const rec = { on: !!rc, text: rc ? wds.slice(0, rc.words).join(' ') : '', rest: rc && rc.words < wds.length ? ' ' + wds.slice(rc.words).join(' ') : '', stop: () => this.stopRec(),
