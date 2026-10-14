@@ -247,6 +247,8 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
         <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ job.tools }}" as="t"><span style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 10px;border:1px solid #E2DCD9;border-radius:18px;background:#fff;font-size:13px;font-weight:500"><span style="font:19px/1 'Material Symbols Rounded';color:#5E0B1E">{{ t.icon }}</span>{{ t.label }}</span></sc-for></div>
       </div>
       </sc-if>
+      <sc-if value="{{ job.noChecklist }}"><div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px dashed #CFC7C3;border-radius:12px;font-size:14px;line-height:20px;color:#6B625D"><span style="font:22px/1 'Material Symbols Rounded'">checklist</span>No checklist for this intervention.</div></sc-if>
+      <sc-if value="{{ job.hasChecklist }}">
       <div style="display:flex;flex-direction:column;gap:8px">
         <div style="display:flex;align-items:center"><span style="flex:1;font-size:15px;font-weight:600">Checklist ({{ job.done }} / {{ job.total }})</span><span style="font-size:14px;font-weight:600">{{ job.pct }}</span></div>
         <span style="height:6px;border-radius:3px;background:#EEE9E7;overflow:hidden"><span style="display:block;height:100%;width:{{ job.pct }};background:#5E0B1E"></span></span>
@@ -254,6 +256,7 @@ a{color:#5E0B1E}a:hover{color:#1A1412}
           <sc-for list="{{ job.items }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.toggle }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:50px;padding:8px 14px;border:0;border-top:{{ c.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="flex:none;width:22px;height:22px;border-radius:5px;border:2px solid {{ c.ring }};background:{{ c.fill }};color:#fff;display:grid;place-items:center;font:16px/1 'Material Symbols Rounded'">{{ c.mark }}</span><span style="flex:1;font-size:14px;text-decoration:{{ c.strike }};color:{{ c.color }}">{{ c.label }}</span></button></sc-for>
         </div>
       </div>
+      </sc-if>
     </sc-if>
     <sc-if value="{{ job.isDocs }}">
       <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
@@ -530,7 +533,7 @@ class Component extends DCLogic {
       parts: jp.map(([k, qty], i) => { const [name, bin, stock, kind] = PARTS[k], on = !!pk[k]; return { name, bin, stock, qty, sep: sep(i), isSeal: kind === 'seal', isGasket: kind === 'gasket', isOring: kind === 'oring', isKit: kind === 'kit', isOil: kind === 'oil', isBearing: kind === 'bearing', noImg: !kind,
         mark: on ? 'check' : '', ring: on ? '#1F8A4C' : '#CFC7C3', fill: on ? '#1F8A4C' : '#fff', aria: on ? 'Picked' : 'Mark as picked', toggle: () => this.setState({ picked: { ...s.picked, [s.jobId]: { ...pk, [k]: !on } } }) }; }),
       hasTools: (TOOLS[s.jobId] || []).length > 0, tools: (TOOLS[s.jobId] || []).map(([icon, label]) => ({ icon, label })), task: J.task, state: stt[0], stBg: stt[1], stFg: stt[2], asset: ASSETS[J.asset].name, code: ASSETS[J.asset].code, type: J.type, prio: J.prio, prBg: pbg, prFg: pfg, desc: J.desc,
-      openAsset: openAsset(J.asset), done: nd, total: J.items.length, pct: Math.round(nd / J.items.length * 100) + '%',
+      openAsset: openAsset(J.asset), done: nd, total: J.items.length, pct: J.items.length ? Math.round(nd / J.items.length * 100) + '%' : '0%', hasChecklist: J.items.length > 0, noChecklist: !J.items.length,
       items: J.items.map((label, i) => { const on = !!chk[i]; return { label, mark: on ? 'check' : '', ring: on ? W : '#CFC7C3', fill: on ? W : '#fff', strike: 'none', color: on ? '#6B625D' : '#1A1412', sep: sep(i),
         toggle: () => { if (jst !== 'cours') return this.flash('Start the intervention to tick the checklist'); const a = chk.slice(); a[i] = !a[i]; this.setState({ checks: { ...s.checks, [s.jobId]: a } }); } }; }),
       tabs: [['summary', 'Summary'], ['docs', 'Documents'], ['photos', 'Photos'], ['comments', 'Comments']].map(([v, label]) => { const on = s.tab === v; return { label, color: on ? W : '#6B625D', line: on ? W : 'transparent', pick: () => this.setState({ tab: v }) }; }),
@@ -563,7 +566,7 @@ class Component extends DCLogic {
       types: QTYPES.map(([v, label, icon]) => { const on = qk.type === v; return { label, icon, color: on ? '#fff' : '#1A1412', ic: on ? '#fff' : '#5E0B1E', bg: on ? W : '#fff', border: on ? W : '#E2DCD9', pick: () => this.setState({ quick: { ...qk, type: v } }) }; }).map(t => ({ ...t, label: t.label })),
       btnBg: qOk ? W : '#BFA9AE',
       start: () => { if (!qOk) return this.flash('Tap what is happening'); const id = 1380 + Object.keys(s.newJobs).length, tl = QTYPES.find(t => t[0] === qk.type)[1];
-        this.setState({ newJobs: { ...s.newJobs, [id]: { asset: qk.asset, task: `Quick intervention · ${tl}`, type: 'Corrective', prio: 'High', state: 'cours', when: 'started now', desc: qk.note || 'Quick intervention started from the mobile. Details to complete at the end.', items: ['Make the area safe', 'Fix the problem', 'Check the machine runs'], docs: [] } }, scr: 'job', jobId: id, tab: 'summary', assetId: qk.asset, stack: ['home'] });
+        this.setState({ newJobs: { ...s.newJobs, [id]: { asset: qk.asset, task: `Quick intervention · ${tl}`, type: 'Corrective', prio: 'High', state: 'cours', when: 'started now', desc: qk.note || 'Quick intervention started from the mobile. Details to complete at the end.', items: [], docs: [] } }, scr: 'job', jobId: id, tab: 'summary', assetId: qk.asset, stack: ['home'] });
         this.flash(`Quick intervention started · WO #${id}`); } };
     const shRow = (o, i) => ({ hasIcon: !!o.icon, icon: o.icon || '', bg: o.bg || '#F6EDEF', fg: o.fg || W, label: o.label, sub: o.sub || '', hasSub: !!o.sub, sep: sep(i), color: o.color || '#1A1412', end: o.end || 'chevron_right', endColor: o.end === 'check' ? W : '#B9B0A9', go: o.go });
     const toSheet = k => () => this.setState({ sheet: k });
