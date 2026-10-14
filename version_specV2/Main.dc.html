@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Relix Mobile · initial spec V2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..600,0..1,0&amp;display=block" />
+<style>
+body{margin:0;background:#ECE8E6}
+*{box-sizing:border-box;scrollbar-width:none}
+*::-webkit-scrollbar{display:none}
+.sp-s>*{flex-shrink:0}
+button,input,textarea{font-family:'IBM Plex Sans',system-ui,sans-serif}
+a{color:#5E0B1E}a:hover{color:#1A1412}
+@keyframes spscan{0%{transform:translateY(0)}50%{transform:translateY(150px)}100%{transform:translateY(0)}}
+@keyframes spspin{to{transform:rotate(360deg)}}
+@keyframes spbar{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+</style>
+</helmet>
+<div style="min-height:100vh;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:24px;background:#ECE8E6;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1A1412">
+<div style="position:relative;flex:none;width:414px;height:868px;padding:12px;border-radius:64px;background:#1C1C1E;box-shadow:inset 0 0 0 2px #3A3A3C,0 30px 80px rgba(26,20,18,.35)">
+<span aria-hidden="true" style="position:absolute;left:-3px;top:170px;width:3px;height:32px;border-radius:2px 0 0 2px;background:#2C2C2E"></span>
+<span aria-hidden="true" style="position:absolute;left:-3px;top:225px;width:3px;height:62px;border-radius:2px 0 0 2px;background:#2C2C2E"></span>
+<span aria-hidden="true" style="position:absolute;left:-3px;top:298px;width:3px;height:62px;border-radius:2px 0 0 2px;background:#2C2C2E"></span>
+<span aria-hidden="true" style="position:absolute;right:-3px;top:250px;width:3px;height:96px;border-radius:0 2px 2px 0;background:#2C2C2E"></span>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;border-radius:52px;background:#F6F4F3;color:#1A1412;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased">
+
+<!-- ================= HEADER (wine) ================= -->
+<sc-if value="{{ hd.on }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:0;right:0;top:0;z-index:20;height:104px;padding:50px 8px 0;background:#5E0B1E;color:#fff;display:flex;align-items:center;gap:4px">
+    <button onClick="{{ back }}" aria-label="Back" style="flex:none;width:44px;height:44px;border:0;border-radius:50%;background:none;color:#fff;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer">{{ hd.backIcon }}</button>
+    <span style="flex:1;text-align:center;font-size:17px;font-weight:600">{{ hd.title }}</span>
+    <button onClick="{{ hd.rightGo }}" aria-label="{{ hd.rightAria }}" style="flex:none;width:44px;height:44px;border:0;border-radius:50%;background:none;color:#fff;display:grid;place-items:center;font:24px/1 'Material Symbols Rounded';cursor:pointer">{{ hd.right }}</button>
+  </div>
+</sc-if>
+
+<!-- ================= TO DO (home) ================= -->
+<sc-if value="{{ is.home }}" hint-placeholder-val="{{ true }}">
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:0 0 120px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;align-items:center;gap:8px;padding:50px 16px 6px;background:#fff;border-bottom:1px solid #EEE9E7">
+      <svg width="26" height="23" viewBox="12 10.5 30 27" fill="none" aria-hidden="true" style="display:block;flex:none"><path d="M41.5834 21.3333C41.5834 15.4421 36.6836 10.6666 30.639 10.6666H21.7467C20.6129 10.6666 19.6947 11.5616 19.6947 12.6666V18.9802L19.6148 18.897C19.4988 18.7754 19.3357 18.7061 19.165 18.7061H13.0329C12.7877 18.7061 12.5655 18.848 12.4681 19.0666C12.3707 19.2853 12.4156 19.5402 12.582 19.7152L18.5619 25.968L12.582 32.2218C12.4145 32.3968 12.3696 32.6517 12.4681 32.8704C12.5666 33.089 12.7877 33.2309 13.0329 33.2309H19.165C19.3357 33.2309 19.4988 33.1616 19.6159 33.04L19.6958 32.9568V35.3333C19.6958 36.4384 20.6611 37.3333 21.8518 37.3333H40.7199C40.9541 37.3333 41.1532 37.2533 41.301 37.1264C41.301 37.1264 41.602 36.8085 41.3513 35.9882C41.2123 35.5317 39.2194 33.3088 36.4494 30.3712C39.5324 28.4842 41.5834 25.1434 41.5834 21.3333ZM37.0568 17.6938L29.144 25.9669L37.0568 34.2421C37.2242 34.417 37.2691 34.672 37.1706 34.8906C37.0732 35.1093 36.851 35.2512 36.6059 35.2512H28.6132C28.4425 35.2512 28.2794 35.1818 28.1623 35.0602L22.9222 29.5797L25.9855 26.3765C26.2055 26.1461 26.2055 25.7888 25.9855 25.5584L22.9222 22.3552L28.1623 16.8757C28.2783 16.7541 28.4414 16.6848 28.6121 16.6848H36.6048C36.8499 16.6848 37.0721 16.8266 37.1695 17.0453C37.2669 17.264 37.222 17.5189 37.0557 17.6938H37.0568Z" fill="#5E0B1E"></path></svg><span style="flex:1;font-size:19px;font-weight:700;letter-spacing:-.01em;color:#5E0B1E">Relix</span>
+      <button onClick="{{ go.sync }}" aria-label="Sync" style="width:36px;height:36px;border:0;border-radius:50%;background:none;color:#1F8A4C;display:grid;place-items:center;font:24px/1 'Material Symbols Rounded';cursor:pointer">{{ home.cloud }}</button>
+      <button onClick="{{ open.profile }}" aria-label="Profile and settings" style="width:34px;height:34px;border:0;border-radius:50%;background:#E8EEF9;color:#2456B8;display:grid;place-items:center;font-size:13px;font-weight:600;cursor:pointer">PL</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px;padding:0 18px"><span style="font-size:22px;font-weight:700">Hello Pierre</span><span style="font-size:14px;color:#6B625D">Thursday, September 3</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0 18px">
+      <sc-for list="{{ home.actions }}" as="a" hint-placeholder-count="3"><button onClick="{{ a.go }}" style="height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px;border:1.5px solid {{ a.border }};border-radius:14px;background:{{ a.bg }};color:#1A1412;font-size:13px;line-height:16px;font-weight:600;text-align:center;cursor:pointer"><span style="font:28px/1 'Material Symbols Rounded';color:{{ a.ic }};font-variation-settings:'FILL' {{ a.fill }}">{{ a.icon }}</span>{{ a.label }}</button></sc-for>
+    </div>
+    <sc-if value="{{ home.hasCur }}">
+    <div style="display:flex;flex-direction:column;gap:8px;padding:0 18px">
+      <div style="display:flex;align-items:center"><span style="flex:1;font-size:16px;font-weight:600">In progress</span><button onClick="{{ go.list }}" style="border:0;background:none;padding:0;font-size:14px;font-weight:600;color:#5E0B1E;cursor:pointer">See all</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px;background:#fff;border:1px solid #EEE9E7;border-radius:14px">
+        <button onClick="{{ home.curOpen }}" style="flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:#1A1412">
+          <span style="flex:none;width:58px;height:58px;border-radius:10px;background:linear-gradient(135deg,#8A7E74,#4E4640);display:grid;place-items:center;color:rgba(255,255,255,.85);font:30px/1 'Material Symbols Rounded'">local_fire_department</span>
+          <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">{{ home.curAsset }}</span><span style="font-size:14px;color:#6B625D">{{ home.curTask }}</span><span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6B625D"><span style="padding:2px 8px;border-radius:10px;background:#E7F6EC;color:#1F8A4C;font-weight:600">In progress</span>since 10:32</span></span>
+        </button>
+        <button onClick="{{ home.curOpen }}" aria-label="Resume" style="flex:none;width:40px;height:40px;border:0;border-radius:50%;background:#F6F4F3;color:#1A1412;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer">play_arrow</button>
+      </div>
+    </div>
+    </sc-if>
+    <div style="display:flex;flex-direction:column;gap:8px;padding:0 18px">
+      <span style="font-size:16px;font-weight:600">To do today</span>
+      <div style="background:#fff;border:1px solid #EEE9E7;border-radius:14px;overflow:hidden">
+        <sc-for list="{{ home.today }}" as="r" hint-placeholder-count="3">
+          <button onClick="{{ r.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:62px;padding:10px 14px;border:0;border-top:{{ r.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412">
+            <span style="flex:none;width:44px;font:500 13px 'IBM Plex Mono',monospace;color:#C8102E">{{ r.time }}</span>
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:15px;font-weight:600">{{ r.asset }}</span><span style="font-size:13px;color:#6B625D">{{ r.task }}</span></span>
+            <span style="flex:none;padding:3px 9px;border-radius:10px;background:{{ r.bg }};color:{{ r.fg }};font-size:12px;font-weight:600">{{ r.badge }}</span>
+          </button>
+        </sc-for>
+        <sc-if value="{{ home.noToday }}"><div style="padding:16px 14px;font-size:14px;color:#6B625D">Nothing else today.</div></sc-if>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;padding:0 18px">
+      <span style="font-size:16px;font-weight:600">Coming up</span>
+      <div style="background:#fff;border:1px solid #EEE9E7;border-radius:14px;overflow:hidden">
+        <sc-for list="{{ home.next }}" as="r" hint-placeholder-count="1">
+          <button onClick="{{ r.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:62px;padding:10px 14px;border:0;border-top:{{ r.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412">
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:12px;color:#6B625D">{{ r.time }}</span><span style="font-size:15px;font-weight:600">{{ r.asset }}</span><span style="font-size:13px;color:#6B625D">{{ r.task }}</span></span>
+            <span style="flex:none;padding:3px 9px;border-radius:10px;background:{{ r.bg }};color:{{ r.fg }};font-size:12px;font-weight:600">{{ r.badge }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- ================= SEARCH ================= -->
+<sc-if value="{{ is.search }}">
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:56px 18px 120px;display:flex;flex-direction:column;gap:14px">
+    <span style="font-size:22px;font-weight:700">{{ search.title }}</span>
+    <label style="height:50px;display:flex;align-items:center;gap:10px;padding:0 14px;background:#fff;border:1px solid #E2DCD9;border-radius:12px"><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">search</span><input value="{{ search.q }}" onInput="{{ search.setQ }}" placeholder="Asset, work order, line…" aria-label="Search" style="flex:1;min-width:0;border:0;outline:none;background:transparent;font-size:16px;color:#1A1412" /></label>
+    <div style="display:grid;grid-template-columns:1fr 1fr;padding:3px;background:#EEE9E7;border-radius:10px">
+      <sc-for list="{{ search.segs }}" as="g" hint-placeholder-count="2"><button onClick="{{ g.pick }}" style="height:38px;border:0;border-radius:8px;background:{{ g.bg }};color:{{ g.color }};font-size:14px;font-weight:600;cursor:pointer">{{ g.label }}</button></sc-for>
+    </div>
+    <div style="background:#fff;border:1px solid #EEE9E7;border-radius:14px;overflow:hidden">
+      <sc-for list="{{ search.rows }}" as="r" hint-placeholder-count="5">
+        <button onClick="{{ r.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:62px;padding:10px 14px;border:0;border-top:{{ r.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412">
+          <span style="flex:none;width:40px;height:40px;border-radius:10px;background:#F6EDEF;color:#5E0B1E;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded'">{{ r.icon }}</span>
+          <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:15px;font-weight:600">{{ r.title }}</span><span style="font-size:13px;color:#6B625D">{{ r.sub }}</span></span>
+          <sc-if value="{{ r.hasBadge }}"><span style="flex:none;padding:3px 9px;border-radius:10px;background:{{ r.bg }};color:{{ r.fg }};font-size:12px;font-weight:600">{{ r.badge }}</span></sc-if>
+        </button>
+      </sc-for>
+      <sc-if value="{{ search.empty }}"><div style="padding:18px 14px;font-size:14px;color:#6B625D">No results.</div></sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<!-- ================= SCANNER ================= -->
+<sc-if value="{{ is.scan }}">
+  <div style="position:absolute;inset:0;background:#141210">
+    <div style="position:absolute;left:0;right:0;top:0;height:104px;z-index:5;padding:50px 8px 0;background:#1E1B19;color:#fff;display:flex;align-items:center">
+      <button onClick="{{ back }}" aria-label="Close" style="width:44px;height:44px;border:0;background:none;color:#fff;display:grid;place-items:center;font:26px/1 'Material Symbols Rounded';cursor:pointer">close</button>
+      <span style="flex:1;text-align:center;font-size:17px;font-weight:600">Scan</span>
+      <button onClick="{{ scan.torch }}" aria-label="Torch" style="width:44px;height:44px;border:0;background:none;color:{{ scan.torchColor }};display:grid;place-items:center;font:24px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer">bolt</button>
+    </div>
+    <button onClick="{{ scan.detect }}" aria-label="Simulate reading the QR code" style="position:absolute;left:0;right:0;top:104px;bottom:0;border:0;padding:0;cursor:pointer;background:linear-gradient(180deg,#5C5650 0%,#3B3631 55%,#26221F 100%);overflow:hidden">
+      <span style="position:absolute;left:58px;top:70px;width:274px;height:470px;border-radius:6px;background:linear-gradient(90deg,#9A9690,#C4C0BA 45%,#A8A49E);box-shadow:0 20px 60px rgba(0,0,0,.5)"></span>
+      <span style="position:absolute;left:70px;top:84px;width:250px;height:440px;border:2px solid #8E8A84;border-radius:4px"></span>
+      <span style="position:absolute;left:300px;top:280px;width:8px;height:60px;border-radius:4px;background:#5D5954"></span>
+      <span style="position:absolute;left:135px;top:150px;width:120px;height:120px;padding:9px;background:#F6F4F0;border-radius:3px;display:block"><svg viewBox="0 0 25 25" width="102" height="102" shape-rendering="crispEdges" aria-hidden="true"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM9 0h1v1h-1zM12 0h1v1h-1zM14 0h1v1h-1zM15 0h1v1h-1zM16 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM21 0h1v1h-1zM22 0h1v1h-1zM23 0h1v1h-1zM24 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h1v1h-1zM11 1h1v1h-1zM12 1h1v1h-1zM13 1h1v1h-1zM15 1h1v1h-1zM16 1h1v1h-1zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM11 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM10 3h1v1h-1zM11 3h1v1h-1zM12 3h1v1h-1zM13 3h1v1h-1zM15 3h1v1h-1zM16 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM21 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM15 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM12 5h1v1h-1zM14 5h1v1h-1zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM21 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM8 7h1v1h-1zM12 7h1v1h-1zM13 7h1v1h-1zM14 7h1v1h-1zM15 7h1v1h-1zM2 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM9 8h1v1h-1zM13 8h1v1h-1zM15 8h1v1h-1zM18 8h1v1h-1zM19 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM24 8h1v1h-1zM1 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM9 9h1v1h-1zM10 9h1v1h-1zM13 9h1v1h-1zM16 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM24 9h1v1h-1zM1 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM13 10h1v1h-1zM17 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM0 11h1v1h-1zM1 11h1v1h-1zM2 11h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM9 11h1v1h-1zM11 11h1v1h-1zM15 11h1v1h-1zM18 11h1v1h-1zM19 11h1v1h-1zM20 11h1v1h-1zM21 11h1v1h-1zM23 11h1v1h-1zM1 12h1v1h-1zM3 12h1v1h-1zM6 12h1v1h-1zM9 12h1v1h-1zM11 12h1v1h-1zM13 12h1v1h-1zM14 12h1v1h-1zM15 12h1v1h-1zM16 12h1v1h-1zM18 12h1v1h-1zM19 12h1v1h-1zM20 12h1v1h-1zM21 12h1v1h-1zM1 13h1v1h-1zM2 13h1v1h-1zM3 13h1v1h-1zM9 13h1v1h-1zM12 13h1v1h-1zM17 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM6 14h1v1h-1zM7 14h1v1h-1zM8 14h1v1h-1zM10 14h1v1h-1zM12 14h1v1h-1zM17 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM21 14h1v1h-1zM22 14h1v1h-1zM23 14h1v1h-1zM24 14h1v1h-1zM0 15h1v1h-1zM5 15h1v1h-1zM8 15h1v1h-1zM10 15h1v1h-1zM12 15h1v1h-1zM17 15h1v1h-1zM23 15h1v1h-1zM0 16h1v1h-1zM2 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM7 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM10 16h1v1h-1zM14 16h1v1h-1zM16 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM23 16h1v1h-1zM10 17h1v1h-1zM11 17h1v1h-1zM16 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM23 17h1v1h-1zM0 18h1v1h-1zM1 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM9 18h1v1h-1zM11 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM21 18h1v1h-1zM22 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM8 19h1v1h-1zM10 19h1v1h-1zM13 19h1v1h-1zM16 19h1v1h-1zM20 19h1v1h-1zM21 19h1v1h-1zM22 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM20 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM0 21h1v1h-1zM2 21h1v1h-1zM3 21h1v1h-1zM4 21h1v1h-1zM6 21h1v1h-1zM11 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM21 21h1v1h-1zM22 21h1v1h-1zM24 21h1v1h-1zM0 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM17 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM10 23h1v1h-1zM13 23h1v1h-1zM16 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM22 23h1v1h-1zM0 24h1v1h-1zM1 24h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM8 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM13 24h1v1h-1zM14 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1z" fill="#141110"></path></svg></span>
+      <span style="position:absolute;left:150px;top:278px;width:90px;height:14px;border-radius:2px;background:#E8E4DE"></span>
+      <span style="position:absolute;left:0;right:0;top:540px;bottom:0;background:#1F1C1A"></span>
+      <span style="position:absolute;left:55px;top:100px;width:280px;height:230px;pointer-events:none">
+        <span style="position:absolute;left:0;top:0;width:40px;height:40px;border-left:4px solid #fff;border-top:4px solid #fff"></span>
+        <span style="position:absolute;right:0;top:0;width:40px;height:40px;border-right:4px solid #fff;border-top:4px solid #fff"></span>
+        <span style="position:absolute;left:0;bottom:0;width:40px;height:40px;border-left:4px solid #fff;border-bottom:4px solid #fff"></span>
+        <span style="position:absolute;right:0;bottom:0;width:40px;height:40px;border-right:4px solid #fff;border-bottom:4px solid #fff"></span>
+        <span style="position:absolute;left:14px;right:14px;top:30px;height:2px;background:#fff;box-shadow:0 0 14px 3px rgba(255,255,255,.6);animation:spscan 2.4s ease-in-out infinite"></span>
+      </span>
+      <span style="position:absolute;left:0;right:0;top:600px;text-align:center;color:#fff;font-size:15px;line-height:22px">Place the QR code<br />inside the frame</span>
+    </button>
+  </div>
+</sc-if>
+
+<!-- ================= ASSET ================= -->
+<sc-if value="{{ is.asset }}">
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;gap:14px">
+      <span style="flex:none;width:104px;height:92px;border-radius:10px;background:linear-gradient(135deg,#8A7E74,#4E4640);display:grid;place-items:center;color:rgba(255,255,255,.85);font:44px/1 'Material Symbols Rounded'">{{ asset.icon }}</span>
+      <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><span style="font-size:19px;font-weight:700">{{ asset.name }}</span><span style="font:500 13px 'IBM Plex Mono',monospace;color:#6B625D">{{ asset.code }}</span><span style="align-self:flex-start;padding:2px 8px;border-radius:10px;background:{{ asset.stBg }};color:{{ asset.stFg }};font-size:12px;font-weight:600">{{ asset.status }}</span><span style="font-size:13px;color:#6B625D">{{ asset.loc }}</span></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+      <button onClick="{{ go.fiche }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px solid #5E0B1E;border-radius:12px;background:#fff;color:#1A1412;font-size:13px;font-weight:600;line-height:16px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded';color:#5E0B1E;font-variation-settings:'FILL' 1">visibility</span>View sheet</button>
+      <button onClick="{{ go.incident }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px solid #D9730D;border-radius:12px;background:#FFF8F0;color:#1A1412;font-size:13px;font-weight:600;line-height:16px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded';color:#D9730D;font-variation-settings:'FILL' 1">warning</span>Report<br />an incident</button>
+      <button onClick="{{ go.create }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px solid #5E0B1E;border-radius:12px;background:#fff;color:#1A1412;font-size:13px;font-weight:600;line-height:16px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded';color:#5E0B1E">add</span>Create an<br />intervention</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center"><span style="flex:1;font-size:15px;font-weight:600">{{ asset.openLabel }}</span><button onClick="{{ go.list }}" style="border:0;background:none;padding:0;font-size:14px;font-weight:600;color:#5E0B1E;cursor:pointer">See all</button></div>
+      <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
+        <sc-for list="{{ asset.jobs }}" as="r" hint-placeholder-count="2">
+          <button onClick="{{ r.open }}" style="width:100%;display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 14px;border:0;border-top:{{ r.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font:600 13px 'IBM Plex Mono',monospace">{{ r.id }}</span><span style="font-size:14px;color:#3B3431">{{ r.task }}</span></span><span style="flex:none;padding:3px 9px;border-radius:10px;background:{{ r.bg }};color:{{ r.fg }};font-size:12px;font-weight:600">{{ r.state }}</span></button>
+        </sc-for>
+        <sc-if value="{{ asset.noJobs }}"><div style="padding:14px;font-size:14px;color:#6B625D">No open intervention.</div></sc-if>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center"><span style="flex:1;font-size:15px;font-weight:600">Documents (3)</span><button onClick="{{ go.fiche }}" style="border:0;background:none;padding:0;font-size:14px;font-weight:600;color:#5E0B1E;cursor:pointer">See all</button></div>
+      <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
+        <sc-for list="{{ asset.docs }}" as="d" hint-placeholder-count="3"><button onClick="{{ d.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 14px;border:0;border-top:{{ d.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="font:24px/1 'Material Symbols Rounded';color:#5E0B1E">description</span><span style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ d.name }}</span><span style="font-size:12px;color:#6B625D">{{ d.size }}</span></span></button></sc-for>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- ================= ASSET SHEET ================= -->
+<sc-if value="{{ is.fiche }}">
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:16px">
+    <span style="height:170px;border-radius:12px;background:linear-gradient(135deg,#8A7E74,#4E4640);display:grid;place-items:center;color:rgba(255,255,255,.85);font:70px/1 'Material Symbols Rounded'">{{ asset.icon }}</span>
+    <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:20px;font-weight:700">{{ asset.name }}</span><span style="font:500 13px 'IBM Plex Mono',monospace;color:#6B625D">{{ asset.code }} · {{ asset.loc }}</span></div>
+    <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
+      <sc-for list="{{ asset.facts }}" as="f" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:10px;min-height:48px;padding:8px 14px;border-top:{{ f.sep }}"><span style="flex:1;font-size:14px;color:#6B625D">{{ f.k }}</span><span style="font-size:14px;font-weight:600;text-align:right">{{ f.v }}</span></div></sc-for>
+    </div>
+    <span style="font-size:15px;font-weight:600">Documents</span>
+    <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
+      <sc-for list="{{ asset.docs }}" as="d" hint-placeholder-count="3"><button onClick="{{ d.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 14px;border:0;border-top:{{ d.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="font:24px/1 'Material Symbols Rounded';color:#5E0B1E">description</span><span style="flex:1;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ d.name }}</span><span style="font-size:12px;color:#6B625D">{{ d.size }}</span></span><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">download</span></button></sc-for>
+    </div>
+  </div>
+</sc-if>
+
+<!-- ================= REPORT AN INCIDENT ================= -->
+<sc-if value="{{ is.incident }}">
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Asset</span><div style="height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#F2EFEE;color:#6B625D;font-size:14px"><span style="flex:1">{{ asset.name }} ({{ asset.code }})</span><span style="font:20px/1 'Material Symbols Rounded'">lock</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">What's happening? *</span><div style="position:relative;display:flex"><textarea value="{{ inc.text }}" onInput="{{ inc.setText }}" placeholder="Describe the problem, or tap the mic and say it…" aria-label="What's happening?" style="flex:1;height:96px;resize:none;padding:10px 54px 10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea><button onClick="{{ inc.speak }}" aria-label="Dictate" style="position:absolute;right:8px;bottom:8px;width:40px;height:40px;border:0;border-radius:50%;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer;box-shadow:0 4px 10px rgba(94,11,30,.25)">mic</button></div></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Criticality *</span>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #E2DCD9;border-radius:10px;overflow:hidden;background:#fff"><sc-for list="{{ inc.crits }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" style="height:44px;border:0;border-left:{{ c.sep }};background:{{ c.bg }};color:{{ c.color }};font-size:14px;font-weight:600;cursor:pointer">{{ c.label }}</button></sc-for></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Add a photo <span style="font-weight:400;color:#6B625D">(optional)</span></span>
+      <button onClick="{{ inc.photo }}" style="height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1px dashed #CFC7C3;border-radius:10px;background:#fff;color:#3B3431;font-size:13px;cursor:pointer"><span style="font:28px/1 'Material Symbols Rounded'">{{ inc.photoIcon }}</span>{{ inc.photoLabel }}</button>
+    </div>
+    <button onClick="{{ inc.send }}" style="height:52px;border:0;border-radius:10px;background:{{ inc.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer">Report the incident</button>
+  </div>
+</sc-if>
+
+<!-- ================= CREATE AN INTERVENTION ================= -->
+<sc-if value="{{ is.create }}">
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Asset</span><div style="height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#F2EFEE;color:#6B625D;font-size:14px"><span style="flex:1">{{ asset.name }} ({{ asset.code }})</span><span style="font:20px/1 'Material Symbols Rounded'">lock</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Title *</span><input value="{{ cr.title }}" onInput="{{ cr.setTitle }}" placeholder="E.g. Bearing replacement" aria-label="Title" style="height:46px;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;color:#1A1412;outline:none" /></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Intervention type *</span>
+      <div style="display:flex;gap:8px"><sc-for list="{{ cr.types }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.pick }}" style="flex:1;height:40px;display:flex;align-items:center;justify-content:center;gap:4px;border:1px solid {{ t.border }};border-radius:8px;background:{{ t.bg }};color:{{ t.color }};font-size:13px;font-weight:600;cursor:pointer"><span style="font:17px/1 'Material Symbols Rounded'">{{ t.icon }}</span>{{ t.label }}</button></sc-for></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Priority *</span>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #E2DCD9;border-radius:10px;overflow:hidden;background:#fff"><sc-for list="{{ cr.prios }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" style="height:44px;border:0;border-left:{{ c.sep }};background:{{ c.bg }};color:{{ c.color }};font-size:14px;font-weight:600;cursor:pointer">{{ c.label }}</button></sc-for></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Checklist <span style="font-weight:400;color:#6B625D">(optional)</span></span>
+      <button onClick="{{ cr.nextChecklist }}" style="height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;color:{{ cr.clColor }};font-size:14px;text-align:left;cursor:pointer"><span style="flex:1">{{ cr.checklist }}</span><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">expand_more</span></button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Description <span style="font-weight:400;color:#6B625D">(optional)</span></span><div style="position:relative;display:flex"><textarea value="{{ cr.desc }}" onInput="{{ cr.setDesc }}" placeholder="Describe it, or tap the mic and say it…" aria-label="Description" style="flex:1;height:84px;resize:none;padding:10px 54px 10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea><button onClick="{{ cr.speak }}" aria-label="Dictate" style="position:absolute;right:8px;bottom:8px;width:40px;height:40px;border:0;border-radius:50%;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer;box-shadow:0 4px 10px rgba(94,11,30,.25)">mic</button></div></div>
+    <button onClick="{{ cr.save }}" style="height:52px;border:0;border-radius:10px;background:{{ cr.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer">Create the intervention</button>
+  </div>
+</sc-if>
+
+<!-- ================= INTERVENTION ================= -->
+<sc-if value="{{ is.job }}">
+  <div style="position:absolute;left:0;right:0;top:104px;z-index:4;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:#fff;border-bottom:1px solid #EEE9E7">
+    <sc-for list="{{ job.tabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.pick }}" style="height:44px;border:0;border-bottom:2px solid {{ t.line }};background:none;color:{{ t.color }};font-size:13px;font-weight:600;cursor:pointer">{{ t.label }}</button></sc-for>
+  </div>
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:164px 18px 120px;display:flex;flex-direction:column;gap:14px">
+    <sc-if value="{{ job.isSummary }}">
+      <div style="display:flex;align-items:flex-start;gap:10px"><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font:600 14px 'IBM Plex Mono',monospace;color:#6B625D">{{ job.id }}</span><span style="font-size:20px;line-height:26px;font-weight:700">{{ job.task }}</span></span><span style="flex:none;padding:3px 10px;border-radius:10px;background:{{ job.stBg }};color:{{ job.stFg }};font-size:12px;font-weight:600">{{ job.state }}</span></div>
+      <button onClick="{{ job.openAsset }}" style="display:flex;align-items:center;gap:12px;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="flex:none;width:44px;height:44px;border-radius:50%;background:#E8EEF9;color:#2456B8;display:grid;place-items:center;font-size:14px;font-weight:600">PL</span><span style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">{{ job.asset }}</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#6B625D">{{ job.code }}</span></span></button>
+      <div style="display:flex;gap:8px"><span style="display:flex;align-items:center;gap:4px;padding:3px 10px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:12px;font-weight:600"><span style="font:15px/1 'Material Symbols Rounded'">build</span>{{ job.type }}</span><span style="padding:3px 10px;border-radius:10px;background:{{ job.prBg }};color:{{ job.prFg }};font-size:12px;font-weight:600">{{ job.prio }}</span></div>
+      <p style="margin:0;font-size:14px;line-height:21px;color:#3B3431">{{ job.desc }}</p>
+      <sc-if value="{{ job.hasParts }}">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center"><span style="flex:1;font-size:15px;font-weight:600">Spare parts</span><span style="font-size:13px;color:#6B625D">{{ job.pickedText }}</span></div>
+        <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
+          <sc-for list="{{ job.parts }}" as="p" hint-placeholder-count="2"><div style="display:flex;align-items:center;gap:12px;min-height:72px;padding:8px 10px 8px 8px;border-top:{{ p.sep }}">
+            <span style="flex:none;width:56px;height:56px;border-radius:10px;background:#F1ECE7;display:grid;place-items:center"><sc-if value="{{ p.isSeal }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><circle cx="48" cy="48" r="38" fill="#AEB5BC"></circle><circle cx="48" cy="48" r="27" fill="#2A2E32"></circle><circle cx="48" cy="48" r="20" fill="#C7CDD2"></circle><circle cx="48" cy="48" r="12" fill="#F1ECE7"></circle></svg></sc-if><sc-if value="{{ p.isGasket }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><circle cx="48" cy="48" r="40" fill="#D3B48A"></circle><circle cx="48" cy="48" r="19" fill="#F1ECE7"></circle><circle cx="79" cy="48" r="4.5" fill="#F1ECE7"></circle><circle cx="63.5" cy="74.8" r="4.5" fill="#F1ECE7"></circle><circle cx="32.5" cy="74.8" r="4.5" fill="#F1ECE7"></circle><circle cx="17" cy="48" r="4.5" fill="#F1ECE7"></circle><circle cx="32.5" cy="21.2" r="4.5" fill="#F1ECE7"></circle><circle cx="63.5" cy="21.2" r="4.5" fill="#F1ECE7"></circle></svg></sc-if><sc-if value="{{ p.isOring }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><circle cx="38" cy="40" r="22" fill="none" stroke="#1F2326" stroke-width="7"></circle><circle cx="63" cy="58" r="15" fill="none" stroke="#2D3237" stroke-width="6"></circle><circle cx="30" cy="72" r="9" fill="none" stroke="#3A4046" stroke-width="5"></circle></svg></sc-if><sc-if value="{{ p.isKit }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><rect x="14" y="34" width="68" height="46" rx="6" fill="#C9A66B"></rect><rect x="14" y="34" width="68" height="13" rx="4" fill="#B38E52"></rect><rect x="41" y="34" width="14" height="46" fill="#E3CFA6"></rect><circle cx="32" cy="22" r="10" fill="none" stroke="#2A2E32" stroke-width="5"></circle><circle cx="63" cy="21" r="7" fill="none" stroke="#2A2E32" stroke-width="4"></circle></svg></sc-if><sc-if value="{{ p.isOil }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><rect x="26" y="24" width="44" height="60" rx="7" fill="#2F6B4F"></rect><rect x="31" y="13" width="14" height="13" rx="2" fill="#1F4A36"></rect><rect x="51" y="15" width="15" height="10" rx="3" fill="#1F4A36"></rect><rect x="31" y="44" width="34" height="22" rx="3" fill="#E9E4DF"></rect><rect x="35" y="50" width="26" height="4" fill="#2F6B4F"></rect></svg></sc-if><sc-if value="{{ p.isBearing }}"><svg viewBox="0 0 96 96" width="46" height="46" aria-hidden="true"><circle cx="48" cy="48" r="38" fill="#AEB5BC"></circle><circle cx="48" cy="48" r="31" fill="#4E565E"></circle><circle cx="72.0" cy="48.0" r="5.5" fill="#D9DEE2"></circle><circle cx="65.0" cy="65.0" r="5.5" fill="#D9DEE2"></circle><circle cx="48.0" cy="72.0" r="5.5" fill="#D9DEE2"></circle><circle cx="31.0" cy="65.0" r="5.5" fill="#D9DEE2"></circle><circle cx="24.0" cy="48.0" r="5.5" fill="#D9DEE2"></circle><circle cx="31.0" cy="31.0" r="5.5" fill="#D9DEE2"></circle><circle cx="48.0" cy="24.0" r="5.5" fill="#D9DEE2"></circle><circle cx="65.0" cy="31.0" r="5.5" fill="#D9DEE2"></circle><circle cx="48" cy="48" r="18" fill="#C7CDD2"></circle><circle cx="48" cy="48" r="11" fill="#F1ECE7"></circle></svg></sc-if><sc-if value="{{ p.noImg }}"><span style="font:26px/1 'Material Symbols Rounded';color:#9B928C">inventory_2</span></sc-if></span>
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600">{{ p.name }}</span><span style="font-size:13px;color:#6B625D"><b style="color:#1A1412">×{{ p.qty }}</b> · Shelf {{ p.bin }} · {{ p.stock }} in stock</span></span>
+            <button onClick="{{ p.toggle }}" aria-label="{{ p.aria }}" style="flex:none;width:40px;height:40px;border-radius:50%;border:2px solid {{ p.ring }};background:{{ p.fill }};color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';cursor:pointer">{{ p.mark }}</button>
+          </div></sc-for>
+        </div>
+      </div>
+      </sc-if>
+      <sc-if value="{{ job.hasTools }}">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:15px;font-weight:600">Tools and equipment</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ job.tools }}" as="t"><span style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 10px;border:1px solid #E2DCD9;border-radius:18px;background:#fff;font-size:13px;font-weight:500"><span style="font:19px/1 'Material Symbols Rounded';color:#5E0B1E">{{ t.icon }}</span>{{ t.label }}</span></sc-for></div>
+      </div>
+      </sc-if>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center"><span style="flex:1;font-size:15px;font-weight:600">Checklist ({{ job.done }} / {{ job.total }})</span><span style="font-size:14px;font-weight:600">{{ job.pct }}</span></div>
+        <span style="height:6px;border-radius:3px;background:#EEE9E7;overflow:hidden"><span style="display:block;height:100%;width:{{ job.pct }};background:#5E0B1E"></span></span>
+        <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
+          <sc-for list="{{ job.items }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.toggle }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:50px;padding:8px 14px;border:0;border-top:{{ c.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="flex:none;width:22px;height:22px;border-radius:5px;border:2px solid {{ c.ring }};background:{{ c.fill }};color:#fff;display:grid;place-items:center;font:16px/1 'Material Symbols Rounded'">{{ c.mark }}</span><span style="flex:1;font-size:14px;text-decoration:{{ c.strike }};color:{{ c.color }}">{{ c.label }}</span></button></sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ job.isDocs }}">
+      <div style="background:#fff;border:1px solid #EEE9E7;border-radius:12px;overflow:hidden">
+        <sc-for list="{{ job.docs }}" as="d" hint-placeholder-count="3"><button onClick="{{ d.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:60px;padding:8px 14px;border:0;border-top:{{ d.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="font:24px/1 'Material Symbols Rounded';color:#C8102E">picture_as_pdf</span><span style="flex:1;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ d.name }}</span><span style="font-size:12px;color:#6B625D">{{ d.size }}</span></span><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">download</span></button></sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ job.isPhotos }}">
+      <span style="font-size:16px;font-weight:600">Photos</span>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+        <button onClick="{{ job.addPhoto }}" style="aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1px dashed #CFC7C3;border-radius:10px;background:#fff;color:#3B3431;font-size:12px;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded'">add_a_photo</span>Add<br />a photo</button>
+        <sc-for list="{{ job.photos }}" as="p" hint-placeholder-count="5"><span style="aspect-ratio:1;border-radius:10px;background:{{ p.bg }};display:grid;place-items:center;color:rgba(255,255,255,.8);font:34px/1 'Material Symbols Rounded'">{{ p.icon }}</span></sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ job.isComments }}">
+      <div style="display:flex;gap:8px"><input value="{{ job.draft }}" onInput="{{ job.setDraft }}" placeholder="Add a comment…" aria-label="Add a comment" style="flex:1;min-width:0;height:44px;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;color:#1A1412;outline:none" /><button onClick="{{ job.speak }}" aria-label="Dictate a comment" style="flex:none;width:44px;height:44px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;color:#5E0B1E;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer">mic</button><button onClick="{{ job.send }}" aria-label="Send" style="flex:none;width:44px;height:44px;border:0;border-radius:10px;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';cursor:pointer">send</button></div>
+      <sc-for list="{{ job.comments }}" as="c" hint-placeholder-count="2">
+        <div style="display:flex;gap:10px;padding:12px;background:#fff;border:1px solid #EEE9E7;border-radius:12px"><span style="flex:none;width:36px;height:36px;border-radius:50%;background:{{ c.bg }};color:{{ c.fg }};display:grid;place-items:center;font-size:12px;font-weight:600">{{ c.ini }}</span><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600">{{ c.name }}</span><span style="font-size:12px;color:#6B625D">{{ c.when }}</span><span style="font-size:14px;line-height:20px;color:#3B3431">{{ c.text }}</span></span></div>
+      </sc-for>
+    </sc-if>
+  </div>
+  <sc-if value="{{ job.hasBtn }}">
+  <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 18px 34px;background:linear-gradient(rgba(246,244,243,0),#F6F4F3 25%)">
+    <button onClick="{{ job.go }}" style="width:100%;height:54px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;background:#5E0B1E;color:#fff;font-size:16px;font-weight:600;cursor:pointer"><span style="font:22px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1">{{ job.btnIcon }}</span>{{ job.btn }}</button>
+  </div>
+  </sc-if>
+</sc-if>
+
+<!-- ================= FINISH ================= -->
+<sc-if value="{{ is.finish }}">
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Report *</span><div style="position:relative;display:flex"><textarea value="{{ fin.text }}" onInput="{{ fin.setText }}" aria-label="Report" style="flex:1;height:120px;resize:none;padding:10px 54px 10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea><button onClick="{{ fin.speak }}" aria-label="Dictate" style="position:absolute;right:8px;bottom:8px;width:40px;height:40px;border:0;border-radius:50%;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer;box-shadow:0 4px 10px rgba(94,11,30,.25)">mic</button></div></div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Final photos <span style="font-weight:400;color:#6B625D">(optional)</span></span>
+      <div style="display:flex;gap:10px"><sc-for list="{{ fin.photos }}" as="p" hint-placeholder-count="2"><span style="width:84px;height:84px;border-radius:10px;background:{{ p.bg }};display:grid;place-items:center;color:rgba(255,255,255,.8);font:32px/1 'Material Symbols Rounded'">{{ p.icon }}</span></sc-for><button onClick="{{ fin.addPhoto }}" aria-label="Add a photo" style="width:84px;height:84px;border:1px dashed #CFC7C3;border-radius:10px;background:#fff;color:#3B3431;display:grid;place-items:center;font:28px/1 'Material Symbols Rounded';cursor:pointer">add</button></div>
+    </div>
+    <button onClick="{{ fin.done }}" style="height:52px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;background:{{ fin.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer"><span style="font:22px/1 'Material Symbols Rounded'">check</span>Finish the intervention</button>
+  </div>
+</sc-if>
+
+<!-- ================= SYNC ================= -->
+<sc-if value="{{ is.sync }}">
+  <div style="position:absolute;inset:0;padding:150px 32px 40px;display:flex;flex-direction:column;align-items:center;gap:18px;background:#fff">
+    <span style="position:relative;width:110px;height:110px;border-radius:50%;border:3px solid #5E0B1E;display:grid;place-items:center;color:#5E0B1E;font:52px/1 'Material Symbols Rounded'">{{ sync.icon }}<sc-if value="{{ sync.busy }}"><span style="position:absolute;inset:-3px;border-radius:50%;border:3px solid transparent;border-top-color:#D9A3AE;animation:spspin 1s linear infinite"></span></sc-if></span>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center"><span style="font-size:18px;font-weight:700">{{ sync.title }}</span><span style="font-size:14px;color:#6B625D">{{ sync.sub }}</span></div>
+    <div style="align-self:stretch;display:flex;flex-direction:column;gap:12px;padding:8px 24px">
+      <sc-for list="{{ sync.items }}" as="i" hint-placeholder-count="4"><span style="display:flex;align-items:center;gap:12px;font-size:15px;color:{{ i.color }}"><span style="font:22px/1 'Material Symbols Rounded';color:{{ i.ic }}">{{ i.icon }}</span>{{ i.label }}</span></sc-for>
+    </div>
+    <button onClick="{{ sync.close }}" style="margin-top:auto;align-self:stretch;height:52px;border:0;border-radius:10px;background:#5E0B1E;color:#fff;font-size:16px;font-weight:600;cursor:pointer">Back to home</button>
+  </div>
+</sc-if>
+
+<!-- ================= PICK AN ASSET ================= -->
+<sc-if value="{{ is.pick }}">
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 40px;display:flex;flex-direction:column;gap:14px">
+    <span style="font-size:15px;color:#6B625D">{{ pick.sub }}</span>
+    <div style="display:flex;gap:8px">
+      <label style="flex:1;min-width:0;height:50px;display:flex;align-items:center;gap:10px;padding:0 14px;background:#fff;border:1px solid #E2DCD9;border-radius:12px"><span style="font:22px/1 'Material Symbols Rounded';color:#6B625D">search</span><input value="{{ pick.q }}" onInput="{{ pick.setQ }}" placeholder="Asset name, code or line…" aria-label="Search an asset" style="flex:1;min-width:0;border:0;outline:none;background:transparent;font-size:16px;color:#1A1412" /></label>
+      <button onClick="{{ go.scan }}" aria-label="Scan a QR code" style="flex:none;width:50px;height:50px;border:0;border-radius:12px;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:24px/1 'Material Symbols Rounded';cursor:pointer">qr_code_scanner</button>
+    </div>
+    <div style="background:#fff;border:1px solid #EEE9E7;border-radius:14px;overflow:hidden">
+      <sc-for list="{{ pick.rows }}" as="r" hint-placeholder-count="5"><button onClick="{{ r.go }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:62px;padding:10px 14px;border:0;border-top:{{ r.sep }};background:none;text-align:left;cursor:pointer;color:#1A1412"><span style="flex:none;width:40px;height:40px;border-radius:10px;background:#F6EDEF;color:#5E0B1E;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded'">{{ r.icon }}</span><span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:15px;font-weight:600">{{ r.title }}</span><span style="font-size:13px;color:#6B625D">{{ r.sub }}</span></span><span style="font:22px/1 'Material Symbols Rounded';color:#B9B0A9">chevron_right</span></button></sc-for>
+      <sc-if value="{{ pick.empty }}"><div style="padding:18px 14px;font-size:14px;color:#6B625D">No asset matches.</div></sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<!-- ================= QUICK INTERVENTION ================= -->
+<sc-if value="{{ is.quick }}">
+  <div class="sp-s" style="position:absolute;inset:0;overflow-y:auto;padding:118px 18px 120px;display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:14px;line-height:20px;color:#6B625D">Start right away. The details can be completed when you finish.</span>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Asset</span>
+      <button onClick="{{ quick.change }}" style="height:50px;display:flex;align-items:center;gap:10px;padding:0 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;color:#1A1412;font-size:14px;text-align:left;cursor:pointer"><span style="font:22px/1 'Material Symbols Rounded';color:#5E0B1E">{{ quick.icon }}</span><span style="flex:1">{{ quick.asset }}</span><span style="font-size:13px;font-weight:600;color:#5E0B1E">Change</span></button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">What's happening? *</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><sc-for list="{{ quick.types }}" as="t" hint-placeholder-count="6"><button onClick="{{ t.pick }}" style="height:54px;display:flex;align-items:center;gap:10px;padding:0 12px;border:1.5px solid {{ t.border }};border-radius:12px;background:{{ t.bg }};color:{{ t.color }};font-size:14px;font-weight:600;text-align:left;cursor:pointer"><span style="font:24px/1 'Material Symbols Rounded';color:{{ t.ic }}">{{ t.icon }}</span>{{ t.label }}</button></sc-for></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Note <span style="font-weight:400;color:#6B625D">(optional)</span></span>
+      <div style="position:relative;display:flex"><textarea value="{{ quick.note }}" onInput="{{ quick.setNote }}" placeholder="Say or type a short note…" aria-label="Note" style="flex:1;height:72px;resize:none;padding:10px 54px 10px 12px;border:1px solid #E2DCD9;border-radius:10px;background:#fff;font-size:14px;line-height:20px;color:#1A1412;outline:none"></textarea><button onClick="{{ quick.speak }}" aria-label="Dictate" style="position:absolute;right:8px;bottom:8px;width:40px;height:40px;border:0;border-radius:50%;background:#5E0B1E;color:#fff;display:grid;place-items:center;font:22px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer;box-shadow:0 4px 10px rgba(94,11,30,.25)">mic</button></div>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 18px 34px;background:linear-gradient(rgba(246,244,243,0),#F6F4F3 25%)">
+    <button onClick="{{ quick.start }}" style="width:100%;height:54px;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;background:{{ quick.btnBg }};color:#fff;font-size:16px;font-weight:600;cursor:pointer"><span style="font:24px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1">play_arrow</span>Start now</button>
+  </div>
+</sc-if>
+
+<!-- ================= TAB BAR ================= -->
+<sc-if value="{{ tabs.show }}" hint-placeholder-val="{{ true }}">
+  <nav aria-label="Navigation" style="position:absolute;left:0;right:0;bottom:0;z-index:30;height:88px;padding:6px 10px 28px;background:#5E0B1E;border-radius:22px 22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start">
+    <button onClick="{{ tabs.todo }}" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:0;background:none;color:{{ tabs.todoC }};font-size:12px;font-weight:600;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded'">assignment</span>To do</button>
+    <button onClick="{{ go.scan }}" aria-label="Scan" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;border:0;background:none;color:#fff;font-size:12px;font-weight:600;cursor:pointer"><span style="width:60px;height:60px;margin-top:-30px;border-radius:50%;background:#7A1A2E;border:4px solid #F6F4F3;display:grid;place-items:center;font:30px/1 'Material Symbols Rounded';box-shadow:0 6px 16px rgba(94,11,30,.35)">qr_code_scanner</span>Scan</button>
+    <button onClick="{{ tabs.search }}" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:0;background:none;color:{{ tabs.searchC }};font-size:12px;font-weight:600;cursor:pointer"><span style="font:26px/1 'Material Symbols Rounded'">search</span>Search</button>
+  </nav>
+</sc-if>
+
+<!-- ================= SHEET ================= -->
+<sc-if value="{{ sheet.on }}">
+  <div onClick="{{ sheet.close }}" style="position:absolute;inset:0;z-index:40;background:rgba(26,20,18,.42)"></div>
+  <div role="dialog" aria-label="{{ sheet.title }}" class="sp-s" style="position:absolute;left:0;right:0;bottom:0;z-index:41;max-height:720px;overflow-y:auto;padding:10px 18px 34px;background:#F6F4F3;border-radius:24px 24px 0 0;display:flex;flex-direction:column;gap:14px">
+    <span style="align-self:center;width:40px;height:5px;border-radius:3px;background:#D6CFC8"></span>
+    <sc-if value="{{ sheet.isProfile }}"><div style="display:flex;align-items:center;gap:12px"><span style="width:52px;height:52px;border-radius:50%;background:#E8EEF9;color:#2456B8;display:grid;place-items:center;font-size:17px;font-weight:600">PL</span><span style="display:flex;flex-direction:column"><span style="font-size:18px;font-weight:700">Pierre Leroy</span><span style="font-size:13px;color:#6B625D">Mechanic · Mechanical team · Thourotte Plant</span></span></div></sc-if>
+    <sc-if value="{{ sheet.hasTitle }}"><span style="font-size:18px;font-weight:700">{{ sheet.title }}</span></sc-if>
+    <div style="background:#fff;border:1px solid #EEE9E7;border-radius:14px;overflow:hidden">
+      <sc-for list="{{ sheet.rows }}" as="r" hint-placeholder-count="6"><button onClick="{{ r.go }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 14px;border:0;border-top:{{ r.sep }};background:none;text-align:left;cursor:pointer;color:{{ r.color }}"><sc-if value="{{ r.hasIcon }}"><span style="flex:none;width:36px;height:36px;border-radius:10px;background:{{ r.bg }};color:{{ r.fg }};display:grid;place-items:center;font:21px/1 'Material Symbols Rounded'">{{ r.icon }}</span></sc-if><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">{{ r.label }}</span><sc-if value="{{ r.hasSub }}"><span style="font-size:13px;color:#6B625D">{{ r.sub }}</span></sc-if></span><span style="flex:none;font:22px/1 'Material Symbols Rounded';color:{{ r.endColor }}">{{ r.end }}</span></button></sc-for>
+    </div>
+    <button onClick="{{ sheet.close }}" style="height:48px;border:0;border-radius:10px;background:transparent;color:#6B625D;font-size:15px;font-weight:600;cursor:pointer">Close</button>
+  </div>
+</sc-if>
+
+<!-- ================= VOICE ================= -->
+<sc-if value="{{ rec.on }}">
+  <div style="position:absolute;inset:0;z-index:45;background:rgba(26,20,18,.35)"></div>
+  <div style="position:absolute;left:0;right:0;bottom:0;z-index:46;height:390px;padding:22px 26px 40px;border-radius:24px 24px 0 0;background:#5E0B1E;color:#fff;display:flex;flex-direction:column;align-items:center;gap:18px">
+    <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600"><span style="width:8px;height:8px;border-radius:50%;background:#FF6B7F"></span>Listening…</span>
+    <div style="display:flex;align-items:center;gap:4px;height:44px"><sc-for list="{{ rec.bars }}" as="b"><span style="width:4px;height:{{ b.h }};border-radius:2px;background:#fff;opacity:.85;animation:spbar {{ b.d }} ease-in-out infinite"></span></sc-for></div>
+    <p style="margin:0;min-height:84px;font-size:19px;line-height:26px;font-weight:500;text-align:center">{{ rec.text }}<span style="opacity:.4">{{ rec.rest }}</span></p>
+    <button onClick="{{ rec.stop }}" aria-label="Stop and insert the text" style="width:72px;height:72px;border:0;border-radius:50%;background:#fff;color:#5E0B1E;display:grid;place-items:center;font:34px/1 'Material Symbols Rounded';font-variation-settings:'FILL' 1;cursor:pointer">stop</button>
+    <span style="font-size:13px;color:rgba(255,255,255,.7)">Tap to stop · the text goes into the field</span>
+  </div>
+</sc-if>
+
+<sc-if value="{{ toast.on }}">
+  <div style="position:absolute;left:18px;right:18px;bottom:{{ toast.bottom }};z-index:50;display:flex;align-items:center;gap:10px;padding:13px 15px;border-radius:12px;background:#1A1412;color:#fff;font-size:14px;line-height:20px;box-shadow:0 10px 30px rgba(0,0,0,.25)"><span style="flex:none;font:20px/1 'Material Symbols Rounded';color:#6FDCA8;font-variation-settings:'FILL' 1">check_circle</span>{{ toast.text }}</div>
+</sc-if>
+
+<!-- ================= IPHONE STATUS BAR ================= -->
+<div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;height:50px;z-index:70;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 46px;color:{{ sb.color }};font:600 17px/1 -apple-system,'SF Pro Text','IBM Plex Sans',sans-serif">
+  <span>9:41</span>
+  <span style="display:flex;align-items:center;gap:6px"><svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor"></rect><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"></rect><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"></rect></svg><svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M8 11.5 5.6 9.1a3.4 3.4 0 0 1 4.8 0z" fill="currentColor"></path><path d="M3.4 6.9a6.5 6.5 0 0 1 9.2 0l-1.4 1.4a4.5 4.5 0 0 0-6.4 0z" fill="currentColor"></path><path d="M1.1 4.6a9.8 9.8 0 0 1 13.8 0l-1.4 1.4a7.8 7.8 0 0 0-11 0z" fill="currentColor"></path></svg><svg width="27" height="13" viewBox="0 0 27 13" aria-hidden="true"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="currentColor" stroke-opacity=".4"></rect><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"></rect><path d="M25 4.5v4a2 2 0 0 0 0-4z" fill="currentColor" fill-opacity=".45"></path></svg></span>
+</div>
+<span aria-hidden="true" style="position:absolute;top:11px;left:50%;margin-left:-63px;width:126px;height:37px;border-radius:20px;background:#000;z-index:71;pointer-events:none"></span>
+<span aria-hidden="true" style="position:absolute;bottom:8px;left:50%;margin-left:-67px;width:134px;height:5px;border-radius:3px;background:{{ sb.bar }};z-index:71;pointer-events:none"></span>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":462,"height":916},"screen":{"editor":"enum","options":["home","scan","asset","fiche","incident","create","job","jobDocs","jobPhotos","jobComments","finish","sync","search","pick","quick","profile","voice"],"default":"home","tsType":"string"}}'>
+const W = '#5E0B1E', LINE = '1px solid #EEE9E7';
+const sep = i => i ? LINE : '0';
+const BADGE = { High: ['#FDECEE', '#C8102E'], Critical: ['#C8102E', '#fff'], Medium: ['#FFF1E0', '#C2610C'], Low: ['#E7F6EC', '#1F8A4C'], Preventive: ['#E8F0FE', '#2457C5'] };
+const STATE = { cours: ['In progress', '#E7F6EC', '#1F8A4C'], retard: ['Late', '#FDECEE', '#C8102E'], todo: ['To do', '#E8F0FE', '#2457C5'], done: ['Done', '#EEE9E7', '#6B625D'] };
+const ASSETS = {
+  FT2: { name: 'Tempering Furnace 2', code: 'FT2-FR-001', loc: 'Tempering Line > Furnace Area', icon: 'local_fire_department', facts: [['Manufacturer', 'Glaston FC500'], ['Serial number', 'GL-7730'], ['In service since', 'April 2016'], ['Criticality', 'A · critical'], ['Last intervention', '28/08/2026']] },
+  CV3: { name: 'Conveyor Line 3', code: 'CV3-FL-003', loc: 'Float Line > Cold End', icon: 'conveyor_belt', facts: [['Manufacturer', 'Interroll RM 8310'], ['Serial number', 'IR-55102'], ['In service since', 'June 2020'], ['Criticality', 'B'], ['Last intervention', '12/08/2026']] },
+  PH: { name: 'Hydraulic Press', code: 'PH-030-AT-001', loc: 'Workshop > Press Area', icon: 'compress', facts: [['Manufacturer', 'Schuler HPX 250'], ['Serial number', 'SCH-1187'], ['In service since', 'January 2017'], ['Criticality', 'A · critical'], ['Last intervention', '20/08/2026']] },
+  C01: { name: 'Compressor C-01', code: 'C01-UT-001', loc: 'Utilities > Compressed Air', icon: 'air', facts: [['Manufacturer', 'Atlas Copco GA 75'], ['Serial number', 'AC-77031'], ['In service since', 'November 2018'], ['Criticality', 'B'], ['Last intervention', '01/09/2026']] },
+  V12: { name: 'Fan V-12', code: 'V12-FL-012', loc: 'Float Line > Tin Bath', icon: 'mode_fan', facts: [['Manufacturer', 'ebm-papst W3G 910'], ['Serial number', 'EP-30418'], ['In service since', 'September 2021'], ['Criticality', 'B'], ['Last intervention', '15/07/2026']] },
+};
+const DOCS_ASSET = [['Manufacturer manual', 'PDF · 2.4 MB'], ['Electrical drawing', 'PDF · 1.1 MB'], ['Maintenance procedure', 'PDF · 890 KB']];
+const JOBS = {
+  1359: { asset: 'FT2', task: 'Bearing replacement', type: 'Corrective', prio: 'High', state: 'cours', when: 'since 10:32', desc: 'Motor-side bearing making an abnormal noise.', items: ['Lock out the machine', 'Remove the protective guard', 'Replace the motor-side bearing', 'Check vibrations on restart'], docs: [['Bearing replacement procedure', 'PDF · 1.2 MB'], ['Exploded view', 'PDF · 800 KB'], ['Mechanical drawing', 'PDF · 1.5 MB']] },
+  1355: { asset: 'FT2', task: 'Major leak on pump', type: 'Corrective', prio: 'Critical', state: 'retard', when: 'due yesterday', desc: 'Major water leak under the furnace cooling pump.', items: ['Lock out the pump', 'Locate the leak', 'Replace the seal', 'Check for leaks'], docs: [['Pump procedure', 'PDF · 640 KB']] },
+  1361: { asset: 'CV3', task: 'Sensor check', type: 'Inspection', prio: 'High', state: 'todo', time: '08:00', when: 'today 08:00', desc: 'Random stops reported, check the speed sensor.', items: ['Lock out the conveyor', 'Check the wiring', 'Test the sensor'], docs: [['Sensor diagram', 'PDF · 420 KB']] },
+  1362: { asset: 'PH', task: 'Greasing', type: 'Preventive', prio: 'Low', state: 'todo', time: '11:00', when: 'today 11:00', desc: 'Monthly greasing of the slides and joints.', items: ['Clean the grease points', 'Grease the 8 points', 'No-load test'], docs: [['Greasing plan', 'PDF · 300 KB']] },
+  1363: { asset: 'C01', task: 'Pressure check', type: 'Inspection', prio: 'Medium', state: 'todo', time: '14:00', when: 'today 14:00', desc: 'Read the outlet pressure and check the drains.', items: ['Read the pressure', 'Check the drains', 'Record the values'], docs: [] },
+  1364: { asset: 'V12', task: 'Filter replacement', type: 'Preventive', prio: 'Preventive', state: 'todo', time: 'Tomorrow · 09:00', when: 'tomorrow 09:00', next: true, desc: 'Quarterly replacement of the intake filter.', items: ['Lock out the fan', 'Replace the filter', 'Restart and check'], docs: [] },
+};
+const COMMENTS = { 1359: [['PL', 'Pierre Leroy', '03/09/2026 10:45', 'Bearing removed, replacement in progress.'], ['MD', 'Marc Dupont', '03/09/2026 11:02', 'New bearing fitted, test in progress.']] };
+const PEOPLE = { PL: ['#E8EEF9', '#2456B8'], MD: ['#E6F4EE', '#0B6B4A'] };
+const PHOTO = [['linear-gradient(135deg,#7D8790,#3F474F)', 'settings'], ['linear-gradient(135deg,#5E7FA3,#2E4560)', 'precision_manufacturing'], ['linear-gradient(135deg,#8A8F96,#4B5057)', 'settings'], ['linear-gradient(135deg,#4F6E92,#263A52)', 'mode_fan'], ['linear-gradient(135deg,#878C93,#45494F)', 'build']];
+const PARTS = { BRG: ['Bearing 6310-2RS', 'B-04', 4, 'bearing'], GRS: ['Grease cartridge EP2', 'C-01', 14, 'oil'], KIT: ['Fastener kit M12', 'D-02', 20, 'kit'], SEAL: ['Mechanical seal 45 mm', 'A-07', 3, 'seal'], GSK: ['Pump casing gasket', 'A-07', 4, 'gasket'], ORG: ['O-ring kit NBR', 'A-09', 12, 'oring'], SNS: ['Inductive sensor M18', 'E-11', 6, ''], FLT: ['Intake filter G4', 'F-03', 8, ''] };
+const JOB_PARTS = { 1359: [['BRG', 1], ['GRS', 1], ['KIT', 1]], 1355: [['SEAL', 1], ['GSK', 1], ['ORG', 1]], 1361: [['SNS', 1]], 1362: [['GRS', 2]], 1363: [], 1364: [['FLT', 1]] };
+const TOOLS = { 1359: [['build', 'Bearing puller'], ['handyman', 'Torque wrench 20–100 N·m'], ['vibration', 'Vibration meter']], 1355: [['build', 'Seal puller'], ['water_drop', 'Retention tray'], ['lock', 'Lockout kit']], 1361: [['electric_meter', 'Multimeter'], ['lock', 'Lockout kit']], 1362: [['format_color_fill', 'Grease gun']], 1363: [['speed', 'Pressure gauge']], 1364: [['lock', 'Lockout kit']] };
+const VOICE = { inc: 'Strong vibration on the motor side and a burning smell, the machine is still running.', cr: 'Replace the drive belt, it slips when the line speeds up.', fin: 'Bearing replaced on the motor side, vibration back to normal, machine handed back to production.', job: 'Bearing in place, starting the vibration test now.', quick: 'It started a few minutes ago, I check it right away.' };
+const QTYPES = [['leak', 'Leak', 'water_drop'], ['noise', 'Strange noise', 'graphic_eq'], ['vib', 'Vibration', 'vibration'], ['hot', 'Overheating', 'device_thermostat'], ['start', "Won't start", 'power_settings_new'], ['other', 'Other', 'more_horiz']];
+const TITLES = { asset: 'Asset', fiche: 'Asset sheet', incident: 'Report an incident', create: 'Create an intervention', job: 'Intervention', finish: 'Finish the intervention', sync: 'Sync', pick: 'Choose the asset', quick: 'Quick intervention' };
+
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    const s0 = p.screen || 'home';
+    const tabMap = { jobDocs: 'docs', jobPhotos: 'photos', jobComments: 'comments' };
+    const scr = tabMap[s0] ? 'job' : s0 === 'profile' ? 'home' : s0 === 'voice' ? 'incident' : s0;
+    this.state = { scr, stack: scr === 'home' || scr === 'search' ? [] : ['home'], assetId: 'FT2', jobId: 1359, tab: tabMap[s0] || 'summary',
+      checks: { 1359: [true, true, false, false] }, states: {}, photos: { 1359: 5 }, comments: { ...COMMENTS }, draft: '',
+      inc: { text: s0 === 'incident' ? '' : '', crit: 'High', photo: false }, cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '' },
+      fin: { text: 'Motor-side bearing replaced. Test OK, no vibration noticed.', photos: 2 },
+      q: '', seg: 'jobs', torch: false, pickFor: s0 === 'pick' ? 'report' : null, pq: '', quick: { asset: 'FT2', type: s0 === 'quick' ? 'vib' : '', note: '' }, picked: { 1359: { BRG: true } }, sheet: s0 === 'profile' ? 'profile' : null, site: 'Thourotte Plant', lang: 'English', rec: s0 === 'voice' ? { field: 'inc', text: VOICE.inc, words: 9 } : null, syncDone: s0 === 'sync', newJobs: {}, toast: null };
+    this._auto = !p.screen;
+  }
+  componentDidUpdate() { const was = this._last; this._last = this.state.scr; if (this.state.scr === 'sync' && was !== 'sync' && !this.state.syncDone) { clearTimeout(this._t2); this._t2 = setTimeout(() => this.setState({ syncDone: true }), 1600); } }
+  componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._t2); clearInterval(this._ri); }
+  speak(field) { clearInterval(this._ri); const text = VOICE[field]; this.setState({ rec: { field, text, words: 0 } });
+    this._ri = setInterval(() => { const r = this.state.rec; if (!r) return clearInterval(this._ri); if (r.words >= text.split(' ').length) return clearInterval(this._ri); this.setState({ rec: { ...r, words: r.words + 1 } }); }, 230); }
+  stopRec() { clearInterval(this._ri); const r = this.state.rec; if (!r) return; const t = r.text, s = this.state, add = (old) => (old && old.trim() ? old.trim() + ' ' : '') + t;
+    const upd = { rec: null };
+    if (r.field === 'inc') upd.inc = { ...s.inc, text: add(s.inc.text) };
+    if (r.field === 'cr') upd.cr = { ...s.cr, desc: add(s.cr.desc), title: s.cr.title || 'Replace the drive belt' };
+    if (r.field === 'fin') upd.fin = { ...s.fin, text: t };
+    if (r.field === 'job') upd.draft = t;
+    if (r.field === 'quick') upd.quick = { ...s.quick, note: t };
+    this.setState(upd); }
+  picked(id) { const pf = this.state.pickFor;
+    this.setState(s => { const st = s.stack.filter(x => x !== 'pick' && x !== 'scan'); const base = { assetId: id, pickFor: null };
+      if (pf === 'report') return { ...base, stack: st, scr: 'incident', inc: { text: '', crit: 'High', photo: false } };
+      if (pf === 'create') return { ...base, stack: st, scr: 'create', cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '' } };
+      if (pf === 'quickChange') { const p = st.pop() || 'quick'; return { ...base, stack: st, scr: p, quick: { ...s.quick, asset: id } }; }
+      return { ...base, stack: st, scr: 'quick', quick: { asset: id, type: '', note: '' } }; }); }
+  go(scr, extra = {}) { this.setState(s => ({ stack: [...s.stack, s.scr], scr, ...extra })); }
+  back() { this.setState(s => { const st = s.stack.slice(); const p = st.pop() || 'home'; return { scr: p, stack: st }; }); }
+  tab(scr) { this.setState({ scr, stack: [] }); }
+  flash(text) { this.setState({ toast: text }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: null }), 2600); }
+  renderVals() {
+    const s = this.state, scr = s.scr;
+    const allJobs = { ...JOBS, ...s.newJobs };
+    const stOf = id => s.states[id] || allJobs[id].state;
+    const is = { pick: scr === 'pick', quick: scr === 'quick', home: scr === 'home', scan: scr === 'scan', asset: scr === 'asset', fiche: scr === 'fiche', incident: scr === 'incident', create: scr === 'create', job: scr === 'job', finish: scr === 'finish', sync: scr === 'sync', search: scr === 'search' };
+    const openJob = id => () => this.go('job', { jobId: id, tab: 'summary', assetId: allJobs[id].asset });
+    const openAsset = id => () => this.go('asset', { assetId: id });
+    const go = { scan: () => this.go('scan'), sync: () => this.go('sync', { syncDone: false }), list: () => this.go('search', { seg: 'jobs', q: '' }), fiche: () => this.go('fiche'),
+      incident: () => this.go('incident', { inc: { text: '', crit: 'High', photo: false } }), create: () => this.go('create', { cr: { title: '', type: 'Corrective', prio: 'High', checklist: 0, desc: '' } }) };
+
+    // header
+    const hd = { on: !!TITLES[scr], title: TITLES[scr] || '', backIcon: scr === 'sync' ? 'close' : 'chevron_left', right: scr === 'asset' || scr === 'job' ? 'more_horiz' : '', rightAria: 'More options', rightGo: () => this.flash('Options: share, print the QR label, history') };
+
+    // home
+    const open = Object.keys(allJobs).filter(id => stOf(id) !== 'done');
+    const cur = open.find(id => stOf(id) === 'cours');
+    const badge = j => BADGE[j.prio] || BADGE.Moyenne;
+    const todayIds = open.filter(id => stOf(id) === 'todo' && !allJobs[id].next);
+    const toPick = pf => () => this.go('pick', { pickFor: pf, pq: '' });
+    const home = { cloud: 'cloud_done',
+      actions: [['Report a problem', 'warning', '#D9730D', '#FFF8F0', '#D9730D', 1, toPick('report')], ['Quick intervention', 'bolt', '#5E0B1E', '#fff', '#5E0B1E', 1, toPick('quick')], ['New intervention', 'add_circle', '#5E0B1E', '#fff', '#5E0B1E', 0, toPick('create')]].map(([label, icon, ic, bg, border, fill, g]) => ({ label, icon, ic, bg, border, fill, go: g })),
+      kpis: [[String(open.filter(id => stOf(id) === 'todo').length), 'To do', '#1A1412'], [String(open.filter(id => stOf(id) === 'cours').length), 'In progress', '#D9730D'], [String(open.filter(id => stOf(id) === 'retard').length), 'Late', '#C8102E']].map(([value, label, color]) => ({ value, label, color, go: go.list })),
+      hasCur: !!cur, curAsset: cur ? ASSETS[allJobs[cur].asset].name : '', curTask: cur ? allJobs[cur].task : '', curOpen: cur ? openJob(cur) : () => {},
+      today: todayIds.map((id, i) => { const j = allJobs[id], [bg, fg] = badge(j); return { time: j.time, asset: ASSETS[j.asset].name, task: j.task, badge: j.prio, bg, fg, sep: sep(i), open: openJob(id) }; }), noToday: !todayIds.length,
+      next: open.filter(id => allJobs[id].next).map((id, i) => { const j = allJobs[id], [bg, fg] = badge(j); return { time: j.time, asset: ASSETS[j.asset].name, task: j.task, badge: j.prio, bg, fg, sep: sep(i), open: openJob(id) }; }) };
+
+    // search
+    const q = s.q.trim().toLowerCase();
+    const rowsJobs = Object.keys(allJobs).filter(id => { const j = allJobs[id]; return !q || `wo #${id} ${j.task} ${ASSETS[j.asset].name}`.toLowerCase().includes(q); }).map((id, i) => { const j = allJobs[id], st = STATE[stOf(id)]; return { icon: 'build', title: `WO #${id} · ${j.task}`, sub: ASSETS[j.asset].name, hasBadge: true, badge: st[0], bg: st[1], fg: st[2], sep: sep(i), open: openJob(id) }; });
+    const rowsAssets = Object.keys(ASSETS).filter(k => { const a = ASSETS[k]; return !q || `${a.name} ${a.code} ${a.loc}`.toLowerCase().includes(q); }).map((k, i) => ({ icon: ASSETS[k].icon, title: ASSETS[k].name, sub: `${ASSETS[k].code} · ${ASSETS[k].loc}`, hasBadge: false, badge: '', bg: '', fg: '', sep: sep(i), open: openAsset(k) }));
+    const rows = s.seg === 'jobs' ? rowsJobs : rowsAssets;
+    const search = { title: 'Search', q: s.q, setQ: e => this.setState({ q: e.target.value }), rows, empty: !rows.length,
+      segs: [['jobs', 'Interventions'], ['assets', 'Assets']].map(([v, label]) => { const on = s.seg === v; return { label, bg: on ? '#fff' : 'transparent', color: on ? '#1A1412' : '#6B625D', pick: () => this.setState({ seg: v }) }; }) };
+
+    // scan
+    const scan = { detect: () => s.pickFor ? this.picked('FT2') : this.setState({ scr: 'asset', assetId: 'FT2' }), torch: () => this.setState({ torch: !s.torch }), torchColor: s.torch ? '#FFD84D' : '#fff' };
+
+    // asset
+    const A = ASSETS[s.assetId] || ASSETS.FT2;
+    const aj = open.filter(id => allJobs[id].asset === s.assetId);
+    const asset = { ...A, status: 'In service', stBg: '#E7F6EC', stFg: '#1F8A4C',
+      openLabel: `${aj.length} open intervention${aj.length > 1 ? 's' : ''}`, noJobs: !aj.length,
+      jobs: aj.map((id, i) => { const st = STATE[stOf(id)]; return { id: `WO #${id}`, task: allJobs[id].task, state: st[0], bg: st[1], fg: st[2], sep: sep(i), open: openJob(id) }; }),
+      docs: DOCS_ASSET.map(([name, size], i) => ({ name, size, sep: sep(i), open: () => this.flash(`${name} — opened offline`) })),
+      facts: A.facts.map(([k, v], i) => ({ k, v, sep: sep(i) })) };
+
+    // incident
+    const ic = s.inc, icOk = ic.text.trim().length > 2;
+    const segBtns = (opts, cur, set, colors) => opts.map((label, i) => { const on = cur === label; return { label, sep: i ? '1px solid #E2DCD9' : '0', bg: on ? W : '#fff', color: on ? '#fff' : colors[i], pick: () => set(label) }; });
+    const inc = { speak: () => this.speak('inc'), text: ic.text, setText: e => this.setState({ inc: { ...ic, text: e.target.value } }),
+      crits: segBtns(['Low', 'Medium', 'High', 'Critical'], ic.crit, v => this.setState({ inc: { ...ic, crit: v } }), ['#1F8A4C', '#C2610C', '#C8102E', '#C8102E']),
+      photo: () => this.setState({ inc: { ...ic, photo: !ic.photo } }), photoIcon: ic.photo ? 'check_circle' : 'photo_camera', photoLabel: ic.photo ? 'Photo added · tap to remove' : 'Add a photo',
+      btnBg: icOk ? W : '#BFA9AE', send: () => { if (!icOk) return this.flash('Describe the problem you see'); this.back(); this.flash(`Incident reported · ${A.name} · ${ic.crit.toLowerCase()} criticality`); } };
+
+    // create
+    const c = s.cr, crOk = c.title.trim().length > 2, CL = ['Select a checklist', 'Bearing replacement (4 steps)', 'Safety check (6 steps)', 'Greasing (3 steps)'];
+    const cr = { speak: () => this.speak('cr'), title: c.title, setTitle: e => this.setState({ cr: { ...c, title: e.target.value } }), desc: c.desc, setDesc: e => this.setState({ cr: { ...c, desc: e.target.value } }),
+      types: [['Corrective', 'build'], ['Preventive', 'event_repeat'], ['Inspection', 'visibility']].map(([label, icon]) => { const on = c.type === label; return { label, icon, bg: on ? W : '#fff', color: on ? '#fff' : '#1A1412', border: on ? W : '#E2DCD9', pick: () => this.setState({ cr: { ...c, type: label } }) }; }),
+      prios: segBtns(['Low', 'Medium', 'High', 'Critical'], c.prio, v => this.setState({ cr: { ...c, prio: v } }), ['#1F8A4C', '#C2610C', '#C8102E', '#C8102E']),
+      checklist: CL[c.checklist], clColor: c.checklist ? '#1A1412' : '#9B928C', nextChecklist: () => this.setState({ cr: { ...c, checklist: (c.checklist + 1) % CL.length } }),
+      btnBg: crOk ? W : '#BFA9AE',
+      save: () => { if (!crOk) return this.flash('Give the intervention a title'); const id = 1370 + Object.keys(s.newJobs).length;
+        const items = c.checklist === 1 ? JOBS[1359].items : c.checklist === 2 ? ['Lock out', 'Check the guards', 'Test the emergency stops', 'Check the light curtains', 'Check the signage', 'Remove lockout'] : c.checklist === 3 ? JOBS[1362].items : ['Carry out the intervention'];
+        const stack = s.stack.slice(); stack.pop();
+        this.setState({ newJobs: { ...s.newJobs, [id]: { asset: s.assetId, task: c.title.trim(), type: c.type, prio: c.prio, state: 'todo', time: '—', when: 'to schedule', desc: c.desc || 'Created from the mobile app.', items, docs: [] } }, scr: 'job', jobId: id, tab: 'summary', stack: [...stack, 'asset'] });
+        this.flash(`Intervention WO #${id} created`); } };
+
+    // job
+    const J = allJobs[s.jobId] || JOBS[1359], jst = stOf(s.jobId), chk = s.checks[s.jobId] || J.items.map(() => false), nd = chk.filter(Boolean).length;
+    const [pbg, pfg] = badge(J), stt = STATE[jst];
+    const jp = (JOB_PARTS[s.jobId] || []), pk = s.picked[s.jobId] || {}, npk = jp.filter(([k]) => pk[k]).length;
+    const job = { speak: () => this.speak('job'), id: `WO #${s.jobId}`,
+      hasParts: jp.length > 0, pickedText: `${npk} of ${jp.length} picked`,
+      parts: jp.map(([k, qty], i) => { const [name, bin, stock, kind] = PARTS[k], on = !!pk[k]; return { name, bin, stock, qty, sep: sep(i), isSeal: kind === 'seal', isGasket: kind === 'gasket', isOring: kind === 'oring', isKit: kind === 'kit', isOil: kind === 'oil', isBearing: kind === 'bearing', noImg: !kind,
+        mark: on ? 'check' : '', ring: on ? '#1F8A4C' : '#CFC7C3', fill: on ? '#1F8A4C' : '#fff', aria: on ? 'Picked' : 'Mark as picked', toggle: () => this.setState({ picked: { ...s.picked, [s.jobId]: { ...pk, [k]: !on } } }) }; }),
+      hasTools: (TOOLS[s.jobId] || []).length > 0, tools: (TOOLS[s.jobId] || []).map(([icon, label]) => ({ icon, label })), task: J.task, state: stt[0], stBg: stt[1], stFg: stt[2], asset: ASSETS[J.asset].name, code: ASSETS[J.asset].code, type: J.type, prio: J.prio, prBg: pbg, prFg: pfg, desc: J.desc,
+      openAsset: openAsset(J.asset), done: nd, total: J.items.length, pct: Math.round(nd / J.items.length * 100) + '%',
+      items: J.items.map((label, i) => { const on = !!chk[i]; return { label, mark: on ? 'check' : '', ring: on ? W : '#CFC7C3', fill: on ? W : '#fff', strike: 'none', color: on ? '#6B625D' : '#1A1412', sep: sep(i),
+        toggle: () => { if (jst !== 'cours') return this.flash('Start the intervention to tick the checklist'); const a = chk.slice(); a[i] = !a[i]; this.setState({ checks: { ...s.checks, [s.jobId]: a } }); } }; }),
+      tabs: [['summary', 'Summary'], ['docs', 'Documents'], ['photos', 'Photos'], ['comments', 'Comments']].map(([v, label]) => { const on = s.tab === v; return { label, color: on ? W : '#6B625D', line: on ? W : 'transparent', pick: () => this.setState({ tab: v }) }; }),
+      isSummary: s.tab === 'summary', isDocs: s.tab === 'docs', isPhotos: s.tab === 'photos', isComments: s.tab === 'comments',
+      docs: (J.docs.length ? J.docs : [['No linked document', '—']]).map(([name, size], i) => ({ name, size, sep: sep(i), open: () => this.flash(`${name} — downloaded`) })),
+      photos: Array.from({ length: s.photos[s.jobId] || 0 }, (_, i) => ({ bg: PHOTO[i % PHOTO.length][0], icon: PHOTO[i % PHOTO.length][1] })), addPhoto: () => this.setState({ photos: { ...s.photos, [s.jobId]: (s.photos[s.jobId] || 0) + 1 } }),
+      comments: (s.comments[s.jobId] || []).map(([ini, name, when, text]) => ({ ini, name, when, text, bg: (PEOPLE[ini] || PEOPLE.PL)[0], fg: (PEOPLE[ini] || PEOPLE.PL)[1] })),
+      draft: s.draft, setDraft: e => this.setState({ draft: e.target.value }),
+      send: () => { if (!s.draft.trim()) return; this.setState({ draft: '', comments: { ...s.comments, [s.jobId]: [...(s.comments[s.jobId] || []), ['PL', 'Pierre Leroy', 'Just now', s.draft.trim()]] } }); },
+      hasBtn: jst !== 'done', btn: jst === 'cours' ? 'Finish the intervention' : 'Start the intervention', btnIcon: jst === 'cours' ? 'check_circle' : 'play_arrow',
+      go: () => { if (jst === 'cours') return this.go('finish'); this.setState({ states: { ...s.states, [s.jobId]: 'cours' }, tab: 'summary' }); this.flash(`Intervention started · WO #${s.jobId}`); } };
+
+    // finish
+    const f = s.fin, fOk = f.text.trim().length > 2;
+    const fin = { speak: () => this.speak('fin'), text: f.text, setText: e => this.setState({ fin: { ...f, text: e.target.value } }), photos: Array.from({ length: f.photos }, (_, i) => ({ bg: PHOTO[i % PHOTO.length][0], icon: PHOTO[i % PHOTO.length][1] })), addPhoto: () => this.setState({ fin: { ...f, photos: f.photos + 1 } }),
+      btnBg: fOk ? W : '#BFA9AE', done: () => { if (!fOk) return this.flash('The report is required'); this.setState({ states: { ...s.states, [s.jobId]: 'done' }, scr: 'sync', stack: ['home'], syncDone: false }); } };
+
+    // sync
+    const sd = s.syncDone;
+    const sync = { busy: !sd, icon: sd ? 'cloud_done' : 'cloud_sync', title: sd ? 'Sync complete' : 'Syncing…', sub: sd ? 'Your data is up to date.' : 'Sending data to the server',
+      items: ['Interventions', 'Photos', 'Comments', 'Documents'].map((label, i) => ({ label, icon: sd ? 'check' : i === 0 ? 'sync' : 'schedule', ic: sd ? '#1F8A4C' : '#9B928C', color: sd ? '#1A1412' : '#6B625D' })),
+      close: () => this.setState({ scr: 'home', stack: [] }) };
+
+    const pq = s.pq.trim().toLowerCase(), pf = s.pickFor;
+    const prow = Object.keys(ASSETS).filter(k => { const a = ASSETS[k]; return !pq || `${a.name} ${a.code} ${a.loc}`.toLowerCase().includes(pq); });
+    const pick = { sub: pf === 'report' ? 'Which asset has a problem? Scan its QR code or search it.' : pf === 'create' ? 'Which asset is the new intervention for?' : 'Which asset are you working on?', q: s.pq, setQ: e => this.setState({ pq: e.target.value }), empty: !prow.length,
+      rows: prow.map((k, i) => ({ icon: ASSETS[k].icon, title: ASSETS[k].name, sub: `${ASSETS[k].code} · ${ASSETS[k].loc}`, sep: sep(i), go: () => this.picked(k) })) };
+    const qk = s.quick, qa = ASSETS[qk.asset] || ASSETS.FT2, qOk = !!qk.type;
+    const quick = { asset: `${qa.name} (${qa.code})`, icon: qa.icon, change: () => this.go('pick', { pickFor: 'quickChange', pq: '' }), note: qk.note, setNote: e => this.setState({ quick: { ...qk, note: e.target.value } }), speak: () => this.speak('quick'),
+      types: QTYPES.map(([v, label, icon]) => { const on = qk.type === v; return { label, icon, color: on ? '#fff' : '#1A1412', ic: on ? '#fff' : '#5E0B1E', bg: on ? W : '#fff', border: on ? W : '#E2DCD9', pick: () => this.setState({ quick: { ...qk, type: v } }) }; }).map(t => ({ ...t, label: t.label })),
+      btnBg: qOk ? W : '#BFA9AE',
+      start: () => { if (!qOk) return this.flash('Tap what is happening'); const id = 1380 + Object.keys(s.newJobs).length, tl = QTYPES.find(t => t[0] === qk.type)[1];
+        this.setState({ newJobs: { ...s.newJobs, [id]: { asset: qk.asset, task: `Quick intervention · ${tl}`, type: 'Corrective', prio: 'High', state: 'cours', when: 'started now', desc: qk.note || 'Quick intervention started from the mobile. Details to complete at the end.', items: ['Make the area safe', 'Fix the problem', 'Check the machine runs'], docs: [] } }, scr: 'job', jobId: id, tab: 'summary', assetId: qk.asset, stack: ['home'] });
+        this.flash(`Quick intervention started · WO #${id}`); } };
+    const shRow = (o, i) => ({ hasIcon: !!o.icon, icon: o.icon || '', bg: o.bg || '#F6EDEF', fg: o.fg || W, label: o.label, sub: o.sub || '', hasSub: !!o.sub, sep: sep(i), color: o.color || '#1A1412', end: o.end || 'chevron_right', endColor: o.end === 'check' ? W : '#B9B0A9', go: o.go });
+    const toSheet = k => () => this.setState({ sheet: k });
+    let sheet = { on: !!s.sheet, isProfile: s.sheet === 'profile', hasTitle: s.sheet !== 'profile', title: '', rows: [], close: () => this.setState({ sheet: null }) };
+    if (s.sheet === 'profile') sheet.rows = [
+      { icon: 'person', label: 'My profile', sub: 'Name, photo, phone, badge number', go: () => this.flash('Profile — same fields as the web app') },
+      { icon: 'event_available', label: 'Availability and time off', sub: 'Usual week · holiday 20–24 Oct', go: toSheet('avail'), bg: '#E7F6EC', fg: '#1F8A4C' },
+      { icon: 'workspace_premium', label: 'Skills', sub: 'Mechanical · Hydraulics · Pneumatics', go: toSheet('skills'), bg: '#E8F0FE', fg: '#2457C5' },
+      { icon: 'factory', label: 'Site', sub: s.site, go: toSheet('site') },
+      { icon: 'translate', label: 'Language', sub: s.lang, go: toSheet('lang') },
+      { icon: 'notifications', label: 'Notifications', sub: 'Push on · quiet hours 21:00–06:00', go: toSheet('notif'), bg: '#FFF1E0', fg: '#C2610C' },
+      { icon: 'cloud_sync', label: 'Sync now', sub: 'Last sync 2 min ago · offline mode ready', go: () => this.setState({ sheet: null, scr: 'sync', stack: [...s.stack, s.scr], syncDone: false }), bg: '#E7F6EC', fg: '#1F8A4C' },
+      { icon: 'logout', label: 'Log out', go: () => this.flash('You will be logged out — data not yet synced is kept'), color: '#C8102E', bg: '#FDECEE', fg: '#C8102E', end: ' ' },
+    ].map(shRow);
+    if (s.sheet === 'site') sheet = { ...sheet, title: 'Site', rows: ['Thourotte Plant', 'Saultain Plant', 'Villers Plant'].map((v, i) => shRow({ label: v, sub: i ? 'Read only' : 'Your site', end: s.site === v ? 'check' : ' ', go: () => { this.setState({ site: v, sheet: 'profile' }); this.flash(`Site · ${v}`); } }, i)) };
+    if (s.sheet === 'lang') sheet = { ...sheet, title: 'Language', rows: ['English', 'Français', 'Deutsch', 'Español', 'Polski'].map((v, i) => shRow({ label: v, end: s.lang === v ? 'check' : ' ', go: () => this.setState({ lang: v, sheet: 'profile' }) }, i)) };
+    if (s.sheet === 'skills') sheet = { ...sheet, title: 'Skills', rows: [['Mechanical', 'Expert'], ['Hydraulics', 'Expert'], ['Pneumatics', 'Qualified'], ['Electrical clearance B1V', 'Basic']].map(([v, l], i) => shRow({ label: v, sub: l, end: ' ', go: () => {} }, i)) };
+    if (s.sheet === 'avail') sheet = { ...sheet, title: 'Availability and time off', rows: [shRow({ icon: 'schedule', label: 'Usual week', sub: 'Mon–Thu 07:00–18:00 · Fri 07:00–12:00', go: () => {} }, 0), shRow({ icon: 'beach_access', label: 'Holiday', sub: 'Mon 20 – Fri 24 Oct', end: ' ', go: () => {}, bg: '#FFF1E0', fg: '#C2610C' }, 1), shRow({ icon: 'add', label: 'Add time off', go: () => this.flash('Time off added · your manager and the planner are told') }, 2)] };
+    if (s.sheet === 'notif') sheet = { ...sheet, title: 'Notifications', rows: [['Interventions assigned to me', 'Pop-up'], ['Incidents reported on my assets', 'Pop-up'], ['Comments and mentions', 'Notification'], ['Planning changes', 'Notification'], ['Spare parts back in stock', 'Off']].map(([v, l], i) => shRow({ label: v, sub: l, go: () => this.flash('Change: Pop-up · Notification · Off') }, i)) };
+    const rc = s.rec, wds = rc ? rc.text.split(' ') : [];
+    const rec = { on: !!rc, text: rc ? wds.slice(0, rc.words).join(' ') : '', rest: rc && rc.words < wds.length ? ' ' + wds.slice(rc.words).join(' ') : '', stop: () => this.stopRec(),
+      bars: [10, 22, 34, 18, 40, 28, 14, 36, 24, 42, 16, 30, 20, 38, 12, 26, 34, 18].map((h, k) => ({ h: h + 'px', d: (0.6 + (k % 5) * 0.12).toFixed(2) + 's' })) };
+    const openSheet = { profile: toSheet('profile') };
+    const tabs = { show: scr === 'home' || scr === 'search', todo: () => this.tab('home'), search: () => this.tab('search'), todoC: scr === 'home' ? '#fff' : 'rgba(255,255,255,.6)', searchC: scr === 'search' ? '#fff' : 'rgba(255,255,255,.6)' };
+    const light = !(scr === 'home' || scr === 'search');
+    return { is, go, open: openSheet, back: () => this.back(), hd, home, search, scan, asset, inc, cr, job, fin, sync, tabs, pick, quick, sheet, rec,
+      sb: { color: light ? '#fff' : '#1A1412', bar: scr === 'scan' ? '#fff' : '#1A1412' },
+      toast: { on: !!s.toast, text: s.toast || '', bottom: tabs.show ? '100px' : (scr === 'job' ? '104px' : '40px') } };
+  }
+}
+</script>
+</body>
+</html>
